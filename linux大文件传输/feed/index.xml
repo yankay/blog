@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>
+	《Linux大文件传输》的评论	</title>
+	<atom:link href="./../../linux%E5%A4%A7%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93/feed/index.html" rel="self" type="application/rss+xml" />
+	<link>./../index.html</link>
+	<description>颜开的博客</description>
+	<lastBuildDate>Mon, 20 Sep 2021 06:44:55 +0000</lastBuildDate>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.2</generator>
+	<item>
+		<title>
+		评论者：Linux大文件传输 - R6博客		</title>
+		<link>./../index.html#comment-327</link>
+
+		<dc:creator><![CDATA[Linux大文件传输 - R6博客]]></dc:creator>
+		<pubDate>Mon, 20 Sep 2021 06:44:55 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26367#comment-327</guid>
+
+					<description><![CDATA[[&#8230;] 转载自：点击查看 [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] 转载自：点击查看 [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+	</channel>
+</rss>

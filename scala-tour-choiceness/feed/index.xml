@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>
+	《Scala Tour &#8211; 精选》的评论	</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../index.html</link>
+	<description>颜开的博客</description>
+	<lastBuildDate>Sat, 26 Nov 2022 02:20:17 +0000</lastBuildDate>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.2</generator>
+	<item>
+		<title>
+		评论者：Scala Tour – 精选 - Java天堂		</title>
+		<link>./../index.html#comment-2781</link>
+
+		<dc:creator><![CDATA[Scala Tour – 精选 - Java天堂]]></dc:creator>
+		<pubDate>Sat, 26 Nov 2022 02:20:17 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=27005#comment-2781</guid>
+
+					<description><![CDATA[[&#8230;] http://www.yankay.com/scala-tour-choiceness/ [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] <a href="http://www.yankay.com/scala-tour-choiceness/" rel="nofollow ugc">http://www.yankay.com/scala-tour-choiceness/</a> [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：子轩		</title>
+		<link>./../index.html#comment-123</link>
+
+		<dc:creator><![CDATA[子轩]]></dc:creator>
+		<pubDate>Fri, 02 Sep 2016 06:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=27005#comment-123</guid>
+
+					<description><![CDATA[给新人推荐的时候发现教程挂了，修复下咯]]></description>
+			<content:encoded><![CDATA[<p>给新人推荐的时候发现教程挂了，修复下咯</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：genjian		</title>
+		<link>./../index.html#comment-122</link>
+
+		<dc:creator><![CDATA[genjian]]></dc:creator>
+		<pubDate>Mon, 11 Aug 2014 01:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=27005#comment-122</guid>
+
+					<description><![CDATA[最近在用scala，感觉还是开叔的教程最棒，大爱开叔！！]]></description>
+			<content:encoded><![CDATA[<p>最近在用scala，感觉还是开叔的教程最棒，大爱开叔！！</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：yufei		</title>
+		<link>./../index.html#comment-121</link>
+
+		<dc:creator><![CDATA[yufei]]></dc:creator>
+		<pubDate>Thu, 29 May 2014 15:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=27005#comment-121</guid>
+
+					<description><![CDATA[支持一下老同学，最近我也有用scala]]></description>
+			<content:encoded><![CDATA[<p>支持一下老同学，最近我也有用scala</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：&#124; E谈网 &#8211; scala语言,linux技巧,jquery,java,php源码下载		</title>
+		<link>./../index.html#comment-120</link>
+
+		<dc:creator><![CDATA[&#124; E谈网 &#8211; scala语言,linux技巧,jquery,java,php源码下载]]></dc:creator>
+		<pubDate>Wed, 26 Mar 2014 02:13:39 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=27005#comment-120</guid>
+
+					<description><![CDATA[[&#8230;] 本文转自：2013-05-02 by yankay [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] 本文转自：2013-05-02 by yankay [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+	</channel>
+</rss>

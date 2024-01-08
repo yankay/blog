@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="ie ie6 lte9 lte8 lte7" lang="zh-CN">
+<![endif]--><!--[if IE 7]>
+<html class="ie ie7 lte9 lte8 lte7" lang="zh-CN">
+<![endif]--><!--[if IE 8]>
+<html class="ie ie8 lte9 lte8" lang="zh-CN">
+<![endif]--><!--[if IE 9]>
+<html class="ie ie9" lang="zh-CN">
+<![endif]--><!--[if gt IE 9]>
+<html lang="zh-CN"> <![endif]--><!--[if !IE]><!--><html lang="zh-CN">
+<!--<![endif]-->
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1.0,maximum-scale=3.0,width=device-width">
+
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<link rel="pingback" href="./../xmlrpc.php">
+
+	<!-- IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	<script src="http://yankay.com/wp-content/themes/neuro/inc/js/html5.js" type="text/javascript"></script>
+	<![endif]-->
+
+	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+	<!-- This site is optimized with the Yoast SEO plugin v16.4 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Docker能够运行任何应用的“PaaS”云 - 我自然</title>
+	<link rel="canonical" href="./index.html">
+	<meta property="og:locale" content="zh_CN">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Docker能够运行任何应用的“PaaS”云 - 我自然">
+	<meta property="og:description" content="Docker 是一个开源可以将任何应用包装在&quot;LXC容器”中运行的工具。如果说VMware,KVM包装的虚拟机，Docker包装的是应用。是一个实至名归的PaaS。">
+	<meta property="og:url" content="./index.html">
+	<meta property="og:site_name" content="我自然">
+	<meta property="article:published_time" content="2013-09-17T07:35:09+00:00">
+	<meta property="article:modified_time" content="2021-03-28T12:04:42+00:00">
+	<meta property="og:image" content="http://47.100.65.109/wp-content/uploads/2013/09/homepage-docker-logo-300x248.png">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:label1" content="作者">
+	<meta name="twitter:data1" content="yankay">
+	<meta name="twitter:label2" content="预计阅读时间">
+	<meta name="twitter:data2" content="2分">
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":".//#website","url":".//","name":"我自然","description":"颜开的博客","potentialAction":[{"@type":"SearchAction","target":".//?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"zh-CN"},{"@type":"ImageObject","@id":".//docker-paas-for-any-application/#primaryimage","inLanguage":"zh-CN","url":"http://47.100.65.109/wp-content/uploads/2013/09/homepage-docker-logo-300x248.png","contentUrl":"http://47.100.65.109/wp-content/uploads/2013/09/homepage-docker-logo-300x248.png"},{"@type":"WebPage","@id":".//docker-paas-for-any-application/#webpage","url":".//docker-paas-for-any-application/","name":"Docker能够运行任何应用的“PaaS”云 - 我自然","isPartOf":{"@id":".//#website"},"primaryImageOfPage":{"@id":".//docker-paas-for-any-application/#primaryimage"},"datePublished":"2013-09-17T07:35:09+00:00","dateModified":"2021-03-28T12:04:42+00:00","author":{"@id":".//#/schema/person/f52d918e9bfa51c4454172c2caa7704f"},"breadcrumb":{"@id":".//docker-paas-for-any-application/#breadcrumb"},"inLanguage":"zh-CN","potentialAction":[{"@type":"ReadAction","target":[".//docker-paas-for-any-application/"]}]},{"@type":"BreadcrumbList","@id":".//docker-paas-for-any-application/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"WebPage","@id":".//","url":".//","name":"首页"}},{"@type":"ListItem","position":2,"item":{"@id":".//docker-paas-for-any-application/#webpage"}}]},{"@type":"Person","@id":".//#/schema/person/f52d918e9bfa51c4454172c2caa7704f","name":"yankay","image":{"@type":"ImageObject","@id":".//#personlogo","inLanguage":"zh-CN","url":"http://1.gravatar.com/avatar/426bb830224c1471011d92a830a6ed4f?s=96&d=wavatar&r=g","contentUrl":"http://1.gravatar.com/avatar/426bb830224c1471011d92a830a6ed4f?s=96&d=wavatar&r=g","caption":"yankay"},"sameAs":["http://47.100.65.109"],"url":".//author/yankay/"}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel="alternate" type="application/rss+xml" title="我自然 &raquo; Feed" href="./../feed/index.html">
+<link rel="alternate" type="application/rss+xml" title="我自然 &raquo; 评论Feed" href="./../comments/feed/index.html">
+			<link rel="shortcut icon" href="http://47.100.65.109/wp-content/uploads/2021/03/favicon.png" type="image/x-icon">
+		<link rel="alternate" type="application/rss+xml" title="我自然 &raquo; Docker能够运行任何应用的“PaaS”云评论Feed" href="./feed/index.html">
+<script type="text/javascript">
+/* <![CDATA[ */
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":".\/\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.4.2"}};
+/*! This file is auto-generated */
+!function(i,n){var o,s,e;function c(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function p(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data),r=(e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0),new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data));return t.every(function(e,t){return e===r[t]})}function u(e,t,n){switch(t){case"flag":return n(e,"🏳️‍⚧️","🏳️​⚧️")?!1:!n(e,"🇺🇳","🇺​🇳")&&!n(e,"🏴󠁧󠁢󠁥󠁮󠁧󠁿","🏴​󠁧​󠁢​󠁥​󠁮​󠁧​󠁿");case"emoji":return!n(e,"🫱🏻‍🫲🏿","🫱🏻​🫲🏿")}return!1}function f(e,t,n){var r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):i.createElement("canvas"),a=r.getContext("2d",{willReadFrequently:!0}),o=(a.textBaseline="top",a.font="600 32px Arial",{});return e.forEach(function(e){o[e]=t(a,e,n)}),o}function t(e){var t=i.createElement("script");t.src=e,t.defer=!0,i.head.appendChild(t)}"undefined"!=typeof Promise&&(o="wpEmojiSettingsSupports",s=["flag","emoji"],n.supports={everything:!0,everythingExceptFlag:!0},e=new Promise(function(e){i.addEventListener("DOMContentLoaded",e,{once:!0})}),new Promise(function(t){var n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"}),a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=function(e){c(n=e.data),a.terminate(),t(n)})}catch(e){}c(n=f(s,u,p))}t(n)}).then(function(e){for(var t in e)n.supports[t]=e[t],n.supports.everything=n.supports.everything&&n.supports[t],"flag"!==t&&(n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&n.supports[t]);n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&!n.supports.flag,n.DOMReady=!1,n.readyCallback=function(){n.DOMReady=!0}}).then(function(){return e}).then(function(){var e;n.supports.everything||(n.readyCallback(),(e=n.source||{}).concatemoji?t(e.concatemoji):e.wpemoji&&e.twemoji&&(t(e.twemoji),t(e.wpemoji)))}))}((window,document),window._wpemojiSettings);
+/* ]]> */
+</script>
+<style id="wp-emoji-styles-inline-css" type="text/css">img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}</style>
+<link rel="stylesheet" id="wp-block-library-css" href="./../wp-includes/css/dist/block-library/style.min.css?ver=6.4.2" type="text/css" media="all">
+<style id="classic-theme-styles-inline-css" type="text/css">/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}</style>
+<style id="global-styles-inline-css" type="text/css">body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--gray: #777;--wp--preset--color--light-gray: #f5f5f5;--wp--preset--color--blue: #0286cf;--wp--preset--color--legacy: #b6b6b6;--wp--preset--color--red: #c80a00;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}</style>
+<link rel="stylesheet" id="bootstrap-style-css" href="./../wp-content/themes/neuro/cyberchimps/lib/bootstrap/css/bootstrap.min.css?ver=2.0.4" type="text/css" media="all">
+<link rel="stylesheet" id="bootstrap-responsive-style-css" href="./../wp-content/themes/neuro/cyberchimps/lib/bootstrap/css/bootstrap-responsive.min.css?ver=2.0.4" type="text/css" media="all">
+<link rel="stylesheet" id="font-awesome-css" href="./../wp-content/themes/neuro/cyberchimps/lib/css/font-awesome.min.css?ver=6.4.2" type="text/css" media="all">
+<link rel="stylesheet" id="cyberchimps_responsive-css" href="./../wp-content/themes/neuro/cyberchimps/lib/bootstrap/css/cyberchimps-responsive.min.css?ver=1.0" type="text/css" media="all">
+<link rel="stylesheet" id="core-style-css" href="./../wp-content/themes/neuro/cyberchimps/lib/css/core.css?ver=1.0" type="text/css" media="all">
+<link rel="stylesheet" id="style-css" href="./../wp-content/themes/neuro/style.css?ver=1.0" type="text/css" media="all">
+<link rel="stylesheet" id="elements_style-css" href="./../wp-content/themes/neuro/elements/lib/css/elements.css?ver=6.4.2" type="text/css" media="all">
+        <script>
+            /* <![CDATA[ */
+            var rcewpp = {
+                "ajax_url":"http://yankay.com/wp-admin/admin-ajax.php",
+                "nonce": "aa462ebe7f",
+                "home_url": "http://yankay.com/",
+                "settings_icon": 'http://yankay.com/wp-content/plugins/export-wp-page-to-static-html/admin/images/settings.png',
+                "settings_hover_icon": 'http://yankay.com/wp-content/plugins/export-wp-page-to-static-html/admin/images/settings_hover.png'
+            };
+            /* ]]\> */
+        </script>
+        <script type="text/javascript" src="./../wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js"></script>
+<script type="text/javascript" src="./../wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js"></script>
+<script type="text/javascript" src="./../wp-content/themes/neuro/cyberchimps/lib/js/jquery.slimbox.min.js?ver=1.0" id="slimbox-js"></script>
+<script type="text/javascript" src="./../wp-content/themes/neuro/cyberchimps/lib/js/jquery.jcarousel.min.js?ver=1.0" id="jcarousel-js"></script>
+<script type="text/javascript" src="./../wp-content/themes/neuro/cyberchimps/lib/js/jquery.mobile.custom.min.js?ver=6.4.2" id="jquery-mobile-touch-js"></script>
+<script type="text/javascript" src="./../wp-content/themes/neuro/cyberchimps/lib/js/swipe-call.min.js?ver=6.4.2" id="slider-call-js"></script>
+<script type="text/javascript" src="./../wp-content/themes/neuro/cyberchimps/lib/js/core.min.js?ver=6.4.2" id="core-js-js"></script>
+<script type="text/javascript" src="./../wp-content/themes/neuro/elements/lib/js/elements.min.js?ver=6.4.2" id="elements_js-js"></script>
+<link rel="https://api.w.org/" href="./../wp-json/index.html">
+<link rel="alternate" type="application/json" href="./../wp-json/wp/v2/posts/26821/index.html">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="./../xmlrpc.php?rsd">
+<meta name="generator" content="WordPress 6.4.2">
+<link rel="shortlink" href="./../index.html?p=26821">
+<link rel="alternate" type="application/json+oembed" href="./../wp-json/oembed/1.0/embed/index.html?url=http%3A%2F%2F%2Fdocker-paas-for-any-application%2F">
+<link rel="alternate" type="text/xml+oembed" href="./../wp-json/oembed/1.0/embed/index.html?url=http%3A%2F%2F%2Fdocker-paas-for-any-application%2F#038;format=xml">
+<style type="text/css">.ie8 .container {max-width: 1020px;width:auto;}</style>
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+	<style type="text/css" media="all">body {
+		 font-size : 16px;
+		 font-family : "Open Sans", Helvetica, Arial, "Lucida Grande", sans-serif;
+		 font-weight : normal;
+		 color : #333333;
+				}
+
+										.container {
+		 max-width : 1020px;
+				}
+
+		
+				h1, h2, h3, h4, h5, h6 {
+		font-family : Arial, Helvetica, sans-serif;
+				}</style>
+	<link rel="icon" href="./../wp-content/uploads/2021/03/cropped-favicon-32x32.png" sizes="32x32">
+<link rel="icon" href="./../wp-content/uploads/2021/03/cropped-favicon-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="./../wp-content/uploads/2021/03/cropped-favicon-180x180.png">
+<meta name="msapplication-TileImage" content="./../wp-content/uploads/2021/03/cropped-favicon-270x270.png">
+	
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-10148377-3"></script>
+<script>window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-10148377-3');</script>
+
+</head>
+<body class="post-template-default single single-post postid-26821 single-format-standard cc-responsive">
+
+
+<!-- ---------------- Menu --------------------- -->
+<div class="container-full-width" id="navigation_menu">
+	<div class="container">
+		<div class="container-fluid">
+			<nav id="navigation" role="navigation">
+				<div class="main-navigation navbar">
+					<div class="navbar-inner">
+						<div class="container">
+
+														<div class="nav-collapse collapse">
+								
+								<div class="menu-%e4%b8%bb%e8%8f%9c%e5%8d%95-container"><ul id="menu-%e4%b8%bb%e8%8f%9c%e5%8d%95" class="nav">
+<li id="menu-item-27229" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-27229"><a href="./../index.html">首页</a></li>
+<li id="menu-item-26815" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-26815"><a href="./../about/index.html">关于</a></li>
+</ul></div>
+								
+															</div>
+						<!-- collapse -->
+
+						<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+							<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</a>
+												</div>
+						<!-- container -->
+					</div>
+					<!-- .navbar-inner .row-fluid -->
+				</div>
+				<!-- main-navigation navbar -->
+			</nav>
+			<!-- #navigation -->
+		</div>
+		<!-- .container-fluid-->
+	</div>
+	<!-- .container -->
+</div>
+<!-- #navigation_menu -->
+
+
+<!-- --------------- Sub Body -------------------- -->
+
+<div class="container-full-width" id="sub_body">
+
+	<!-- ---------------- Header --------------------- -->
+	<div class="container-full-width" id="header_section">
+		<div class="container">
+						<div class="container-fluid">
+					<header id="cc-header" class="row-fluid">
+		<div class="span7">
+				<div class="hgroup">
+		<h2 class="site-title"><a href="./../index.html" title="我自然" rel="home">我自然</a></h2>
+	</div>
+		</div>
+
+		<div id="register" class="span5">
+				<div id="social">
+		<div class="legacy-icons">
+					</div>
+	</div>
+
+		</div>
+	</header>
+			</div>
+			<!-- .container-fluid-->
+		</div>
+		<!-- .container -->
+	</div>
+	<!-- #header_section -->
+
+	<div id="single_page" class="container-full-width">
+
+		<div class="container">
+
+			<div class="container-fluid">
+
+				
+				<div id="container" class="row-fluid">
+
+					
+					<div id="content" class=" span9 content-sidebar-right">
+
+						
+						
+							
+<article id="post-26821" class="post-26821 post type-post status-publish format-standard hentry category-5 tag-docker tag-paas">
+
+	<header class="entry-header">
+
+		
+		<h1 class="entry-title">
+							Docker能够运行任何应用的“PaaS”云				
+		</h1>
+					<div class="entry-meta">
+				在 <a href="./index.html" title="下午3:35" rel="bookmark">
+							<time class="entry-date updated" datetime="2013-09-17T15:35:09+08:00">2013年9月17日</time>
+						</a> 上公布				<span class="byline"> 作者为 <span class="author vcard">
+								<a class="url fn n" href="./../author/yankay/index.html" title="查看 yankay 的所有文章" rel="author">yankay</a>
+							</span>
+						</span>			</div>
+<!-- .entry-meta -->
+			</header>
+	<!-- .entry-header -->
+
+	
+		<div class="entry-content">
+						<h3>Docker 简介</h3>
+<p><a href="http://www.docker.io/">Docker </a>是一个开源可以将<strong>任何应用</strong>包装在&#8221;LXC容器”中运行的工具。如果说VMware,KVM包装的虚拟机，Docker包装的是应用。是一个实至名归的PaaS。</p>
+<p>当应用被打包成Docker Image后，部署和运维就变得极其简单。可以使用<strong>统一的方式 </strong>来下载，启动，扩展，删除，迁移。</p>
+<p><img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-27237" src="http://47.100.65.109/wp-content/uploads/2013/09/homepage-docker-logo-300x248.png" alt="" width="300" height="248" srcset="./../wp-content/uploads/2013/09/homepage-docker-logo-300x248.png 300w, ./../wp-content/uploads/2013/09/homepage-docker-logo.png 400w" sizes="(max-width: 300px) 100vw, 300px"></p>
+<p>Dock可以用来：</p>
+<ul>
+<li>自动化打包和部署任何应用</li>
+<li>创建一个轻量级私有PaaS云</li>
+<li>搭建开发测试环境</li>
+<li>部署可扩展的Web应用</li>
+</ul>
+<p>Docker是开源的，可以在<a href="https://github.com/dotcloud/docker/">GitHub</a>上访问其代码，提供Restful接口。他的贡献者是一个非常流行的PaaS云提供商 <a href="https://dotcloud.com/">https://dotcloud.com/</a></p>
+<h3>PaaS 的核心价值</h3>
+<h4>遗失的方向 &#8211; 绝大部分应用竟然不能无缝迁移到主流PaaS上</h4>
+<p>云计算发展多年，分为IaaS,PaaS和SaaS。其中PaaS（平台即服务）最为不愠不火。笔者因为，最大的原因是PaaS给人(开发，运维，老板)带来的价值不够多，私有PaaS门槛高！最大的问题在于绝大部分应用竟然不能无缝迁移到PaaS上。</p>
+<p>Heroku是最流行的公有PaaS云。很廉价好用，可是大部分应用都无法部署。每个应用只能监听一个HTTP端口，应用之间不能交互。他可以为你自动扩展和负载均衡，但其实没得选择，只要使用Heroku就必须接受限制。好歹Heroku支持绝大部分平台如Java,Python。相比之下，GAE更甚，只支持三个平台，不能访问文件系统，也不能启动子进程。</p>
+<p>CloudFoundry是比较流行的私有PaaS云。限制和Heroku一样多，部署比较复杂。为此他甚至有一个量身定制的部署工具BOSH。有多难用，用过的人都知道。这个不能怪开发人员，他定义的PaaS本来就这么复杂。</p>
+<h4>PaaS要实现开发人和运维人的梦</h4>
+<h5>开发人的梦 &#8211; 自在的运行环境，无限的资源</h5>
+<p>开发人希望专注于程序逻辑。有自由自在的运行环境，有丰富的外部资源如各种中间件。至少不要为什么 端口监听数目，通信协议限制 这些事情所困扰。</p>
+<h5>运维人的梦 &#8211; 没有故障和重复的事，减少等待</h5>
+<p>运维天天处理故障，如果千千万应用都能以同样的方式部署，运维。那么故障的处理就简单多了，重复的事情也会变少。下载部署，安装依赖，这些事情都太过繁琐耗时了。</p>
+<h5>Docker功能</h5>
+<p>Docker可以让开发和运维都变得简单。</p>
+<p>开发者不必要像使用一般PaaS一样在充满着限制的条件下开发应用，可以就如同平常一样，自由的使用各种资源。老子说“太上下知有之 ，其次誉之，其次侮之”。Dock对于开发者就是“下知有之”的状态。</p>
+<p>爽的人是运维。要使用Docker，需要在机器上安装Docker Engine，</p>
+<ol>
+<li>创建一个Container。实际上是一个Linux Container，Docker会将网络，存储这些事情都配好。</li>
+<li>下载应用并安装。比如可以用sudo apt-get install mysql-server 来安装一个MySQL。并配置一些参数什么的。</li>
+<li>打包上传Image。Docker可以将这个Linux Container打包成Image，启动脚本也在其中。并上传至Image Registry中。这个Image仅仅包括你修改的<strong>增量部分</strong>，所以体积比较小。</li>
+<li>一条命令跑起来。使用Docker Run 一条命令可以从Image Registry中下载Image 并跑起来。</li>
+</ol>
+<p>需要重启的时候，只要重启Container。需要迁移的时候，只要迁移Container。一切干干净净。</p>
+<h4>PaaS，IaaS术业有专攻</h4>
+<p>IaaS普遍使用虚拟机,开销较大。Docker明显更轻量。笔者认为IaaS和PaaS各有专攻，PaaS去专注于安全级别的隔离是没有意义的，IaaS也不应该去感知到应用。一个公有云中，可以让每个租户使用不同的虚拟机，虚拟网络来做到安全和资源上的隔离。再通过PaaS统一运维，管理计算资源。</p>
+<p>没有必要让每个应用都专享一台虚拟机，这样开销太大。但在安全敏感的环境中，每个租户使用不同的虚拟机是合理的。</p>
+<h3>使用Docker</h3>
+<h4>在线尝试</h4>
+<p>使用Docker最便捷的方式莫过于 <strong>在线尝试</strong>: <a href="http://www.docker.io/gettingstarted/#">http://www.docker.io/gettingstarted/#</a></p>
+<p>完成了这个在线的教材，相信你对Docker已经基本玩转了。</p>
+<h4>在Ubuntu中安装Docker</h4>
+<p>现在Docker支持两个Ubuntu版本：</p>
+<ul>
+<li><a href="http://docs.docker.io/en/latest/installation/ubuntulinux/#ubuntu-precise"><em>Ubuntu Precise 12.04 (LTS) (64-bit)</em></a></li>
+<li><a href="http://docs.docker.io/en/latest/installation/ubuntulinux/#ubuntu-raring"><em>Ubuntu Raring 13.04 (64 bit)</em></a></li>
+</ul>
+<p>有两个依赖</p>
+<ul>
+<li>Linux kernel 3.8 (read more about <a href="http://docs.docker.io/en/latest/installation/kernel/#kernel"><em>Kernel Requirements</em></a>)</li>
+<li>AUFS 文件系统</li>
+</ul>
+<p>所以需要确认下您的操作系统，安装依赖并重启：</p>
+<pre class="lang:sh decode:true"># Add the PPA sources to your apt sources list.
+sudo apt-get install python-software-properties &amp;&amp; sudo add-apt-repository ppa:dotcloud/lxc-docker
+
+# Update your sources
+sudo apt-get update
+
+# Install, you will see another warning that the package cannot be authenticated. Confirm install.
+sudo apt-get install lxc-docker</pre>
+<p>安装Docker并重启：</p>
+<pre class="lang:sh decode:true"># Add the PPA sources to your apt sources list.
+sudo apt-get install python-software-properties &amp;&amp; sudo add-apt-repository ppa:dotcloud/lxc-docker
+
+# Update your sources
+sudo apt-get update
+
+# Install, you will see another warning that the package cannot be authenticated. Confirm install.
+sudo apt-get install lxc-docker</pre>
+<p>使用Docker，下载一个Ubuntu Image，并创建一个Container，在其中运行Bash</p>
+<pre class="lang:sh decode:true"># download the base 'ubuntu' container and run bash inside it while setting up an interactive shell
+sudo docker run -i -t ubuntu /bin/bash
+
+# type 'exit' to exit</pre>
+<p>成功，你已经玩转Docker了！！</p>
+<h4>Docker Run的时候发生了什么？</h4>
+<p>当用户执行Docker run的时候，发生了这些事情：</p>
+<ol>
+<li>Docker CLI 调用 Docker Engine的Restful API。默认情况下，Docker  Engine是监听在一个Unix Socket上的，当然也可以监听在TCP端口上。</li>
+<li>从<a href="https://index.docker.io/">docker index</a>下载一个Ubuntu Image。<a href="https://index.docker.io/">docker index</a>是一个荟萃Docker Image的地方，就像一个Repository.你也可以构建自己的私有Repository。</li>
+<li>分配文件系统。文件系统是AUFS，这是一种“增量文件系统”，你做的修改都可以以增量的方式保存。因此Docker Image可以很小。</li>
+<li>Mount文件系统</li>
+<li>创建网络端口。Docker使用Linux Bridge和Linux Network NameSpace来配置网络。</li>
+<li>配置IP地址。给刚刚创建的虚拟网卡配一个内部IP。这个IP不重要，因为Docker是通过静态NAT来对外保留TCP/UDP端口的。</li>
+<li>在LXC中执行命令，这个例子中命令就是 &#8220;/bin/bash&#8221;</li>
+<li>截取“/bin/bash”的输入输出流到Terminal，和你交互</li>
+</ol>
+<h3><span style="font-size: 1.17em;">Dock详解</span></h3>
+<h4>在Docker中运行Redis</h4>
+<p>创建一个Docker Container</p>
+<pre class="lang:sh decode:true">sudo docker run -i -t ubuntu /bin/bash</pre>
+<p>安装Redis .</p>
+<pre class="lang:sh decode:true">apt-get update
+apt-get install redis-server
+exit</pre>
+<p>拍个快照，创建你自己的Docker Redis Image</p>
+<pre class="lang:sh decode:true">docker ps -a  # grab the container id (this will be the first one in the list)
+docker commit &lt;container_id&gt; &lt;your username&gt;/redis</pre>
+<p>运行Redis。-d 是指后台运行，使用你刚刚创建的Image。</p>
+<pre class="lang:sh decode:true">sudo docker run -d -p 6379 &lt;your username&gt;/redis /usr/bin/redis-server</pre>
+<p>使用redis-cli访问</p>
+<pre class="lang:sh decode:true">sudo docker ps  # grab the new container id
+sudo docker inspect &lt;container_id&gt;    # grab the ipaddress of the container
+redis-cli -h &lt;ipaddress&gt; -p 6379
+redis 10.0.3.32:6379&gt; set docker awesome
+OK
+redis 10.0.3.32:6379&gt; get docker
+"awesome"
+redis 10.0.3.32:6379&gt; exit</pre>
+<h4> 文件系统</h4>
+<p>一般来说，要Linux需要两种文件系统</p>
+<ol>
+<li>boot file system (bootfs)</li>
+<li>root file system (rootfs)</li>
+</ol>
+<p>bootfs包含有bootloader。用户从来不会更改bootfs。事实上，当机器启动结束后，kernel会卸载掉这个bootfs。</p>
+<p>rootfs就是我们通常看到了Linux文件目录，包括 <tt>/dev, /proc, /bin, /etc,/lib, /usr,</tt> 和<tt>/tmp等等。不同的Linux发行版的rootfs是不一样的，软件包结构也是不同的。Docker通过管理rootfs，可以在同时运行多个Linux发行版。</tt></p>
+<p>当传统Linux启动的时候，rootfs是只读的，检查完整性后会转化成可读写状态。</p>
+<p>当Docker挂载rootfs的时候，也是只读的。但是他并没有把它转化为可读写状态，而且在其上使用 <a href="http://en.wikipedia.org/wiki/Union_mount">union mount</a> 来加一层，创建一个可读写的文件系统。原理的rootfs还是只读的，数据被写入新的空间。Docker称之为&#8221;层&#8221;，数据可以这样一层一层叠加起来。</p>
+<p>最初的时候，最顶层中什么数据也没有，当进程创建修改文件的时候，数据就会保存在最顶层。底层的文件系统没有丝毫改变。</p>
+<p>当导出Image的时候，其实就是导出最顶层而已。</p>
+<p>由于底层的只读的，多个Docker Container可以共享，提高的文件系统的使用效率。</p>
+<h3>Docker生态环境</h3>
+<p>Docker是开源的，提供完善的Restful接口，设计简洁，直戳痛点。但是因此比较简单，没有华丽的功能。凤栖梧桐，以Docker为树干，衍生出许多优秀的项目。</p>
+<ul>
+<li>
+<strong><a href="https://github.com/progrium/dokku">dokku</a> </strong>100行BASH的微Heroku。包含了一个PaaS的基本功能</li>
+<li>
+<strong><a href="https://github.com/ehazlett/shipyard">shipyard</a></strong> Docker管理界面，提供多Host,创建Container,查看Image等功能</li>
+<li>
+<strong><a href="https://github.com/dotcloud/openstack-docker">openstack-docker</a></strong> Docker和OpenStack集成，可以使用Nova和Glance来控制</li>
+<li>
+<strong><a href="https://github.com/ptone/jiffylab">jiffylab</a></strong>教学用Python和Unix Shell平台</li>
+<li>
+<strong><a href="http://www.memcachedasaservice.com/">BYO SAAS</a></strong> Memcached as a Service</li>
+<li>
+<strong><a href="https://github.com/crosbymichael/dockerui">Dockerui</a></strong> Docker管理界面</li>
+</ul>
+					</div>
+<!-- .entry-content -->
+
+	
+	<footer class="entry-meta">
+		
+							<span class="cat-links">
+				文章分类 <a href="./../category/%e6%8a%80%e6%9c%af/index.html" rel="category tag">软件技术</a>			</span>
+				<span class="sep"> | </span>
+			
+							<span class="taglinks">
+				标签： <a href="./../tag/docker/index.html" rel="tag">Docker</a>, <a href="./../tag/paas/index.html" rel="tag">PaaS</a>			</span>
+				<span class="sep"> | </span>
+			
+		
+						<span class="comments-link"><a href="./index.html#comments">9 评论</a></span>
+				<span class="sep">  </span>
+			
+		
+	</footer>
+	<!-- #entry-meta -->
+
+</article><!-- #post-26821 -->
+
+							<div class="more-content">
+								<div class="row-fluid">
+									<div class="span6 previous-post">
+										&laquo; <a href="./../scala-tour-choiceness/index.html" rel="prev">Scala Tour &#8211; 精选</a>									</div>
+									<div class="span6 next-post">
+										<a href="./../cloudfoundry-v2-with-microcf/index.html" rel="next">CloudFoundry v2面面谈，内赠MicroCFv2福利</a> &raquo;									</div>
+								</div>
+							</div>
+
+							
+
+<div id="comments" class="comments-area">
+
+	
+			<h2 class="comments-title">
+			9 thoughts on <span>&ldquo;Docker能够运行任何应用的“PaaS”云&rdquo;</span>		</h2>
+
+		
+		<ol class="commentlist">
+							<li class="post pingback">
+				<p>通告: <a href="http://john24318.wordpress.com/2014/01/14/docker-some-materials/" class="url" rel="ugc external nofollow">Docker &#8211; Some materials | John&#039;s code place</a></p>
+				</li>
+<!-- #comment-## -->
+				<li class="post pingback">
+				<p>通告: <a href="http://www.openstack.cn/p828.html" class="url" rel="ugc external nofollow">Docker能够运行任何应用的“PaaS”云 &laquo; OpenStack中国社区</a></p>
+				</li>
+<!-- #comment-## -->
+					<li class="comment even thread-even depth-1" id="li-comment-104">
+					<article id="comment-104" class="comment hreview">
+						<footer>
+							<div class="comment-author reviewer vcard">
+								<img alt="" src="http://2.gravatar.com/avatar/8ee493c6c288d18c24fd6994ccc969f0?s=40&#038;d=wavatar&#038;r=g" srcset="http://2.gravatar.com/avatar/8ee493c6c288d18c24fd6994ccc969f0?s=80&#038;d=wavatar&#038;r=g 2x" class="avatar avatar-40 photo" height="40" width="40" decoding="async">								<cite class="fn">demohi</cite> <span class="says">说:</span>							</div>
+							<!-- .comment-author .vcard -->
+							
+							<div class="comment-meta commentmetadata">
+								<a href="./index.html#comment-104" class="dtreviewed">
+									<time pubdate datetime="2014-01-21T13:05:00+08:00">
+										2014年1月21日于下午1:05									</time>
+								</a>
+															</div>
+							<!-- .comment-meta .commentmetadata -->
+						</footer>
+
+						<div class="comment-content">
+<p>赞~</p>
+</div>
+
+						<div class="reply">
+							<a rel="nofollow" class="comment-reply-link" href="#comment-104" data-commentid="104" data-postid="26821" data-belowelement="comment-104" data-respondelement="respond" data-replyto="回复给demohi" aria-label="回复给demohi">回复</a>						</div>
+						<!-- .reply -->
+					</article><!-- #comment-## -->
+
+				</li>
+<!-- #comment-## -->
+				<li class="post pingback">
+				<p>通告: <a href="http://www.lilihui.name/2014/01/24/docker%e8%83%bd%e5%a4%9f%e8%bf%90%e8%a1%8c%e4%bb%bb%e4%bd%95%e5%ba%94%e7%94%a8%e7%9a%84paas%e4%ba%91/" class="url" rel="ugc external nofollow">Docker能够运行任何应用的“PaaS”云 | 电商技术与互联网营销博客</a></p>
+				</li>
+<!-- #comment-## -->
+					<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-106">
+					<article id="comment-106" class="comment hreview">
+						<footer>
+							<div class="comment-author reviewer vcard">
+								<img alt="" src="http://0.gravatar.com/avatar/0ff68493e66e72b9a6c2e428e1d323c5?s=40&#038;d=wavatar&#038;r=g" srcset="http://0.gravatar.com/avatar/0ff68493e66e72b9a6c2e428e1d323c5?s=80&#038;d=wavatar&#038;r=g 2x" class="avatar avatar-40 photo" height="40" width="40" decoding="async">								<cite class="fn">zacker</cite> <span class="says">说:</span>							</div>
+							<!-- .comment-author .vcard -->
+							
+							<div class="comment-meta commentmetadata">
+								<a href="./index.html#comment-106" class="dtreviewed">
+									<time pubdate datetime="2014-02-24T09:54:00+08:00">
+										2014年2月24日于上午9:54									</time>
+								</a>
+															</div>
+							<!-- .comment-meta .commentmetadata -->
+						</footer>
+
+						<div class="comment-content">
+<p>Dock可以用来：</p>
+<p>错别字。应该是Docker哦。</p>
+</div>
+
+						<div class="reply">
+							<a rel="nofollow" class="comment-reply-link" href="#comment-106" data-commentid="106" data-postid="26821" data-belowelement="comment-106" data-respondelement="respond" data-replyto="回复给zacker" aria-label="回复给zacker">回复</a>						</div>
+						<!-- .reply -->
+					</article><!-- #comment-## -->
+
+				</li>
+<!-- #comment-## -->
+					<li class="comment even thread-even depth-1" id="li-comment-107">
+					<article id="comment-107" class="comment hreview">
+						<footer>
+							<div class="comment-author reviewer vcard">
+								<img alt="" src="http://0.gravatar.com/avatar/9c4be2478a37d9e49357a683e234fe0b?s=40&#038;d=wavatar&#038;r=g" srcset="http://0.gravatar.com/avatar/9c4be2478a37d9e49357a683e234fe0b?s=80&#038;d=wavatar&#038;r=g 2x" class="avatar avatar-40 photo" height="40" width="40" loading="lazy" decoding="async">								<cite class="fn">tufeiping</cite> <span class="says">说:</span>							</div>
+							<!-- .comment-author .vcard -->
+							
+							<div class="comment-meta commentmetadata">
+								<a href="./index.html#comment-107" class="dtreviewed">
+									<time pubdate datetime="2014-02-25T02:01:00+08:00">
+										2014年2月25日于上午2:01									</time>
+								</a>
+															</div>
+							<!-- .comment-meta .commentmetadata -->
+						</footer>
+
+						<div class="comment-content">
+<p>Docker其实就是汇集了多种Linux虚拟化技术的集合，相比较LXC，是一种更简洁，有效的方案!</p>
+</div>
+
+						<div class="reply">
+							<a rel="nofollow" class="comment-reply-link" href="#comment-107" data-commentid="107" data-postid="26821" data-belowelement="comment-107" data-respondelement="respond" data-replyto="回复给tufeiping" aria-label="回复给tufeiping">回复</a>						</div>
+						<!-- .reply -->
+					</article><!-- #comment-## -->
+
+				</li>
+<!-- #comment-## -->
+					<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-109">
+					<article id="comment-109" class="comment hreview">
+						<footer>
+							<div class="comment-author reviewer vcard">
+								<img alt="" src="http://1.gravatar.com/avatar/408bf7d97835a79ff1aa1a1754751526?s=40&#038;d=wavatar&#038;r=g" srcset="http://1.gravatar.com/avatar/408bf7d97835a79ff1aa1a1754751526?s=80&#038;d=wavatar&#038;r=g 2x" class="avatar avatar-40 photo" height="40" width="40" loading="lazy" decoding="async">								<cite class="fn">fate</cite> <span class="says">说:</span>							</div>
+							<!-- .comment-author .vcard -->
+							
+							<div class="comment-meta commentmetadata">
+								<a href="./index.html#comment-109" class="dtreviewed">
+									<time pubdate datetime="2014-10-04T01:41:00+08:00">
+										2014年10月4日于上午1:41									</time>
+								</a>
+															</div>
+							<!-- .comment-meta .commentmetadata -->
+						</footer>
+
+						<div class="comment-content">
+<p>docker的资源隔离性能怎样？docker创建的集群的实际运行效率是否比基于kvm的集群的运行效率高，有实例证明吗？从当前的理解上只是看到docker较充分利用了资源。</p>
+</div>
+
+						<div class="reply">
+							<a rel="nofollow" class="comment-reply-link" href="#comment-109" data-commentid="109" data-postid="26821" data-belowelement="comment-109" data-respondelement="respond" data-replyto="回复给fate" aria-label="回复给fate">回复</a>						</div>
+						<!-- .reply -->
+					</article><!-- #comment-## -->
+
+				</li>
+<!-- #comment-## -->
+					<li class="comment even thread-even depth-1" id="li-comment-113">
+					<article id="comment-113" class="comment hreview">
+						<footer>
+							<div class="comment-author reviewer vcard">
+								<img alt="" src="http://0.gravatar.com/avatar/328b3a997f24210594c0d18e139dfc7c?s=40&#038;d=wavatar&#038;r=g" srcset="http://0.gravatar.com/avatar/328b3a997f24210594c0d18e139dfc7c?s=80&#038;d=wavatar&#038;r=g 2x" class="avatar avatar-40 photo" height="40" width="40" loading="lazy" decoding="async">								<cite class="fn">Pony</cite> <span class="says">说:</span>							</div>
+							<!-- .comment-author .vcard -->
+							
+							<div class="comment-meta commentmetadata">
+								<a href="./index.html#comment-113" class="dtreviewed">
+									<time pubdate datetime="2017-08-23T23:09:00+08:00">
+										2017年8月23日于下午11:09									</time>
+								</a>
+															</div>
+							<!-- .comment-meta .commentmetadata -->
+						</footer>
+
+						<div class="comment-content">
+<p>不好意思打扰一下。能问你一个关于docker的技术问题吗？看过你的一篇回答，你觉得不应该把数据库放在docker上面。https://www.zhihu.com/question/31682393。我顺着这个思路来，把postgres放在本地机器上跑。那就出现一个问题在于，我放在docker上的应用不能直接通过localhost:5432直接访问数据库。因为在docker里面locahost指向是不一样的。</p>
+<p>我大概查了一下，解决方法，比如这个：https://stackoverflow.com/questions/24319662/from-inside-of-a-docker-container-how-do-i-connect-to-the-localhost-of-the-mach。一般而言他们都推荐把本地机器的ip写成一个常数，比如叫dockerhost..那么docker上面的程序用dockerhost来与数据库交流。这个方法可以解决，但是不太优美。</p>
+<p>说了这么多，其实我冒昧的想问一下，你和DaoCloud是怎么解决这个问题的？有没有什么特别方便的解决方法？<br>
+在此谢谢啦。:)</p>
+</div>
+
+						<div class="reply">
+							<a rel="nofollow" class="comment-reply-link" href="#comment-113" data-commentid="113" data-postid="26821" data-belowelement="comment-113" data-respondelement="respond" data-replyto="回复给Pony" aria-label="回复给Pony">回复</a>						</div>
+						<!-- .reply -->
+					</article><!-- #comment-## -->
+
+				<ul class="children">
+					<li class="comment odd alt depth-2" id="li-comment-114">
+					<article id="comment-114" class="comment hreview">
+						<footer>
+							<div class="comment-author reviewer vcard">
+								<img alt="" src="http://0.gravatar.com/avatar/328b3a997f24210594c0d18e139dfc7c?s=40&#038;d=wavatar&#038;r=g" srcset="http://0.gravatar.com/avatar/328b3a997f24210594c0d18e139dfc7c?s=80&#038;d=wavatar&#038;r=g 2x" class="avatar avatar-40 photo" height="40" width="40" loading="lazy" decoding="async">								<cite class="fn">Pony</cite> <span class="says">说:</span>							</div>
+							<!-- .comment-author .vcard -->
+							
+							<div class="comment-meta commentmetadata">
+								<a href="./index.html#comment-114" class="dtreviewed">
+									<time pubdate datetime="2017-08-23T23:13:00+08:00">
+										2017年8月23日于下午11:13									</time>
+								</a>
+															</div>
+							<!-- .comment-meta .commentmetadata -->
+						</footer>
+
+						<div class="comment-content">
+<p>disques有bug.不能判断哪里是链接的结束。哈哈。我再重新复制一下吧。</p>
+<p>不好意思打扰一下。能问你一个关于docker的技术问题吗？看过你的一篇回答，你觉得不应该把数据库放在docker上面。https://www.zhihu.com/question/31682393  。<br>
+我顺着这个思路来，把postgres放在本地机器上跑。那就出现一个问题在于，我放在docker上的应用不能直接通过localhost:5432直接访问数据库。因为在docker里面locahost指向是不一样的。</p>
+<p>我大概查了一下，解决方法，比如这个：https://stackoverflow.com/questions/24319662/from-inside-of-a-docker-container-how-do-i-connect-to-the-localhost-of-the-mach 。<br>
+一般而言他们都推荐把本地机器的ip写成一个常数，比如叫dockerhost..那么docker上面的程序用dockerhost来与数据库交流。这个方法可以解决，但是不太优美。</p>
+<p>说了这么多，其实我冒昧的想问一下，你和DaoCloud是怎么解决这个问题的？有没有什么特别方便的解决方法？<br>
+在此谢谢啦。:)</p>
+</div>
+
+						<div class="reply">
+							<a rel="nofollow" class="comment-reply-link" href="#comment-114" data-commentid="114" data-postid="26821" data-belowelement="comment-114" data-respondelement="respond" data-replyto="回复给Pony" aria-label="回复给Pony">回复</a>						</div>
+						<!-- .reply -->
+					</article><!-- #comment-## -->
+
+				</li>
+<!-- #comment-## -->
+</ul>
+<!-- .children -->
+</li>
+<!-- #comment-## -->
+		</ol>
+
+		
+	
+	
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">发表评论 <small><a rel="nofollow" id="cancel-comment-reply-link" href="./index.html#respond" style="display:none;">取消回复</a></small>
+</h3>
+<form action="http://yankay.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+<p class="comment-notes"><span id="email-notes">您的电子邮箱地址不会被公开。</span> <span class="required-field-message">必填项已用<span class="required">*</span>标注</span></p>
+<p class="comment-form-comment"><label for="comment">评论 <span class="required">*</span></label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p>
+<p class="comment-form-author"><label for="author">显示名称 <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" autocomplete="name" required="required"></p>
+<p class="comment-form-email"><label for="email">电子邮箱地址 <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" maxlength="100" aria-describedby="email-notes" autocomplete="email" required="required"></p>
+<p class="comment-form-url"><label for="url">网站地址</label> <input id="url" name="url" type="text" value="" size="30" maxlength="200" autocomplete="url"></p>
+<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"> <label for="wp-comment-cookies-consent">在此浏览器中保存我的显示名称、邮箱地址和网站地址，以便下次评论时使用。</label></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="发表评论"> <input type="hidden" name="comment_post_ID" value="26821" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p>
+<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="798eb7fefd"></p>
+<input type="hidden" id="ak_js" name="ak_js" value="135"><textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100" style="display: none !important;"></textarea>
+</form>	</div>
+<!-- #respond -->
+	
+</div>
+<!-- #comments .comments-area -->
+						
+						
+					</div>
+					<!-- #content -->
+
+					
+<div id="secondary" class="widget-area span3">
+
+	
+	<div id="sidebar">
+		<aside id="search-2" class="widget-container widget_search"><form method="get" id="searchform" class="navbar-search pull-right" action="http://yankay.com/" role="search">
+	<input type="text" class="search-query input-medium" name="s" placeholder="Search &hellip;">
+</form>
+<div class="clear"></div>
+</aside>
+		<aside id="recent-posts-2" class="widget-container widget_recent_entries">
+		<h3 class="widget-title">近期文章</h3>
+		<ul>
+											<li>
+					<a href="./../containerd-will-replace-docker/index.html">听说 Docker 被 kubenetes 抛弃了，怎么办？containerd</a>
+									</li>
+											<li>
+					<a href="./../%e5%85%ac%e5%91%8a-%e5%8d%9a%e5%ae%a2%e9%87%8d%e5%bc%80%e4%ba%86/index.html">公告 &#8211; 博客重开了</a>
+									</li>
+											<li>
+					<a href="./../cloudfoundry-v2-with-microcf/index.html">CloudFoundry v2面面谈，内赠MicroCFv2福利</a>
+									</li>
+											<li>
+					<a href="./index.html" aria-current="page">Docker能够运行任何应用的“PaaS”云</a>
+									</li>
+											<li>
+					<a href="./../scala-tour-choiceness/index.html">Scala Tour &#8211; 精选</a>
+									</li>
+					</ul>
+
+		</aside><aside id="recent-comments-2" class="widget-container widget_recent_comments"><h3 class="widget-title">近期评论</h3>
+<ul id="recentcomments">
+<li class="recentcomments">
+<span class="comment-author-link"><a href="https://www.ccppcoding.com/archives/63098.html" class="url" rel="ugc external nofollow">[整理]完美哈希函数(Perfect Hash Function) - 高性能架构探索</a></span>发表在《<a href="./../introduction-to-opmphf/index.html#comment-3101">最小完美哈希函数简介</a>》</li>
+<li class="recentcomments">
+<span class="comment-author-link"><a href="https://www.javatt.com/p/284115" class="url" rel="ugc external nofollow">Scala Tour – 精选 - Java天堂</a></span>发表在《<a href="./../scala-tour-choiceness/index.html#comment-2781">Scala Tour &#8211; 精选</a>》</li>
+<li class="recentcomments">
+<span class="comment-author-link"><a href="https://www.zhankr.net/46292.html" class="url" rel="ugc external nofollow">Golang适合高并发场景的原因分析 - 站壳网</a></span>发表在《<a href="./../go-clear-concurreny/index.html#comment-2701">Go-简洁的并发</a>》</li>
+<li class="recentcomments">
+<span class="comment-author-link"><a href="https://code84.com/710435.html" class="url" rel="ugc external nofollow">HBase 官方文档 &#8211; 源码巴士</a></span>发表在《<a href="./../windows%e4%b8%8beclipse%e7%9a%84-c%e7%8e%af%e5%a2%83%e9%85%8d%e7%bd%ae/index.html#comment-2679">Windows下eclipse的 C++环境配置</a>》</li>
+<li class="recentcomments">
+<span class="comment-author-link"><a href="https://www.ideaopen.cn/98230.html" class="url" rel="ugc external nofollow">Go-简洁的并发-点开</a></span>发表在《<a href="./../go-clear-concurreny/index.html#comment-1255">Go-简洁的并发</a>》</li>
+</ul></aside><aside id="archives-2" class="widget-container widget_archive"><h3 class="widget-title">归档</h3>
+			<ul>
+					<li><a href="./../2021/06/index.html">2021年6月</a></li>
+	<li><a href="./../2021/03/index.html">2021年3月</a></li>
+	<li><a href="./../2014/02/index.html">2014年2月</a></li>
+	<li><a href="./../2013/09/index.html">2013年9月</a></li>
+	<li><a href="./../2013/05/index.html">2013年5月</a></li>
+	<li><a href="./../2013/01/index.html">2013年1月</a></li>
+	<li><a href="./../2012/11/index.html">2012年11月</a></li>
+	<li><a href="./../2012/09/index.html">2012年9月</a></li>
+	<li><a href="./../2012/08/index.html">2012年8月</a></li>
+	<li><a href="./../2012/03/index.html">2012年3月</a></li>
+	<li><a href="./../2012/02/index.html">2012年2月</a></li>
+	<li><a href="./../2012/01/index.html">2012年1月</a></li>
+	<li><a href="./../2011/11/index.html">2011年11月</a></li>
+	<li><a href="./../2011/10/index.html">2011年10月</a></li>
+	<li><a href="./../2011/09/index.html">2011年9月</a></li>
+	<li><a href="./../2010/10/index.html">2010年10月</a></li>
+	<li><a href="./../2010/08/index.html">2010年8月</a></li>
+	<li><a href="./../2010/07/index.html">2010年7月</a></li>
+	<li><a href="./../2010/06/index.html">2010年6月</a></li>
+	<li><a href="./../2010/05/index.html">2010年5月</a></li>
+	<li><a href="./../2010/04/index.html">2010年4月</a></li>
+	<li><a href="./../2010/03/index.html">2010年3月</a></li>
+	<li><a href="./../2010/02/index.html">2010年2月</a></li>
+	<li><a href="./../2010/01/index.html">2010年1月</a></li>
+	<li><a href="./../2009/10/index.html">2009年10月</a></li>
+	<li><a href="./../2009/09/index.html">2009年9月</a></li>
+	<li><a href="./../2009/08/index.html">2009年8月</a></li>
+	<li><a href="./../2009/07/index.html">2009年7月</a></li>
+	<li><a href="./../2009/06/index.html">2009年6月</a></li>
+	<li><a href="./../2008/10/index.html">2008年10月</a></li>
+	<li><a href="./../2008/08/index.html">2008年8月</a></li>
+	<li><a href="./../2008/07/index.html">2008年7月</a></li>
+	<li><a href="./../2008/06/index.html">2008年6月</a></li>
+			</ul>
+
+			</aside><aside id="categories-2" class="widget-container widget_categories"><h3 class="widget-title">分类目录</h3>
+			<ul>
+					<li class="cat-item cat-item-3">
+<a href="./../category/%e5%ae%b6%e5%ba%ad%e7%94%9f%e6%b4%bb/index.html">家庭生活</a>
+</li>
+	<li class="cat-item cat-item-1">
+<a href="./../category/uncategorized/index.html">未分类</a>
+</li>
+	<li class="cat-item cat-item-7">
+<a href="./../category/%e6%8a%80%e6%9c%af/%e6%af%8f%e6%97%a5%e5%bf%83%e5%be%97/index.html">每日心得</a>
+</li>
+	<li class="cat-item cat-item-5">
+<a href="./../category/%e6%8a%80%e6%9c%af/index.html">软件技术</a>
+</li>
+			</ul>
+
+			</aside><aside id="nav_menu-3" class="widget-container widget_nav_menu"><h3 class="widget-title">友情链接</h3>
+<div class="menu-%e5%8f%8b%e6%83%85%e9%93%be%e6%8e%a5-container"><ul id="menu-%e5%8f%8b%e6%83%85%e9%93%be%e6%8e%a5" class="menu">
+<li id="menu-item-27287" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-27287"><a href="https://www.daocloud.io/dce">DaoCloud Enterprise</a></li>
+<li id="menu-item-27288" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-27288"><a href="https://www.daocloud.io/dch">DaoCloud 云原生一体机</a></li>
+</ul></div></aside>	</div>
+	<!-- #sidebar -->
+
+	
+</div>
+<!-- #secondary .widget-area .span3 -->
+				</div>
+				<!-- #container .row-fluid-->
+
+				
+			</div>
+			<!--container fluid -->
+
+		</div>
+		<!-- container -->
+
+	</div>
+<!-- container full width -->
+
+
+
+	<div class="container-full-width" id="after_footer">
+		<div class="container">
+			<div class="container-fluid">
+				<footer class="site-footer row-fluid">
+					<div class="span6">
+						<div id="credit">
+															<a href="http://cyberchimps.com/" target="_blank" title="CyberChimps Themes">
+																			<h4 class="cc-credit-text">CyberChimps WordPress Themes</h4></a>
+																	
+													
+						</div>
+					</div>
+					<!-- Adds the afterfooter copyright area -->
+					<div class="span6">
+												<div id="copyright">
+							沪ICP备2021008917号-1 © 颜开						</div>
+					</div>
+				</footer>
+				<!-- row-fluid -->
+			</div>
+			<!-- .container-fluid-->
+		</div>
+		<!-- .container -->
+	</div>    <!-- #after_footer -->
+
+
+</div>
+<!-- End Sub Body -->
+
+
+		<script type="text/javascript">jQuery(document).ready(function($){
+			$(window).scroll(function()  {
+			if ($(this).scrollTop() > 0) {
+			$('#header_section').addClass("sticky-header");
+                       
+			}
+			else{
+			$('#header_section').removeClass("sticky-header");
+                       
+			}
+			});
+		});</script>
+	<script type="text/javascript" src="./../wp-content/themes/neuro/inc/js/jquery.flexslider.js?ver=1.0" id="jquery-flexslider-js"></script>
+<script type="text/javascript" src="./../wp-content/themes/neuro/cyberchimps/lib/bootstrap/js/bootstrap.min.js?ver=2.0.4" id="bootstrap-js-js"></script>
+<script type="text/javascript" src="./../wp-content/themes/neuro/cyberchimps/lib/js/retina-1.1.0.min.js?ver=1.1.0" id="retina-js-js"></script>
+<script type="text/javascript" src="./../wp-includes/js/comment-reply.min.js?ver=6.4.2" id="comment-reply-js" async="async" data-wp-strategy="async"></script>
+<script async="async" type="text/javascript" src="./../wp-content/plugins/akismet/_inc/form.js?ver=4.1.9" id="akismet-form-js"></script>
+
+</body>
+</html>

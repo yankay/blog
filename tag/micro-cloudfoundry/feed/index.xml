@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Micro CloudFoundry &#8211; 我自然</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../index.html</link>
+	<description>颜开的博客</description>
+	<lastBuildDate>Sun, 28 Mar 2021 12:03:08 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.2</generator>
+
+<image>
+	<url>./../../../wp-content/uploads/2021/03/cropped-favicon-32x32.png</url>
+	<title>Micro CloudFoundry &#8211; 我自然</title>
+	<link>./../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>CloudFoundry v2面面谈，内赠MicroCFv2福利</title>
+		<link>./../../../cloudfoundry-v2-with-microcf/index.html</link>
+					<comments>./../../../cloudfoundry-v2-with-microcf/index.html#comments</comments>
+		
+		<dc:creator><![CDATA[yankay]]></dc:creator>
+		<pubDate>Thu, 06 Feb 2014 11:39:32 +0000</pubDate>
+				<category><![CDATA[软件技术]]></category>
+		<category><![CDATA[CloudFoundry]]></category>
+		<category><![CDATA[Micro CloudFoundry]]></category>
+		<guid isPermaLink="false">http://www.yankay.com/?p=27189</guid>
+
+					<description><![CDATA[<p>CloudFoundry 是业界领先的PaaS云平台，可以为应用提供运行平台，类似于运行着无数应用的炙手可热的HeroKu。最近发布的第二代，功能上有了极大的扩充，如BuildPack, Service Broker v2, loggregator，并且用GoLang重写了大部分组件提升性能，如GoRouter,CLI,HM9000。本文带您走进这个大观园。还提供一个MicroCFv2下载，满足您试一试的愿望，只此一家哦。</p>
+<p><a rel="nofollow" href="./../../../cloudfoundry-v2-with-microcf/index.html">CloudFoundry v2面面谈，内赠MicroCFv2福利</a>最先出现在<a rel="nofollow" href="./../../../index.html">我自然</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p></p>
+
+
+<p>CloudFoundry 是业界领先的PaaS云平台，可以为应用提供运行平台，类似于运行着无数应用的炙手可热的HeroKu。最近发布的第二代，功能上有了极大的扩充，如BuildPack, Service Broker v2, loggregator，并且用GoLang重写了大部分组件提升性能，如GoRouter,CLI,HM9000。本文带您走进这个大观园。还提供一个MicroCFv2下载，满足您试一试的愿望，只此一家哦。</p>
+<p><img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-27234" src="http://47.100.65.109/wp-content/uploads/2014/02/run-your-java-code-on-cloud-foundry-andy-piper-pivotal-16-638-300x225.jpeg" alt="" width="300" height="225" srcset="./../../../wp-content/uploads/2014/02/run-your-java-code-on-cloud-foundry-andy-piper-pivotal-16-638-300x225.jpeg 300w, ./../../../wp-content/uploads/2014/02/run-your-java-code-on-cloud-foundry-andy-piper-pivotal-16-638.jpeg 638w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p>CloudFoundry v1已经出现较长时间，在三年前EMC中国研究院就参与其研究。对CloudFoundry v1的研究可以参见彭麟《<a href="http://qing.blog.sina.com.cn/tj/88ca09aa330004r8.html">深入 Cloud Foundry</a>》。在CloudFoundry v2诞生前的三年里，一些事情发生了巨变。外部环境方面，AWS走向成熟，Heroku逐渐成功，摸索到了PaaS成功的道路。OpenStack风起云涌，Docker带着小伙伴们异军突起。面对这些，CloudFoundry面临的竞争加剧，但同时也有了可以配合的伙伴。而CloudFoundry内部也发生了变化，原先隶属于专攻虚拟化的VmWare，现在与时俱进，成为了专攻大数据的Pivotal的一部分。而CloudFoundry v2是CloudFoundry归于Pivotal的第一个版本，成为这家兴新大数据公司的战略一部分。</p>
+<p>如果想试试CloudFoundry公有云，可以在<a href="http://www.cloudfoundry.com/use">官网</a>上申请账户。下文主要针对自建CloudFoundry。</p>
+<h2>新架构</h2>
+<p>是骡子是马，看看架构就懂了。在看第二代的架构之前，我们回顾一下之前的架构。</p>
+<p>用户通过VMC Client将应用上传到Cloud Controller 上，Cloud Controller将应用部署到DEA Pool上面。用户可以通过Router访问到各自的应用，Health Manager查看各个APP状态，保证可以自动重启。同时Cloud Controller还提供了各种Services，如MySQL，Redis等等。</p>
+<p>在上一代架构中，CloudFoundry呈现出大包大揽的方式，APP的部署也好，Service的提供也好，都自己做。虽然扩展Runtime和Service并不麻烦，但是这需要“CloudFoundry”管理员的介入，租户是没有办法做这些的。另外私有云的玩家往往都有着定制Runtime和Service的需求，内置的Service很难满足需要。当然还有一些问题，如Router性能不佳，协议匮乏。Health Manager单点。</p>
+<p>在新的架构中，CloudFoundry有着更加开放的玩法。</p>
+<p>第二代CloudFoundry几乎将V1时代组件全部重写，满足新的需要。</p>
+<p>APP方面，在上传应用的时候，用户可以同时上传一个BuildPack，这样租户可以根据自己的需要来部署应用，无需通知云管理员。BuildPack是Heroku的部署机制，在社区有着丰富的资源。因此CloudFoundry和Heroku是兼容的。可以部署在Heroku上的应用，也可以部署在CloudFoundry上。还有很多其他PaaS也使用BuildPack，BuildPack已经成为PaaS应用部署的事实标准。</p>
+<p>Serivce方面，不再内建Service，而是使用一个更加简洁的Service Broker和User Provided Service设计。用户可以将Service Broker使用现有的XaaS上面，如果OpenStack Trove, AWS RDS。Heroku 有很多<a href="https://addons.heroku.com/">小伙伴们</a> 可以提供各种各样的Service，比如监控服务Relic,国内也有很多，如监控宝。GAE式的PaaS证明关门玩Service是不行的，CloudFoundry走向了开放的道路。另外User Provided Service可以让接上用户现有服务，如Oracle，保护现有资产。</p>
+<p>大数据深入人心，CloudFoundry现在的loggregator可以让应用的日子流进Service中。实时数据分析成为可能。</p>
+<p>新的的CloudFoundry对运行在IaaS有着天生的亲和力。BOSH可以非常方便的部署CF。Router的性能瓶颈得到解决。UAA可以提供第三方认证。Health Manager也不再是单点。</p>
+<h2>开放的App Runtime</h2>
+<p>开放的App Runtime的力量来自如Build Pack。我们可以浏览先App 部署的全过程。</p>
+<p> </p>
+<ol>
+<li>用户使用使用CF PUSH命令上传应用</li>
+<li>CLI告知CCNG创建一个应用</li>
+<li>CCNG在数据库中加入该应用的记录例如应用名称，BuildPack选择</li>
+<li>CLI上传程序</li>
+<li>CCNG将程序存起来</li>
+<li>CLI启动应用</li>
+<li>由于应用尚未部署，所以CCNG找一台DEA，在该DEA内执行BuildPack来部署应用</li>
+<li>DEA输出运行BuildPack的信息</li>
+<li>BuildPack执行完毕，输出是一个DropLet文件(编译打包的结果)，DEA将该文件存起来</li>
+<li>DEA将打包情况汇报给CCNG</li>
+<li>CCNG选择一个DEA来部署应用</li>
+<li>应用在DEA中运行，运行结果输出到CCNG</li>
+</ol>
+<p>可以看到，BuildPack和APP一样都是在一样的环境(DEA)中执行的。BuildPack非常简洁，只需要三个脚本。</p>
+<ul>
+<li>bin/detect 用来判断该BuildPack是否支持该程序</li>
+<li>bin/compile 用来编译，类似Maven的mvn compile</li>
+<li>bin/release 用来打包，类型Maven的mvn package</li>
+</ul>
+<p>现在CloudFoundry内建了三个主要BuildPack，Java BuildPack是自制，Ruby和NodeJs都是沿用Heroku的</p>
+<ul>
+<li><a href="https://github.com/cloudfoundry/java-buildpack">Java BuildPack</a> 支持非常多框架和JVM语言。甚至包括new_relic，这给我们监控CloudFoundry上APP提供思路。</li>
+<li><a href="https://github.com/cloudfoundry/heroku-buildpack-ruby">Ruby BuildPack</a></li>
+<li><a href="https://github.com/cloudfoundry/heroku-buildpack-nodejs">NodeJs BuildPack</a></li>
+</ul>
+<p>得益于Heroku的流行，第三方的BuildPack就数不胜数了。可以在<a href="https://devcenter.heroku.com/articles/third-party-buildpacks">Heroku buildpacks</a> 和<a href="https://github.com/cloudfoundry-community/cf-docs-contrib/wiki/Buildpacks"> CloudFoundry Commmunity </a>中找到很多。</p>
+<p>Build Pack有一个问题就是每次编译都需要从外网下载依赖，巨大JRE文件和不稳定的网络会使部署失败。不过最近的发布中提供了Build Pack Cache功能，可以有效解决这个问题。在内网中搭建一个Cached Proxy也是不错的办法。</p>
+<h2>开放的Service</h2>
+<p>CF-Relase是CloudFoundry的发布包，我们可以对比下V1和最近的发布包。</p>
+<table>
+<tbody>
+<tr>
+<th> </th>
+<th><a href="https://github.com/cloudfoundry/cf-release/tree/v1/jobs">v1</a></th>
+<th><a href="https://github.com/cloudfoundry/cf-release/tree/v155/jobs">v2(依据v155)</a></th>
+</tr>
+<tr>
+<td>CloudFoundry Core组件数量</td>
+<td>29</td>
+<td>21</td>
+</tr>
+<tr>
+<td>Service数量</td>
+<td>24</td>
+<td> 0</td>
+</tr>
+</tbody>
+</table>
+<p>可见在v1版本中有大量的组件是在做Service，摊子铺的很大。而V2中将这个包袱放下，提交给各种第三方XaaS了。连接XaaS和CloudFoundry的中间组件被称为CloudFoudry  Broker。v2的Service Broker和v1的完全不同。V2中的设计如下。</p>
+<p> </p>
+<p>一个Service Broker 需要实现5个API接口，包含三方面</p>
+<ul>
+<li>Service发现。租户可以向ClouldFoundry提交Add Service 命令，参数是URL。然后ClouldFoundry去调用该URL，发现该URL包含哪些Service</li>
+<li>Service创建/删除。自动化的创建Service。</li>
+<li>Service绑定/解绑定。将Service的一些访问参数设定成APP的环境变量。</li>
+</ul>
+<p>Service Broker的部署可以很灵活。既可以作为CloudFoundry的组件，也可以作为CloudFoundry的APP运行在CloudFoundry上。官方提供了一些Service Broker 实现实例。</p>
+<ul>
+<li><a href="https://github.com/cloudfoundry-samples/github-service-broker-ruby">GitHub repo service</a></li>
+<li><a href="https://github.com/cloudfoundry/cf-mysql-release">MySQL database service</a></li>
+<li><a href="https://github.com/cloudfoundry-community/spring-service-broker">Spring Service Broker</a></li>
+<li><a href="https://github.com/cloudfoundry-community/cf-mysql-java-broker">MySQL Java Broker</a></li>
+</ul>
+<p>在企业生产环境中，Service的自动化创建并非易事。举MySQL例子，选择版本，机器，网络，存储，备份策略，高可用方案，搞上防火墙，打上自定义补丁等等，一千个生产环境有一千种个MySQL玩法。在现在的玩法中，需要人介入的环节太多，太有必要。不存在一招鲜吃遍天的自动化创建方法。User  Provided Service 就是来调和这个矛盾。让Cloud　Foundry不强依赖自动化的创建Service。</p>
+<p>User  Provided Service 很简单，就是用户在创建Service的时候，输入Service访问参数。如用户名，密码，CloudFoundry把这参数存起来，在绑定的时候注入到环境变量中。下面会演示。</p>
+<h2>亲昵的大数据</h2>
+<p>国内的CloudFoundry玩家大多有开放平台的计划。作为开发平台的运营者，不只要提供一个稳定，开放的平台，获得应用的数据，就等于把握住了脉搏。Pivotal做为一家大数据公司，接手CloudFoundry的一个大改进就是增加了Loggragtor模块。</p>
+<p><span style="line-height: 1.5em;"> </span></p>
+<p>Loggregator有是数据的中转站。数据可以来自应用和CloudFoundry的自身组件。和SysLog不同，Log根据APP分离，所以产生的数据是为APP服务，而不是为CloudFoundry系统本身服务。</p>
+<p>引入了Loggregator后，用户在创建Service的时候，Service可以返回一个SysLog URL。当该Service绑定到某一个应用，该应用的Log会顺着这个URL源源不断流入。这个Service可以说Splunk也可以说Pivotal Analytics. Heroku也有了这个机制。用户的大数据应用就可以无缝接入了。</p>
+<p>Loggregator提供推(SysLog)，拉(WebScoket)两种方式来获得数据。新的CF CLI就是使用Loggregator的WebSocket来获得APP的Log信息。</p>
+<h2>部署-MicroCFv2福利</h2>
+<p>不避讳的说，部署CloudFoundry v2的难度大于v1。</p>
+<p>在v1中有dev_setup，提供一个基于Chef的一键脚本可以轻松部署。而v2中依赖BOSH，一个一站式的解决方案。可以将CloudFoundry部署在VSphere，OpenStack和AWS上。</p>
+<p>目前看来有三种部署方式</p>
+<ul>
+<li>使用BOSH，BOSH比较重，运行起来就要费一些心力。但运转起来后可以提供健康监控，扩容的支持。</li>
+<li>使用IaaS自带的部署机制，可以使用VSphere OVF,OpenStack  Heat,Aws Cloudformation等技术。部署方便，但绑定IaaS。</li>
+<li>手动一步步安装。最灵活，也最费力。可以考虑和Puppet等机制结合。</li>
+</ul>
+<p>由于官方不再提供新版本dev_setup，试一试CloudFoundry的成本变得很高。笔者提供了一个<a href="http://pan.baidu.com/s/1sj6jxd7">MicroCFv2镜像</a>,请使用7-zip解压</p>
+<p><strong>MicroCFv2下载</strong> (基于<a href="https://github.com/cloudfoundry/cf-release/tree/v154">v154</a>)</p>
+<h3><span style="line-height: 1.5em;">运行MicroCF</span></h3>
+<ol>
+<li>安装<a href="http://www.vmware.com/cn/products/player/">VMware Player</a></li>
+<li>下载<a href="http://pan.baidu.com/s/1sj6jxd7">MicroCFv2</a></li>
+<li>使用该镜像启动一台虚拟机</li>
+<li>使用用户名/密码(admin/admin)登录</li>
+</ol>
+<p>检查网络，正常情况下虚拟机会通过DHCP获得IP地址。记下IP。编译应用需要访问外网。</p>
+<pre lang="bash">admin@atsg2-sh199:~/env$ ifconfig 
+eth0      Link encap:Ethernet  HWaddr 00:50:56:98:7f:0a  
+          inet addr:10.32.170.199  Bcast:10.32.170.255  Mask:255.255.255.0
+</pre>
+<h3>部署一个Java APP</h3>
+<pre lang="bash">admin@atsg2-sh199:~$ cd /home/admin
+admin@atsg2-sh199:~$ cf login      
+API endpoint&gt; api.cf.com
+Username&gt; admin
+Password&gt; admin
+
+admin@atsg2-sh199:~$ cf push helloworld -p helloworld.war 
+App started
+urls: helloworld.cf.com
+
+     state     since                    cpu    memory        disk          
+#0   running   2014-02-06 11:52:18 PM   0.0%   60.8M of 1G   95.1M of 1G 
+
+admin@atsg2-sh199:~$ curl helloworld.cf.com</pre>
+<h1>helloworld</h1>
+<pre lang="bash"> </pre>
+<h3>创建一个Service</h3>
+<pre lang="bash">admin@atsg2-sh199:~/env$ cf create-user-provided-service oracle-db-mine -p '{"username":"admin","password":"pa55woRD"}'
+OK
+admin@atsg2-sh199:~/env$ cf bind-service helloworld oracle-db-mine             
+OK
+</pre>
+<h3>部署一个Ruby APP，并查看环境变量</h3>
+<p>部署Ruby APP，需要访问网络。<br />这个APP可以显现他自己的所有环境变量。</p>
+<pre lang="bash">admin@atsg2-sh199:~$ cd /home/admin/env
+admin@atsg2-sh199:~/env$sudo  bundle install 
+admin@atsg2-sh199:~/env$ cf push 
+requested state: started
+urls: env.cf.com
+     state     since                    cpu    memory          disk          
+#0   running   2014-02-07 12:14:18 AM   0.0%   18.1M of 128M   53.2M of 1G   
+admin@atsg2-sh199:~/env$ cf bind-service env oracle-db-mine             
+OK
+admin@atsg2-sh199:~/env$ cf restart env
+OK
+admin@atsg2-sh199:~/env$ curl env.cf.com
+...
+VCAP_APP_HOST:
+{  "user-provided": [
+    { "name": "oracle-db-mine",
+      "label": "user-provided",
+      "tags": [],
+      "credentials": {
+        "password": "pa55woRD",
+        "username": "admin"
+      },
+      "syslog_drain_url": ""
+}]}
+...
+</pre>
+<h3>设置浏览器</h3>
+<p>你可以使用浏览器访问你部署的应用。需要给浏览器设置HTTP代理。IP为MicroCFv2的IP,端口是8123.如：<br /><br /></p>
+<p>这样就可以使用浏览器了。<br /><br /></p>
+<p>使用愉快。如果遇到问题，可以联系我。</p><p><a rel="nofollow" href="./../../../cloudfoundry-v2-with-microcf/index.html">CloudFoundry v2面面谈，内赠MicroCFv2福利</a>最先出现在<a rel="nofollow" href="./../../../index.html">我自然</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../cloudfoundry-v2-with-microcf/feed/index.html</wfw:commentRss>
+			<slash:comments>5</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

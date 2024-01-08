@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>
+	“我自然”的评论	</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../../index.html</link>
+	<description>颜开的博客</description>
+	<lastBuildDate>Thu, 09 Feb 2023 02:47:13 +0000</lastBuildDate>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.2</generator>
+	<item>
+		<title>
+		[整理]完美哈希函数(Perfect Hash Function) - 高性能架构探索对《最小完美哈希函数简介》的评论		</title>
+		<link>./../../introduction-to-opmphf/index.html#comment-3101</link>
+
+		<dc:creator><![CDATA[[整理]完美哈希函数(Perfect Hash Function) - 高性能架构探索]]></dc:creator>
+		<pubDate>Thu, 09 Feb 2023 02:47:13 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26158#comment-3101</guid>
+
+					<description><![CDATA[[&#8230;] 参考：http://www.yankay.com/introduction-to-opmphf/ [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] 参考：http://www.yankay.com/introduction-to-opmphf/ [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		Scala Tour – 精选 - Java天堂对《Scala Tour &#8211; 精选》的评论		</title>
+		<link>./../../scala-tour-choiceness/index.html#comment-2781</link>
+
+		<dc:creator><![CDATA[Scala Tour – 精选 - Java天堂]]></dc:creator>
+		<pubDate>Sat, 26 Nov 2022 02:20:17 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=27005#comment-2781</guid>
+
+					<description><![CDATA[[&#8230;] http://www.yankay.com/scala-tour-choiceness/ [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] <a href="http://www.yankay.com/scala-tour-choiceness/" rel="nofollow ugc">http://www.yankay.com/scala-tour-choiceness/</a> [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		Golang适合高并发场景的原因分析 - 站壳网对《Go-简洁的并发》的评论		</title>
+		<link>./../../go-clear-concurreny/index.html#comment-2701</link>
+
+		<dc:creator><![CDATA[Golang适合高并发场景的原因分析 - 站壳网]]></dc:creator>
+		<pubDate>Thu, 10 Nov 2022 06:35:46 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26525#comment-2701</guid>
+
+					<description><![CDATA[[&#8230;] Go-简洁的并发 http://www.yankay.com/go-clear-concurreny/ GOROUTINE性能测试 http://www.kankanews.com/ICkengine/archives/115285.shtml Golang特性介绍 [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] Go-简洁的并发 <a href="http://www.yankay.com/go-clear-concurreny/" rel="nofollow ugc">http://www.yankay.com/go-clear-concurreny/</a> GOROUTINE性能测试 <a href="http://www.kankanews.com/ICkengine/archives/115285.shtml" rel="nofollow ugc">http://www.kankanews.com/ICkengine/archives/115285.shtml</a> Golang特性介绍 [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		HBase 官方文档 &#8211; 源码巴士对《Windows下eclipse的 C++环境配置》的评论		</title>
+		<link>./../../windows%e4%b8%8beclipse%e7%9a%84-c%e7%8e%af%e5%a2%83%e9%85%8d%e7%bd%ae/index.html#comment-2679</link>
+
+		<dc:creator><![CDATA[HBase 官方文档 &#8211; 源码巴士]]></dc:creator>
+		<pubDate>Sat, 05 Nov 2022 19:47:49 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=25920#comment-2679</guid>
+
+					<description><![CDATA[[&#8230;] 6.1.1. Eclipse [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] 6.1.1. Eclipse [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		Go-简洁的并发-点开对《Go-简洁的并发》的评论		</title>
+		<link>./../../go-clear-concurreny/index.html#comment-1255</link>
+
+		<dc:creator><![CDATA[Go-简洁的并发-点开]]></dc:creator>
+		<pubDate>Mon, 23 May 2022 07:02:24 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26525#comment-1255</guid>
+
+					<description><![CDATA[[&#8230;] END网络索引# 编程# 程序员# # go# Go语言  喜欢就支持一下吧点赞11 分享QQ空间微博QQ好友海报分享复制链接收藏     JanYork关注 64.7W+236164W+ [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] END网络索引# 编程# 程序员# # go# Go语言  喜欢就支持一下吧点赞11 分享QQ空间微博QQ好友海报分享复制链接收藏     JanYork关注 64.7W+236164W+ [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		Golang适合高并发场景的原理 - 算法网对《Go-简洁的并发》的评论		</title>
+		<link>./../../go-clear-concurreny/index.html#comment-586</link>
+
+		<dc:creator><![CDATA[Golang适合高并发场景的原理 - 算法网]]></dc:creator>
+		<pubDate>Sun, 05 Dec 2021 18:28:48 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26525#comment-586</guid>
+
+					<description><![CDATA[[&#8230;] Go-简洁的并发 http://www.yankay.com/go-clear-concurreny/ [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] Go-简洁的并发 <a href="http://www.yankay.com/go-clear-concurreny/" rel="nofollow ugc">http://www.yankay.com/go-clear-concurreny/</a> [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		Linux大文件传输 - R6博客对《Linux大文件传输》的评论		</title>
+		<link>./../../linux%e5%a4%a7%e6%96%87%e4%bb%b6%e4%bc%a0%e8%be%93/index.html#comment-327</link>
+
+		<dc:creator><![CDATA[Linux大文件传输 - R6博客]]></dc:creator>
+		<pubDate>Mon, 20 Sep 2021 06:44:55 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26367#comment-327</guid>
+
+					<description><![CDATA[[&#8230;] 转载自：点击查看 [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] 转载自：点击查看 [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		Gao对《公告 &#8211; 博客重开了》的评论		</title>
+		<link>./../../%e5%85%ac%e5%91%8a-%e5%8d%9a%e5%ae%a2%e9%87%8d%e5%bc%80%e4%ba%86/index.html#comment-158</link>
+
+		<dc:creator><![CDATA[Gao]]></dc:creator>
+		<pubDate>Wed, 31 Mar 2021 09:02:46 +0000</pubDate>
+		<guid isPermaLink="false">http://47.100.65.109/?p=27267#comment-158</guid>
+
+					<description><![CDATA[welcome back]]></description>
+			<content:encoded><![CDATA[<p>welcome back</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		Impala：新一代开源大数据分析引擎 &#8211; FIXBBS对《Google Dremel 原理 &#8211; 如何能3秒分析1PB》的评论		</title>
+		<link>./../../google-dremel-rationale/index.html#comment-48</link>
+
+		<dc:creator><![CDATA[Impala：新一代开源大数据分析引擎 &#8211; FIXBBS]]></dc:creator>
+		<pubDate>Mon, 26 Oct 2020 00:31:37 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26452#comment-48</guid>
+
+					<description><![CDATA[[&#8230;] Google Dremel 原理 — 如何能3秒分析1PB：http://www.yankay.com/google-dremel-rationale/ [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] Google Dremel 原理 — 如何能3秒分析1PB：http://www.yankay.com/google-dremel-rationale/ [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		何建兵对《NoSQL数据库笔谈v0.2》的评论		</title>
+		<link>./../../nosql%e6%95%b0%e6%8d%ae%e5%ba%93%e7%ac%94%e8%b0%88v0-2/index.html#comment-10</link>
+
+		<dc:creator><![CDATA[何建兵]]></dc:creator>
+		<pubDate>Wed, 29 Aug 2018 09:54:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=25685#comment-10</guid>
+
+					<description><![CDATA[大佬 文档下载不了 能不能单独给发一个 特别希望能看 bayhe2@163.com]]></description>
+			<content:encoded><![CDATA[<p>大佬 文档下载不了 能不能单独给发一个 特别希望能看 <a href="mailto:bayhe2@163.com">bayhe2@163.com</a></p>
+]]></content:encoded>
+		
+			</item>
+	</channel>
+</rss>

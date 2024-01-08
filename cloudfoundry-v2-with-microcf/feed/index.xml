@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>
+	《CloudFoundry v2面面谈，内赠MicroCFv2福利》的评论	</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../index.html</link>
+	<description>颜开的博客</description>
+	<lastBuildDate>Sun, 28 Mar 2021 12:03:08 +0000</lastBuildDate>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.2</generator>
+	<item>
+		<title>
+		评论者：fang		</title>
+		<link>./../index.html#comment-134</link>
+
+		<dc:creator><![CDATA[fang]]></dc:creator>
+		<pubDate>Wed, 25 Jun 2014 08:19:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=27189#comment-134</guid>
+
+					<description><![CDATA[回复给&lt;a href=&quot;./../index.html#comment-133&quot;&gt;wangshuai&lt;/a&gt;。
+
+请问怎么搞定的？我也遇到这个问题了。
+
+
+多谢！]]></description>
+			<content:encoded><![CDATA[<p>回复给<a href="./../index.html#comment-133">wangshuai</a>。</p>
+<p>请问怎么搞定的？我也遇到这个问题了。</p>
+<p>多谢！</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：wangshuai		</title>
+		<link>./../index.html#comment-133</link>
+
+		<dc:creator><![CDATA[wangshuai]]></dc:creator>
+		<pubDate>Wed, 14 May 2014 05:53:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=27189#comment-133</guid>
+
+					<description><![CDATA[回复给&lt;a href=&quot;./../index.html#comment-132&quot;&gt;wangshuai&lt;/a&gt;。
+
+搞定了 不好意思打扰]]></description>
+			<content:encoded><![CDATA[<p>回复给<a href="./../index.html#comment-132">wangshuai</a>。</p>
+<p>搞定了 不好意思打扰</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：wangshuai		</title>
+		<link>./../index.html#comment-132</link>
+
+		<dc:creator><![CDATA[wangshuai]]></dc:creator>
+		<pubDate>Wed, 14 May 2014 03:36:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=27189#comment-132</guid>
+
+					<description><![CDATA[输入 endpoint 的时候 提示 connection refused  “Invalid API endpoint.
+Error performing request: Get http://api.cf.com/v2/info: dial tcp 127.0.0.1:80: connection refused”； 为什么]]></description>
+			<content:encoded><![CDATA[<p>输入 endpoint 的时候 提示 connection refused  “Invalid API endpoint.<br />
+Error performing request: Get <a href="http://api.cf.com/v2/info" rel="nofollow ugc">http://api.cf.com/v2/info</a>: dial tcp 127.0.0.1:80: connection refused”； 为什么</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：Kay Yan		</title>
+		<link>./../index.html#comment-131</link>
+
+		<dc:creator><![CDATA[Kay Yan]]></dc:creator>
+		<pubDate>Fri, 14 Feb 2014 12:03:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=27189#comment-131</guid>
+
+					<description><![CDATA[回复给&lt;a href=&quot;./../index.html#comment-130&quot;&gt;a&lt;/a&gt;。
+
+请用7zip]]></description>
+			<content:encoded><![CDATA[<p>回复给<a href="./../index.html#comment-130">a</a>。</p>
+<p>请用7zip</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：a		</title>
+		<link>./../index.html#comment-130</link>
+
+		<dc:creator><![CDATA[a]]></dc:creator>
+		<pubDate>Wed, 12 Feb 2014 06:16:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=27189#comment-130</guid>
+
+					<description><![CDATA[无法在win下解压缩]]></description>
+			<content:encoded><![CDATA[<p>无法在win下解压缩</p>
+]]></content:encoded>
+		
+			</item>
+	</channel>
+</rss>

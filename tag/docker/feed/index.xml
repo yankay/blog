@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Docker &#8211; 我自然</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../index.html</link>
+	<description>颜开的博客</description>
+	<lastBuildDate>Sun, 28 Mar 2021 12:04:42 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.2</generator>
+
+<image>
+	<url>./../../../wp-content/uploads/2021/03/cropped-favicon-32x32.png</url>
+	<title>Docker &#8211; 我自然</title>
+	<link>./../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Docker能够运行任何应用的“PaaS”云</title>
+		<link>./../../../docker-paas-for-any-application/index.html</link>
+					<comments>./../../../docker-paas-for-any-application/index.html#comments</comments>
+		
+		<dc:creator><![CDATA[yankay]]></dc:creator>
+		<pubDate>Tue, 17 Sep 2013 07:35:09 +0000</pubDate>
+				<category><![CDATA[软件技术]]></category>
+		<category><![CDATA[Docker]]></category>
+		<category><![CDATA[PaaS]]></category>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26819</guid>
+
+					<description><![CDATA[<p><a href="http://www.docker.io/">Docker </a>是一个开源可以将<strong>任何应用</strong>包装在"LXC容器”中运行的工具。如果说VMware,KVM包装的虚拟机，Docker包装的是应用。是一个实至名归的PaaS。</p>
+<p><a rel="nofollow" href="./../../../docker-paas-for-any-application/index.html">Docker能够运行任何应用的“PaaS”云</a>最先出现在<a rel="nofollow" href="./../../../index.html">我自然</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[<h3>Docker 简介</h3>
+<p><a href="http://www.docker.io/">Docker </a>是一个开源可以将<strong>任何应用</strong>包装在&#8221;LXC容器”中运行的工具。如果说VMware,KVM包装的虚拟机，Docker包装的是应用。是一个实至名归的PaaS。</p>
+<p>当应用被打包成Docker Image后，部署和运维就变得极其简单。可以使用<strong>统一的方式 </strong>来下载，启动，扩展，删除，迁移。</p>
+<p><img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-27237" src="http://47.100.65.109/wp-content/uploads/2013/09/homepage-docker-logo-300x248.png" alt="" width="300" height="248" srcset="./../../../wp-content/uploads/2013/09/homepage-docker-logo-300x248.png 300w, ./../../../wp-content/uploads/2013/09/homepage-docker-logo.png 400w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p>Dock可以用来：</p>
+<ul>
+<li>自动化打包和部署任何应用</li>
+<li>创建一个轻量级私有PaaS云</li>
+<li>搭建开发测试环境</li>
+<li>部署可扩展的Web应用</li>
+</ul>
+<p>Docker是开源的，可以在<a href="https://github.com/dotcloud/docker/">GitHub</a>上访问其代码，提供Restful接口。他的贡献者是一个非常流行的PaaS云提供商 <a href="https://dotcloud.com/">https://dotcloud.com/</a></p>
+<h3>PaaS 的核心价值</h3>
+<h4>遗失的方向 &#8211; 绝大部分应用竟然不能无缝迁移到主流PaaS上</h4>
+<p>云计算发展多年，分为IaaS,PaaS和SaaS。其中PaaS（平台即服务）最为不愠不火。笔者因为，最大的原因是PaaS给人(开发，运维，老板)带来的价值不够多，私有PaaS门槛高！最大的问题在于绝大部分应用竟然不能无缝迁移到PaaS上。</p>
+<p>Heroku是最流行的公有PaaS云。很廉价好用，可是大部分应用都无法部署。每个应用只能监听一个HTTP端口，应用之间不能交互。他可以为你自动扩展和负载均衡，但其实没得选择，只要使用Heroku就必须接受限制。好歹Heroku支持绝大部分平台如Java,Python。相比之下，GAE更甚，只支持三个平台，不能访问文件系统，也不能启动子进程。</p>
+<p>CloudFoundry是比较流行的私有PaaS云。限制和Heroku一样多，部署比较复杂。为此他甚至有一个量身定制的部署工具BOSH。有多难用，用过的人都知道。这个不能怪开发人员，他定义的PaaS本来就这么复杂。</p>
+<h4>PaaS要实现开发人和运维人的梦</h4>
+<h5>开发人的梦 &#8211; 自在的运行环境，无限的资源</h5>
+<p>开发人希望专注于程序逻辑。有自由自在的运行环境，有丰富的外部资源如各种中间件。至少不要为什么 端口监听数目，通信协议限制 这些事情所困扰。</p>
+<h5>运维人的梦 &#8211; 没有故障和重复的事，减少等待</h5>
+<p>运维天天处理故障，如果千千万应用都能以同样的方式部署，运维。那么故障的处理就简单多了，重复的事情也会变少。下载部署，安装依赖，这些事情都太过繁琐耗时了。</p>
+<h5>Docker功能</h5>
+<p>Docker可以让开发和运维都变得简单。</p>
+<p>开发者不必要像使用一般PaaS一样在充满着限制的条件下开发应用，可以就如同平常一样，自由的使用各种资源。老子说“太上下知有之 ，其次誉之，其次侮之”。Dock对于开发者就是“下知有之”的状态。</p>
+<p>爽的人是运维。要使用Docker，需要在机器上安装Docker Engine，</p>
+<ol>
+<li>创建一个Container。实际上是一个Linux Container，Docker会将网络，存储这些事情都配好。</li>
+<li>下载应用并安装。比如可以用sudo apt-get install mysql-server 来安装一个MySQL。并配置一些参数什么的。</li>
+<li>打包上传Image。Docker可以将这个Linux Container打包成Image，启动脚本也在其中。并上传至Image Registry中。这个Image仅仅包括你修改的<strong>增量部分</strong>，所以体积比较小。</li>
+<li>一条命令跑起来。使用Docker Run 一条命令可以从Image Registry中下载Image 并跑起来。</li>
+</ol>
+<p>需要重启的时候，只要重启Container。需要迁移的时候，只要迁移Container。一切干干净净。</p>
+<h4>PaaS，IaaS术业有专攻</h4>
+<p>IaaS普遍使用虚拟机,开销较大。Docker明显更轻量。笔者认为IaaS和PaaS各有专攻，PaaS去专注于安全级别的隔离是没有意义的，IaaS也不应该去感知到应用。一个公有云中，可以让每个租户使用不同的虚拟机，虚拟网络来做到安全和资源上的隔离。再通过PaaS统一运维，管理计算资源。</p>
+<p>没有必要让每个应用都专享一台虚拟机，这样开销太大。但在安全敏感的环境中，每个租户使用不同的虚拟机是合理的。</p>
+<h3>使用Docker</h3>
+<h4>在线尝试</h4>
+<p>使用Docker最便捷的方式莫过于 <strong>在线尝试</strong>: <a href="http://www.docker.io/gettingstarted/#">http://www.docker.io/gettingstarted/#</a></p>
+<p>完成了这个在线的教材，相信你对Docker已经基本玩转了。</p>
+<h4>在Ubuntu中安装Docker</h4>
+<p>现在Docker支持两个Ubuntu版本：</p>
+<ul>
+<li><a href="http://docs.docker.io/en/latest/installation/ubuntulinux/#ubuntu-precise"><em>Ubuntu Precise 12.04 (LTS) (64-bit)</em></a></li>
+<li><a href="http://docs.docker.io/en/latest/installation/ubuntulinux/#ubuntu-raring"><em>Ubuntu Raring 13.04 (64 bit)</em></a></li>
+</ul>
+<p>有两个依赖</p>
+<ul>
+<li>Linux kernel 3.8 (read more about <a href="http://docs.docker.io/en/latest/installation/kernel/#kernel"><em>Kernel Requirements</em></a>)</li>
+<li>AUFS 文件系统</li>
+</ul>
+<p>所以需要确认下您的操作系统，安装依赖并重启：</p>
+<pre class="lang:sh decode:true"># Add the PPA sources to your apt sources list.
+sudo apt-get install python-software-properties &amp;&amp; sudo add-apt-repository ppa:dotcloud/lxc-docker
+
+# Update your sources
+sudo apt-get update
+
+# Install, you will see another warning that the package cannot be authenticated. Confirm install.
+sudo apt-get install lxc-docker</pre>
+<p>安装Docker并重启：</p>
+<pre class="lang:sh decode:true"># Add the PPA sources to your apt sources list.
+sudo apt-get install python-software-properties &amp;&amp; sudo add-apt-repository ppa:dotcloud/lxc-docker
+
+# Update your sources
+sudo apt-get update
+
+# Install, you will see another warning that the package cannot be authenticated. Confirm install.
+sudo apt-get install lxc-docker</pre>
+<p>使用Docker，下载一个Ubuntu Image，并创建一个Container，在其中运行Bash</p>
+<pre class="lang:sh decode:true"># download the base 'ubuntu' container and run bash inside it while setting up an interactive shell
+sudo docker run -i -t ubuntu /bin/bash
+
+# type 'exit' to exit</pre>
+<p>成功，你已经玩转Docker了！！</p>
+<h4>Docker Run的时候发生了什么？</h4>
+<p>当用户执行Docker run的时候，发生了这些事情：</p>
+<ol>
+<li>Docker CLI 调用 Docker Engine的Restful API。默认情况下，Docker  Engine是监听在一个Unix Socket上的，当然也可以监听在TCP端口上。</li>
+<li>从<a href="https://index.docker.io/">docker index</a>下载一个Ubuntu Image。<a href="https://index.docker.io/">docker index</a>是一个荟萃Docker Image的地方，就像一个Repository.你也可以构建自己的私有Repository。</li>
+<li>分配文件系统。文件系统是AUFS，这是一种“增量文件系统”，你做的修改都可以以增量的方式保存。因此Docker Image可以很小。</li>
+<li>Mount文件系统</li>
+<li>创建网络端口。Docker使用Linux Bridge和Linux Network NameSpace来配置网络。</li>
+<li>配置IP地址。给刚刚创建的虚拟网卡配一个内部IP。这个IP不重要，因为Docker是通过静态NAT来对外保留TCP/UDP端口的。</li>
+<li>在LXC中执行命令，这个例子中命令就是 &#8220;/bin/bash&#8221;</li>
+<li>截取“/bin/bash”的输入输出流到Terminal，和你交互</li>
+</ol>
+<h3><span style="font-size: 1.17em;">Dock详解</span></h3>
+<h4>在Docker中运行Redis</h4>
+<p>创建一个Docker Container</p>
+<pre class="lang:sh decode:true">sudo docker run -i -t ubuntu /bin/bash</pre>
+<p>安装Redis .</p>
+<pre class="lang:sh decode:true">apt-get update
+apt-get install redis-server
+exit</pre>
+<p>拍个快照，创建你自己的Docker Redis Image</p>
+<pre class="lang:sh decode:true">docker ps -a  # grab the container id (this will be the first one in the list)
+docker commit &lt;container_id&gt; &lt;your username&gt;/redis</pre>
+<p>运行Redis。-d 是指后台运行，使用你刚刚创建的Image。</p>
+<pre class="lang:sh decode:true">sudo docker run -d -p 6379 &lt;your username&gt;/redis /usr/bin/redis-server</pre>
+<p>使用redis-cli访问</p>
+<pre class="lang:sh decode:true">sudo docker ps  # grab the new container id
+sudo docker inspect &lt;container_id&gt;    # grab the ipaddress of the container
+redis-cli -h &lt;ipaddress&gt; -p 6379
+redis 10.0.3.32:6379&gt; set docker awesome
+OK
+redis 10.0.3.32:6379&gt; get docker
+"awesome"
+redis 10.0.3.32:6379&gt; exit</pre>
+<h4> 文件系统</h4>
+<p>一般来说，要Linux需要两种文件系统</p>
+<ol>
+<li>boot file system (bootfs)</li>
+<li>root file system (rootfs)</li>
+</ol>
+<p>bootfs包含有bootloader。用户从来不会更改bootfs。事实上，当机器启动结束后，kernel会卸载掉这个bootfs。</p>
+<p>rootfs就是我们通常看到了Linux文件目录，包括 <tt>/dev, /proc, /bin, /etc,/lib, /usr,</tt> 和<tt>/tmp等等。不同的Linux发行版的rootfs是不一样的，软件包结构也是不同的。Docker通过管理rootfs，可以在同时运行多个Linux发行版。</tt></p>
+<p>当传统Linux启动的时候，rootfs是只读的，检查完整性后会转化成可读写状态。</p>
+<p>当Docker挂载rootfs的时候，也是只读的。但是他并没有把它转化为可读写状态，而且在其上使用 <a href="http://en.wikipedia.org/wiki/Union_mount">union mount</a> 来加一层，创建一个可读写的文件系统。原理的rootfs还是只读的，数据被写入新的空间。Docker称之为&#8221;层&#8221;，数据可以这样一层一层叠加起来。</p>
+<p>最初的时候，最顶层中什么数据也没有，当进程创建修改文件的时候，数据就会保存在最顶层。底层的文件系统没有丝毫改变。</p>
+<p>当导出Image的时候，其实就是导出最顶层而已。</p>
+<p>由于底层的只读的，多个Docker Container可以共享，提高的文件系统的使用效率。</p>
+<h3>Docker生态环境</h3>
+<p>Docker是开源的，提供完善的Restful接口，设计简洁，直戳痛点。但是因此比较简单，没有华丽的功能。凤栖梧桐，以Docker为树干，衍生出许多优秀的项目。</p>
+<ul>
+<li><strong><a href="https://github.com/progrium/dokku">dokku</a> </strong>100行BASH的微Heroku。包含了一个PaaS的基本功能</li>
+<li><strong><a href="https://github.com/ehazlett/shipyard">shipyard</a></strong> Docker管理界面，提供多Host,创建Container,查看Image等功能</li>
+<li><strong><a href="https://github.com/dotcloud/openstack-docker">openstack-docker</a></strong> Docker和OpenStack集成，可以使用Nova和Glance来控制</li>
+<li><strong><a href="https://github.com/ptone/jiffylab">jiffylab</a></strong>教学用Python和Unix Shell平台</li>
+<li><strong><a href="http://www.memcachedasaservice.com/">BYO SAAS</a></strong> Memcached as a Service</li>
+<li><strong><a href="https://github.com/crosbymichael/dockerui">Dockerui</a></strong> Docker管理界面</li>
+</ul>
+<p><a rel="nofollow" href="./../../../docker-paas-for-any-application/index.html">Docker能够运行任何应用的“PaaS”云</a>最先出现在<a rel="nofollow" href="./../../../index.html">我自然</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../docker-paas-for-any-application/feed/index.html</wfw:commentRss>
+			<slash:comments>9</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

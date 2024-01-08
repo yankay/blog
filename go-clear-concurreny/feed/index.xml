@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>
+	《Go-简洁的并发》的评论	</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../index.html</link>
+	<description>颜开的博客</description>
+	<lastBuildDate>Thu, 10 Nov 2022 06:35:46 +0000</lastBuildDate>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.2</generator>
+	<item>
+		<title>
+		评论者：Golang适合高并发场景的原因分析 - 站壳网		</title>
+		<link>./../index.html#comment-2701</link>
+
+		<dc:creator><![CDATA[Golang适合高并发场景的原因分析 - 站壳网]]></dc:creator>
+		<pubDate>Thu, 10 Nov 2022 06:35:46 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26525#comment-2701</guid>
+
+					<description><![CDATA[[&#8230;] Go-简洁的并发 http://www.yankay.com/go-clear-concurreny/ GOROUTINE性能测试 http://www.kankanews.com/ICkengine/archives/115285.shtml Golang特性介绍 [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] Go-简洁的并发 <a href="http://www.yankay.com/go-clear-concurreny/" rel="nofollow ugc">http://www.yankay.com/go-clear-concurreny/</a> GOROUTINE性能测试 <a href="http://www.kankanews.com/ICkengine/archives/115285.shtml" rel="nofollow ugc">http://www.kankanews.com/ICkengine/archives/115285.shtml</a> Golang特性介绍 [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：Go-简洁的并发-点开		</title>
+		<link>./../index.html#comment-1255</link>
+
+		<dc:creator><![CDATA[Go-简洁的并发-点开]]></dc:creator>
+		<pubDate>Mon, 23 May 2022 07:02:24 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26525#comment-1255</guid>
+
+					<description><![CDATA[[&#8230;] END网络索引# 编程# 程序员# # go# Go语言  喜欢就支持一下吧点赞11 分享QQ空间微博QQ好友海报分享复制链接收藏     JanYork关注 64.7W+236164W+ [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] END网络索引# 编程# 程序员# # go# Go语言  喜欢就支持一下吧点赞11 分享QQ空间微博QQ好友海报分享复制链接收藏     JanYork关注 64.7W+236164W+ [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：Golang适合高并发场景的原理 - 算法网		</title>
+		<link>./../index.html#comment-586</link>
+
+		<dc:creator><![CDATA[Golang适合高并发场景的原理 - 算法网]]></dc:creator>
+		<pubDate>Sun, 05 Dec 2021 18:28:48 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26525#comment-586</guid>
+
+					<description><![CDATA[[&#8230;] Go-简洁的并发 http://www.yankay.com/go-clear-concurreny/ [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] Go-简洁的并发 <a href="http://www.yankay.com/go-clear-concurreny/" rel="nofollow ugc">http://www.yankay.com/go-clear-concurreny/</a> [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：fzbing		</title>
+		<link>./../index.html#comment-73</link>
+
+		<dc:creator><![CDATA[fzbing]]></dc:creator>
+		<pubDate>Wed, 24 Aug 2016 11:05:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26525#comment-73</guid>
+
+					<description><![CDATA[回复给&lt;a href=&quot;./../index.html#comment-72&quot;&gt;leon&lt;/a&gt;。
+
+http://www.thinksaas.cn/topics/0/594/594568.html]]></description>
+			<content:encoded><![CDATA[<p>回复给<a href="./../index.html#comment-72">leon</a>。</p>
+<p><a href="http://www.thinksaas.cn/topics/0/594/594568.html" rel="nofollow ugc">http://www.thinksaas.cn/topics/0/594/594568.html</a></p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：leon		</title>
+		<link>./../index.html#comment-72</link>
+
+		<dc:creator><![CDATA[leon]]></dc:creator>
+		<pubDate>Thu, 17 Dec 2015 08:27:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26525#comment-72</guid>
+
+					<description><![CDATA[博文当中的配图返回404了? 能否修复一下?]]></description>
+			<content:encoded><![CDATA[<p>博文当中的配图返回404了? 能否修复一下?</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：go 并发控制 &#124; 为自己写代码		</title>
+		<link>./../index.html#comment-71</link>
+
+		<dc:creator><![CDATA[go 并发控制 &#124; 为自己写代码]]></dc:creator>
+		<pubDate>Wed, 30 Sep 2015 06:31:20 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26525#comment-71</guid>
+
+					<description><![CDATA[[&#8230;] Go并发时如何做到并发的控制？ Go-简洁的并发 [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] Go并发时如何做到并发的控制？ Go-简洁的并发 [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：Peak Secgl		</title>
+		<link>./../index.html#comment-70</link>
+
+		<dc:creator><![CDATA[Peak Secgl]]></dc:creator>
+		<pubDate>Fri, 11 Sep 2015 14:15:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26525#comment-70</guid>
+
+					<description><![CDATA[这篇文章很不错]]></description>
+			<content:encoded><![CDATA[<p>这篇文章很不错</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：Golang适合高并发场景的原因分析 &#8211; 53IT		</title>
+		<link>./../index.html#comment-69</link>
+
+		<dc:creator><![CDATA[Golang适合高并发场景的原因分析 &#8211; 53IT]]></dc:creator>
+		<pubDate>Thu, 13 Aug 2015 09:43:55 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26525#comment-69</guid>
+
+					<description><![CDATA[[&#8230;] Go-简洁的并发 http://www.yankay.com/go-clear-concurreny/ [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] Go-简洁的并发 <a href="http://www.yankay.com/go-clear-concurreny/" rel="nofollow ugc">http://www.yankay.com/go-clear-concurreny/</a> [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：Go-简洁的并发 &#124; 天空之辰		</title>
+		<link>./../index.html#comment-68</link>
+
+		<dc:creator><![CDATA[Go-简洁的并发 &#124; 天空之辰]]></dc:creator>
+		<pubDate>Fri, 17 Jul 2015 09:56:08 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26525#comment-68</guid>
+
+					<description><![CDATA[[&#8230;] 原文 [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] 原文 [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：Lessy		</title>
+		<link>./../index.html#comment-67</link>
+
+		<dc:creator><![CDATA[Lessy]]></dc:creator>
+		<pubDate>Sun, 11 Jan 2015 07:06:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26525#comment-67</guid>
+
+					<description><![CDATA[这篇文章真的是写的很详细, 配图也能说明问题.]]></description>
+			<content:encoded><![CDATA[<p>这篇文章真的是写的很详细, 配图也能说明问题.</p>
+]]></content:encoded>
+		
+			</item>
+	</channel>
+</rss>

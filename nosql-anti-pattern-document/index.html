@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="ie ie6 lte9 lte8 lte7" lang="zh-CN">
+<![endif]--><!--[if IE 7]>
+<html class="ie ie7 lte9 lte8 lte7" lang="zh-CN">
+<![endif]--><!--[if IE 8]>
+<html class="ie ie8 lte9 lte8" lang="zh-CN">
+<![endif]--><!--[if IE 9]>
+<html class="ie ie9" lang="zh-CN">
+<![endif]--><!--[if gt IE 9]>
+<html lang="zh-CN"> <![endif]--><!--[if !IE]><!--><html lang="zh-CN">
+<!--<![endif]-->
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1.0,maximum-scale=3.0,width=device-width">
+
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<link rel="pingback" href="./../xmlrpc.php">
+
+	<!-- IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	<script src="http://yankay.com/wp-content/themes/neuro/inc/js/html5.js" type="text/javascript"></script>
+	<![endif]-->
+
+	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+	<!-- This site is optimized with the Yoast SEO plugin v16.4 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>NoSQL反模式 - 文档数据库篇 - 我自然</title>
+	<link rel="canonical" href="./index.html">
+	<meta property="og:locale" content="zh_CN">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="NoSQL反模式 - 文档数据库篇 - 我自然">
+	<meta property="og:description" content="我们设计关系数据库Schema的都有一套完整的方案，而NoSQL却没有这些。半年前笔者读了本《SQL反模式》的书，觉得非常好。就开始留意，对于NoSQL是否也有反模式？">
+	<meta property="og:url" content="./index.html">
+	<meta property="og:site_name" content="我自然">
+	<meta property="article:published_time" content="2013-01-25T13:03:37+00:00">
+	<meta property="article:modified_time" content="2021-03-28T12:06:56+00:00">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:label1" content="作者">
+	<meta name="twitter:data1" content="yankay">
+	<meta name="twitter:label2" content="预计阅读时间">
+	<meta name="twitter:data2" content="1分">
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":".//#website","url":".//","name":"我自然","description":"颜开的博客","potentialAction":[{"@type":"SearchAction","target":".//?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"zh-CN"},{"@type":"WebPage","@id":".//nosql-anti-pattern-document/#webpage","url":".//nosql-anti-pattern-document/","name":"NoSQL反模式 - 文档数据库篇 - 我自然","isPartOf":{"@id":".//#website"},"datePublished":"2013-01-25T13:03:37+00:00","dateModified":"2021-03-28T12:06:56+00:00","author":{"@id":".//#/schema/person/f52d918e9bfa51c4454172c2caa7704f"},"breadcrumb":{"@id":".//nosql-anti-pattern-document/#breadcrumb"},"inLanguage":"zh-CN","potentialAction":[{"@type":"ReadAction","target":[".//nosql-anti-pattern-document/"]}]},{"@type":"BreadcrumbList","@id":".//nosql-anti-pattern-document/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"WebPage","@id":".//","url":".//","name":"首页"}},{"@type":"ListItem","position":2,"item":{"@id":".//nosql-anti-pattern-document/#webpage"}}]},{"@type":"Person","@id":".//#/schema/person/f52d918e9bfa51c4454172c2caa7704f","name":"yankay","image":{"@type":"ImageObject","@id":".//#personlogo","inLanguage":"zh-CN","url":"http://1.gravatar.com/avatar/426bb830224c1471011d92a830a6ed4f?s=96&d=wavatar&r=g","contentUrl":"http://1.gravatar.com/avatar/426bb830224c1471011d92a830a6ed4f?s=96&d=wavatar&r=g","caption":"yankay"},"sameAs":["http://47.100.65.109"],"url":".//author/yankay/"}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel="alternate" type="application/rss+xml" title="我自然 &raquo; Feed" href="./../feed/index.html">
+<link rel="alternate" type="application/rss+xml" title="我自然 &raquo; 评论Feed" href="./../comments/feed/index.html">
+			<link rel="shortcut icon" href="http://47.100.65.109/wp-content/uploads/2021/03/favicon.png" type="image/x-icon">
+		<link rel="alternate" type="application/rss+xml" title="我自然 &raquo; NoSQL反模式 &#8211; 文档数据库篇评论Feed" href="./feed/index.html">
+<script type="text/javascript">
+/* <![CDATA[ */
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":".\/\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.4.2"}};
+/*! This file is auto-generated */
+!function(i,n){var o,s,e;function c(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function p(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data),r=(e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0),new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data));return t.every(function(e,t){return e===r[t]})}function u(e,t,n){switch(t){case"flag":return n(e,"🏳️‍⚧️","🏳️​⚧️")?!1:!n(e,"🇺🇳","🇺​🇳")&&!n(e,"🏴󠁧󠁢󠁥󠁮󠁧󠁿","🏴​󠁧​󠁢​󠁥​󠁮​󠁧​󠁿");case"emoji":return!n(e,"🫱🏻‍🫲🏿","🫱🏻​🫲🏿")}return!1}function f(e,t,n){var r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):i.createElement("canvas"),a=r.getContext("2d",{willReadFrequently:!0}),o=(a.textBaseline="top",a.font="600 32px Arial",{});return e.forEach(function(e){o[e]=t(a,e,n)}),o}function t(e){var t=i.createElement("script");t.src=e,t.defer=!0,i.head.appendChild(t)}"undefined"!=typeof Promise&&(o="wpEmojiSettingsSupports",s=["flag","emoji"],n.supports={everything:!0,everythingExceptFlag:!0},e=new Promise(function(e){i.addEventListener("DOMContentLoaded",e,{once:!0})}),new Promise(function(t){var n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"}),a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=function(e){c(n=e.data),a.terminate(),t(n)})}catch(e){}c(n=f(s,u,p))}t(n)}).then(function(e){for(var t in e)n.supports[t]=e[t],n.supports.everything=n.supports.everything&&n.supports[t],"flag"!==t&&(n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&n.supports[t]);n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&!n.supports.flag,n.DOMReady=!1,n.readyCallback=function(){n.DOMReady=!0}}).then(function(){return e}).then(function(){var e;n.supports.everything||(n.readyCallback(),(e=n.source||{}).concatemoji?t(e.concatemoji):e.wpemoji&&e.twemoji&&(t(e.twemoji),t(e.wpemoji)))}))}((window,document),window._wpemojiSettings);
+/* ]]> */
+</script>
+<style id="wp-emoji-styles-inline-css" type="text/css">img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}</style>
+<link rel="stylesheet" id="wp-block-library-css" href="./../wp-includes/css/dist/block-library/style.min.css?ver=6.4.2" type="text/css" media="all">
+<style id="classic-theme-styles-inline-css" type="text/css">/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}</style>
+<style id="global-styles-inline-css" type="text/css">body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--gray: #777;--wp--preset--color--light-gray: #f5f5f5;--wp--preset--color--blue: #0286cf;--wp--preset--color--legacy: #b6b6b6;--wp--preset--color--red: #c80a00;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}</style>
+<link rel="stylesheet" id="bootstrap-style-css" href="./../wp-content/themes/neuro/cyberchimps/lib/bootstrap/css/bootstrap.min.css?ver=2.0.4" type="text/css" media="all">
+<link rel="stylesheet" id="bootstrap-responsive-style-css" href="./../wp-content/themes/neuro/cyberchimps/lib/bootstrap/css/bootstrap-responsive.min.css?ver=2.0.4" type="text/css" media="all">
+<link rel="stylesheet" id="font-awesome-css" href="./../wp-content/themes/neuro/cyberchimps/lib/css/font-awesome.min.css?ver=6.4.2" type="text/css" media="all">
+<link rel="stylesheet" id="cyberchimps_responsive-css" href="./../wp-content/themes/neuro/cyberchimps/lib/bootstrap/css/cyberchimps-responsive.min.css?ver=1.0" type="text/css" media="all">
+<link rel="stylesheet" id="core-style-css" href="./../wp-content/themes/neuro/cyberchimps/lib/css/core.css?ver=1.0" type="text/css" media="all">
+<link rel="stylesheet" id="style-css" href="./../wp-content/themes/neuro/style.css?ver=1.0" type="text/css" media="all">
+<link rel="stylesheet" id="elements_style-css" href="./../wp-content/themes/neuro/elements/lib/css/elements.css?ver=6.4.2" type="text/css" media="all">
+        <script>
+            /* <![CDATA[ */
+            var rcewpp = {
+                "ajax_url":"http://yankay.com/wp-admin/admin-ajax.php",
+                "nonce": "aa462ebe7f",
+                "home_url": "http://yankay.com/",
+                "settings_icon": 'http://yankay.com/wp-content/plugins/export-wp-page-to-static-html/admin/images/settings.png',
+                "settings_hover_icon": 'http://yankay.com/wp-content/plugins/export-wp-page-to-static-html/admin/images/settings_hover.png'
+            };
+            /* ]]\> */
+        </script>
+        <script type="text/javascript" src="./../wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js"></script>
+<script type="text/javascript" src="./../wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js"></script>
+<script type="text/javascript" src="./../wp-content/themes/neuro/cyberchimps/lib/js/jquery.slimbox.min.js?ver=1.0" id="slimbox-js"></script>
+<script type="text/javascript" src="./../wp-content/themes/neuro/cyberchimps/lib/js/jquery.jcarousel.min.js?ver=1.0" id="jcarousel-js"></script>
+<script type="text/javascript" src="./../wp-content/themes/neuro/cyberchimps/lib/js/jquery.mobile.custom.min.js?ver=6.4.2" id="jquery-mobile-touch-js"></script>
+<script type="text/javascript" src="./../wp-content/themes/neuro/cyberchimps/lib/js/swipe-call.min.js?ver=6.4.2" id="slider-call-js"></script>
+<script type="text/javascript" src="./../wp-content/themes/neuro/cyberchimps/lib/js/core.min.js?ver=6.4.2" id="core-js-js"></script>
+<script type="text/javascript" src="./../wp-content/themes/neuro/elements/lib/js/elements.min.js?ver=6.4.2" id="elements_js-js"></script>
+<link rel="https://api.w.org/" href="./../wp-json/index.html">
+<link rel="alternate" type="application/json" href="./../wp-json/wp/v2/posts/26652/index.html">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="./../xmlrpc.php?rsd">
+<meta name="generator" content="WordPress 6.4.2">
+<link rel="shortlink" href="./../index.html?p=26652">
+<link rel="alternate" type="application/json+oembed" href="./../wp-json/oembed/1.0/embed/index.html?url=http%3A%2F%2F%2Fnosql-anti-pattern-document%2F">
+<link rel="alternate" type="text/xml+oembed" href="./../wp-json/oembed/1.0/embed/index.html?url=http%3A%2F%2F%2Fnosql-anti-pattern-document%2F#038;format=xml">
+<style type="text/css">.ie8 .container {max-width: 1020px;width:auto;}</style>
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+	<style type="text/css" media="all">body {
+		 font-size : 16px;
+		 font-family : "Open Sans", Helvetica, Arial, "Lucida Grande", sans-serif;
+		 font-weight : normal;
+		 color : #333333;
+				}
+
+										.container {
+		 max-width : 1020px;
+				}
+
+		
+				h1, h2, h3, h4, h5, h6 {
+		font-family : Arial, Helvetica, sans-serif;
+				}</style>
+	<link rel="icon" href="./../wp-content/uploads/2021/03/cropped-favicon-32x32.png" sizes="32x32">
+<link rel="icon" href="./../wp-content/uploads/2021/03/cropped-favicon-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="./../wp-content/uploads/2021/03/cropped-favicon-180x180.png">
+<meta name="msapplication-TileImage" content="./../wp-content/uploads/2021/03/cropped-favicon-270x270.png">
+	
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-10148377-3"></script>
+<script>window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-10148377-3');</script>
+
+</head>
+<body class="post-template-default single single-post postid-26652 single-format-standard cc-responsive">
+
+
+<!-- ---------------- Menu --------------------- -->
+<div class="container-full-width" id="navigation_menu">
+	<div class="container">
+		<div class="container-fluid">
+			<nav id="navigation" role="navigation">
+				<div class="main-navigation navbar">
+					<div class="navbar-inner">
+						<div class="container">
+
+														<div class="nav-collapse collapse">
+								
+								<div class="menu-%e4%b8%bb%e8%8f%9c%e5%8d%95-container"><ul id="menu-%e4%b8%bb%e8%8f%9c%e5%8d%95" class="nav">
+<li id="menu-item-27229" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-27229"><a href="./../index.html">首页</a></li>
+<li id="menu-item-26815" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-26815"><a href="./../about/index.html">关于</a></li>
+</ul></div>
+								
+															</div>
+						<!-- collapse -->
+
+						<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+							<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</a>
+												</div>
+						<!-- container -->
+					</div>
+					<!-- .navbar-inner .row-fluid -->
+				</div>
+				<!-- main-navigation navbar -->
+			</nav>
+			<!-- #navigation -->
+		</div>
+		<!-- .container-fluid-->
+	</div>
+	<!-- .container -->
+</div>
+<!-- #navigation_menu -->
+
+
+<!-- --------------- Sub Body -------------------- -->
+
+<div class="container-full-width" id="sub_body">
+
+	<!-- ---------------- Header --------------------- -->
+	<div class="container-full-width" id="header_section">
+		<div class="container">
+						<div class="container-fluid">
+					<header id="cc-header" class="row-fluid">
+		<div class="span7">
+				<div class="hgroup">
+		<h2 class="site-title"><a href="./../index.html" title="我自然" rel="home">我自然</a></h2>
+	</div>
+		</div>
+
+		<div id="register" class="span5">
+				<div id="social">
+		<div class="legacy-icons">
+					</div>
+	</div>
+
+		</div>
+	</header>
+			</div>
+			<!-- .container-fluid-->
+		</div>
+		<!-- .container -->
+	</div>
+	<!-- #header_section -->
+
+	<div id="single_page" class="container-full-width">
+
+		<div class="container">
+
+			<div class="container-fluid">
+
+				
+				<div id="container" class="row-fluid">
+
+					
+					<div id="content" class=" span9 content-sidebar-right">
+
+						
+						
+							
+<article id="post-26652" class="post-26652 post type-post status-publish format-standard hentry category-7 tag-nosql tag-86 tag-111">
+
+	<header class="entry-header">
+
+		
+		<h1 class="entry-title">
+							NoSQL反模式 &#8211; 文档数据库篇				
+		</h1>
+					<div class="entry-meta">
+				在 <a href="./index.html" title="下午9:03" rel="bookmark">
+							<time class="entry-date updated" datetime="2013-01-25T21:03:37+08:00">2013年1月25日</time>
+						</a> 上公布				<span class="byline"> 作者为 <span class="author vcard">
+								<a class="url fn n" href="./../author/yankay/index.html" title="查看 yankay 的所有文章" rel="author">yankay</a>
+							</span>
+						</span>			</div>
+<!-- .entry-meta -->
+			</header>
+	<!-- .entry-header -->
+
+	
+		<div class="entry-content">
+						<p>我们设计关系数据库Schema的都有一套完整的方案，而NoSQL却没有这些。半年前笔者读了本《SQL反模式》的书，觉得非常好。就开始留意，对于NoSQL是否也有反模式？好的反模式可以在我们设计Schema告诉哪里是陷阱和悬崖。NoSQL宣传的时候往往宣称是SchemaLess的，这会让人误解其不需要设计Schema。但如果不意识到设计Schema的必要，陷阱就在一直在黑暗中等着我们。这篇文章就总结一些别人的，也有自己犯过的深痛的设计Schema错误。</p>
+<p>NoSQL数据库最主流的有文档数据库，列存数据库，键值数据库。三者分别有代表作MongoDB，HBase和Redis。如果将NoSQL比作兵器的话，可以这样(MySQL是典型的关系型数据库，一样参与比较)：</p>
+<ul>
+<li>
+<strong>MySQL</strong>产生年代较早，而且随着LAMP大潮得以成熟。尽管其没有什么大的改进，但是新兴的互联网使用的最多的数据库。就像传统的菜刀，结构简单，几百年没有改进。但是不妨碍产生各式各样的刀法，只要有一把，就能胜任厨房里的大部分事务。MySQL也是一样，核心已经稳定。但是切库，分表，备份，监控，等等手段一应俱全。</li>
+<li>
+<strong>MongoDB</strong>是个新生事物，提供更灵活的Schema，Capped Collection，异步提交，地理位置索引等五花十色的功能。就像瑞士军刀，不但可以当刀用，还可以开瓶盖，剪指甲。但是他也不比MySQL强，因为还缺乏时间的磨砺。一是系统本身的稳定性，二是开发，运维需要更多经验才能流行。</li>
+<li>
+<strong>HBase</strong>是个仗势欺人的大象兵。依仗着Hadoop的生态环境，可以有很好的扩展性。但是就像象兵一样，使用者需要养一头大象(Hadoop),才能驱使他。</li>
+<li>
+<strong>Redis</strong>是键值存储的代表，功能最简单。提供随机数据存储。就像一根棒子一样，没有多余的构造。但是也正是因此，他的伸缩性特别好。就像悟空手里的金箍棒，大可捅破天，小能成缩成针。</li>
+</ul>
+<h3>文档数据库的得失</h3>
+<p>关系模型试图将数据库模型和数据库实现分开，让开发者可以脱离底层很好的操作数据。但笔者以为关系模型在一些应用场景下有弱点，现在已经不得不面对。</p>
+<ul>
+<li>
+<strong><strong><strong>SQL</strong></strong>弱点一：必须支持Join</strong>。因为数据不能够有重复。所以使用范式的关系模型会不可避免的大量Join。如果参与Join的是一张比内存小的表还好。但是如果大表Join或者表分布在多台机器上的话，Join就是性能的噩梦。</li>
+<li>
+<strong><strong>SQL弱点二：</strong>计算和存储耦合</strong>。关系模型作为统一的数据模型既可以用于数据分析，也可以用于在线业务。但这两者一个强调高吞吐，一个强调低延时，已经演化出完全不同的架构。用同一套模型来抽象显然是不合适的。Hadoop针对的就是计算的部分。MongoDB,Redis等针对在线业务。两者都抛弃了关系模型。</li>
+</ul>
+<p>针对这两个梦魇。文档数据库如MongoDB的的主要目的是<strong> 提供更丰富的数据结构来抛弃Join来适应在线业务</strong>。当然也不是MongoDB完全不能用Join，不能拿来做数据分析，讨论这个只是见仁见智的问题。所以文档数据库并不比关系数据库强大，由于对Join的弱支持，功能会弱许多。设计关系模型的时候，通常只需要考虑好数据直接的关系，定义数据模型。而设计文档数据库模型的时候，还需要考虑应用如何使用。因此设计好一个的文档数据库Schema比设计关系模型更加的困难。除此之外，由于文档数据库事务的支持也是比较弱，一般NoSQL只会提供一个行锁。这也给设计Schema更加增加了难度。对于文档数据库的使用有很多需要注意的地方，本文只关注模型设计的部分。</p>
+<h3>反模式一：惯性思维/沿用关系模型</h3>
+<p>关系模型是数据存储的经典模型，使用数据模型范式的好处非常的明显。但是由于文档数据库不支持Join(包括和外键息息相关的外键约束)等特性，习惯性的沿用关系模型有的时候会出现问题。需要利用起文档数据库提供的丰富的数据模型来应对。</p>
+<p>值得一提的是文档数据库的设计和关系模型不同，是灵活多样的。对于同一个情形，可以设计出有多种能够工作的模型，没有绝对意义上最好的模型。</p>
+<p>下图是关系模型和文档模型的对比。</p>
+<p>这个一个博客的数据模型，有Blog,User等表。左侧是关系模型，右侧是文档模型。这个文档模型并不是完全合理，可以作为“正反两面教材”在下文不断阐述。</p>
+<p><strong>问题一：存在描述多对多的关系表</strong><br>
+症状：文档数据库中存储在有纯粹的关系表，例如：</p>
+<table>
+<tbody>
+<tr>
+<td valign="top" width="213">id</td>
+<td valign="top" width="213">user_id</td>
+<td valign="top" width="213">blog_id</td>
+</tr>
+<tr>
+<td valign="top" width="213">0</td>
+<td valign="top" width="213">0</td>
+<td valign="top" width="213">0</td>
+</tr>
+<tr>
+<td valign="top" width="213">1</td>
+<td valign="top" width="213">0</td>
+<td valign="top" width="213">1</td>
+</tr>
+</tbody>
+</table>
+<p>这样的表就算在关系模型中也是不妥的，因为这个ID非常的多余，可以用联合主键来解决。但是在文档数据库中，由于必须强制单主键，不得不采取这样的设计。</p>
+<p>坏处：</p>
+<ol>
+<li><span style="line-height: 22px;">破坏数据完备性。由于ID是主键，在数据模型上没有约束来保证不出现重复的user_id,blog_id对。一旦数据出现重复，更新删除都是问题。</span></li>
+<li><span style="line-height: 22px;">索引过多。由于是关系表，必须在user_id和blog_id上面分别建一个索引。影响性能。</span></li>
+</ol>
+<p>解决方案：<br>
+使用文档数据库典型的处理多对多的办法。不是建立一张关系表，而是在其中一个文档(如User)中，加入一个List字段。</p>
+<div></div>
+<table>
+<tbody>
+<tr>
+<td valign="top" width="160">user_id</td>
+<td valign="top" width="160">user_name</td>
+<td valign="top" width="160">blog_id[]</td>
+<td valign="top" width="160">……</td>
+</tr>
+<tr>
+<td valign="top" width="160">0</td>
+<td valign="top" width="160">Jake</td>
+<td valign="top" width="160">0,1</td>
+<td valign="top" width="160">……</td>
+</tr>
+<tr>
+<td valign="top" width="160">1</td>
+<td valign="top" width="160">Rose</td>
+<td valign="top" width="160">1,2</td>
+<td valign="top" width="160">……</td>
+</tr>
+</tbody>
+</table>
+<p><strong>问题二:没有区分&#8221;一对多关系&#8221;和“多对一关系”</strong><br>
+症状：关系模型不区分“一对多”和“多对一”，对于文档数据库来讲，关系模型只有“多对一”。就像这张Comment表：</p>
+<table>
+<tbody>
+<tr>
+<td valign="top" width="160">comment_id</td>
+<td valign="top" width="160">user_id</td>
+<td valign="top" width="160">content</td>
+<td valign="top" width="160">……</td>
+</tr>
+<tr>
+<td valign="top" width="160">0</td>
+<td valign="top" width="160">0</td>
+<td valign="top" width="160">“NoSQL反模式是好文章”</td>
+<td valign="top" width="160">……</td>
+</tr>
+<tr>
+<td valign="top" width="160">1</td>
+<td valign="top" width="160">0</td>
+<td valign="top" width="160">“是啊”</td>
+<td valign="top" width="160">……</td>
+</tr>
+</tbody>
+</table>
+<p>如果整个模型都是这样的“多对一”关系就需要反思了。</p>
+<p>坏处：</p>
+<ol>
+<li><span style="line-height: 22px;">额外索引。如果客户端已知user_id,需要获得User信息和Comment信息，需要执行两次查询。其中一次查询需要使用索引。并且要在客户端自己Join。这样可能有潜在性能问题。</span></li>
+</ol>
+<p>解决方案：<br>
+问题的核心在于是已知user_id查询两张表，还是已知comment_id查询两张表。如果是已知comment_id这样的设计就是合理的，但是如果是已知user_id来查询，把关系放在user表里的设计更合理一些。</p>
+<div></div>
+<table>
+<tbody>
+<tr>
+<td valign="top" width="160">user_id</td>
+<td valign="top" width="160">user_name</td>
+<td valign="top" width="160">comment_id[]</td>
+<td valign="top" width="160">……</td>
+</tr>
+<tr>
+<td valign="top" width="160">0</td>
+<td valign="top" width="160">Jake</td>
+<td valign="top" width="160">0,1</td>
+<td valign="top" width="160">……</td>
+</tr>
+<tr>
+<td valign="top" width="160">1</td>
+<td valign="top" width="160">Rose</td>
+<td valign="top" width="160">1,2</td>
+<td valign="top" width="160">……</td>
+</tr>
+</tbody>
+</table>
+<p>这样的设计，就可以避免一个索引。同理，对于多对多也是一样的，通过合理的安排字段的位置可以避免索引。</p>
+<p>正确使用的场合：</p>
+<p>关系型模型是非常成功的数据模型，合理的沿用是非常好的。但是由于文档数据库的特点，需要适当的调整，这样得出的数据模型，尽管性能不是最优，但是有最好的灵活性。并且也有利于和关系数据库转换。</p>
+<h3>反模式二：处处引用客户端Join</h3>
+<p>症状：数据库设计中充满了xx_id的字端，在查询的时候需要大量的手动Join操作。就涉及到了这个反模式。正如上面提到的博客的关系模型，如果已知blog_id查询comments，需要至少执行3次查询，并且手动Join。</p>
+<p>坏处：</p>
+<ol>
+<li><span style="line-height: 22px;">手动Join，麻烦且易出错。文档数据库不支持Join且没有外键保证。因此需要在客户端Join，这样的操作对于软件开发来讲是比较繁琐的。由于没有外键保证，因此不能保证取得的ID在数据库里面是有数据的。在处理的时候需要不断判断，容易出错。</span></li>
+<li><span style="line-height: 22px;">多次查询。如果引用过多，查询的时候需要多次查询才能查到足够的数据。本来文档数据库是很快的，但是由于多次查询，给数据库增加了压力，获取全部数据的时间也会增加。</span></li>
+<li><span style="line-height: 22px;">事务处理繁琐。文档数据库一般不支持一般意义上事务，只支持行锁。如果文档数据库有给多个连接。在插入的时候，事务的处理就是噩梦。在文档数据库中使用事务，需要使用行锁，在进行大量的处理。太过繁琐，感兴趣的读者可以搜一下。</span></li>
+</ol>
+<p>解决方案：<br>
+适当使用内联数据结构。由于文档数据库支持更复杂的数据结构可以将引用转换为内联的数据，而不用新建一张表。这样做可以解决上面的一些问题，是一个推荐的方案。就像上面博客的例子一样。将五张表简化成了两张表。那什么时候使用内联呢？一般认为</p>
+<div>
+<ul>
+<li><span style="line-height: 19px;">使用内联可以解决读性能问题，明显减少Query的次数的时候。</span></li>
+<li><span style="line-height: 19px;">可以简化数据模型，化简表之间的关系，而同时不会影响灵活性的时候。</span></li>
+<li><span style="line-height: 19px;">事务可以得到简化为单行事务的时候</span></li>
+</ul>
+</div>
+<div>正确使用的场合：</div>
+<p>范式化的使用场景，文档数据库会被多个应用使用。由于数据库设计无法估计多个应用现在及将来的查询情况，需要极大的灵活性。在这个时候，使用引用比内联靠谱。</p>
+<h3>反模式三 滥用内联后患无穷</h3>
+<p><strong>问题一 妨碍到查询的内联</strong><br>
+症状：频繁查询一些内联字段，丢弃其他字段。</p>
+<p>坏处：</p>
+<ol>
+<li><span style="line-height: 22px;">无ID约束：使用内联字段和引用不同，是没有ID约束的。因此不能通过ID(主键)来管理，如果经常需要单独操作内联对象会非常不便。</span></li>
+<li><span style="line-height: 22px;">索引泛滥：如果以内联字段为条件进行查询，需要建立索引。有可能造成索引泛滥。</span></li>
+<li><span style="line-height: 22px;">性能浪费：大部分文档数据库的实现是按行存储的，也就意味着，尽管只查询一个字段，但是DB需要将整行从磁盘中取出。如果字段够小，文档够大，是很不合算的。</span></li>
+</ol>
+<p>解决方案：<br>
+如果出现以上的症结，就可以考虑使用引用代替内联了。内联特性主要的用途在于提高性能，如果出现性能不升反降，那就没有意义了。如果对性能有很强烈的要求，可以考虑使用重复数据，同样的数据即在内联字段中也在引用的表里面。这样可以结合内联和引用的性能优势。缺点是数据出现重复，维护会比较麻烦。</p>
+<p><strong>问题二 无限膨胀的内联</strong><br>
+症状：List,Map类型的内联字段不断膨胀，而且没有限制。就像前面提到的Blog的内联字段Comment。如果对每一篇Blog的Comment数量没有限制的话，Comment会无限膨胀。轻则影响性能，重则插入失败。</p>
+<table>
+<tbody>
+<tr>
+<td valign="top" width="160">Blog_id</td>
+<td valign="top" width="160">content</td>
+<td valign="top" width="160">Comment[]</td>
+<td valign="top" width="160">……</td>
+</tr>
+<tr>
+<td valign="top" width="160">0</td>
+<td valign="top" width="160">“…”</td>
+<td valign="top" width="160">“NoSQL反模式是好文章”, “是啊”,”无限增长中”…</td>
+<td valign="top" width="160">……</td>
+</tr>
+</tbody>
+</table>
+<p>坏处：</p>
+<ol>
+<li><span style="line-height: 22px;">插入失败。文档数据库的每条记录都有最大大小，并且也有推荐最佳的大小。一般不会超过4M。就像刚刚提到的例子，如果是篇热门的博文的话，评论的大小很容易就超过4M。届时文档将无法更新，新的评论无法插入。</span></li>
+<li><span style="line-height: 22px;">性能拖油瓶。由于内联字段膨胀，其大小将远远超过其他部分，影响其他部分的性能表现。并且因此导致该记录大小频繁变化，对档数据库的数据文件内部可能因此产生很多碎片。</span></li>
+</ol>
+<p>解决方案：<br>
+设定最大数目或者使用引用。还是Blog和Comment的例子，可以将Comment从Blog中剥离出成一张表。如果考虑到性能，可以在Blog表中新建一个字段如最近的评论。这样既保证了性能，又能够预防膨胀。</p>
+<table>
+<tbody>
+<tr>
+<td valign="top" width="160">Blog_id</td>
+<td valign="top" width="160">content</td>
+<td valign="top" width="160">last_five_comment[]</td>
+<td valign="top" width="160">……</td>
+</tr>
+<tr>
+<td valign="top" width="160">0</td>
+<td valign="top" width="160">“…”</td>
+<td valign="top" width="160">“NoSQL反模式是好文章”, “是啊”,”最多5条”…</td>
+<td valign="top" width="160">……</td>
+</tr>
+</tbody>
+</table>
+<p><strong>问题三 无法维护的内联</strong><br>
+症状：DBA想单独维护内联字段，但无法做到。</p>
+<p>坏处：</p>
+<ol>
+<li><span style="line-height: 22px;">权限管理难。数据库的权限管理的最小粒度是表。如果使用内联技术，就意味着内联部分必须和其他字段用同一个权限来管理。没有办法在DB级别隐藏。</span></li>
+<li><span style="line-height: 22px;">切表难。如果发现一张表的庞大需要切表。这个时候就比较纠结了。如果一刀切，partion Key的选择；索引的失效都会成为问题。如果觉得拆为两张表，就会很好操作的话，就是内联的过度使用了 。</span></li>
+<li><span style="line-height: 22px;">备份难。关系数据库中每张表可以有不同的备份策略。但是如果内联起来，这样的备份就做不到了。</span></li>
+</ol>
+<div><span style="line-height: 22px;">解决办法：</span></div>
+<div>设计数据库模型的时候需要考量之后的维护操作，尤其是内联的字段需不需要单独的维护。需要和运维商量。如果对内联的字段有单独维护的要求，可以拆分出来作为引用。</div>
+<p><strong>问题四 盯死应用的内联</strong><br>
+症状：应用可以非常好的运行在数据库上。但是当新的应用接入的时候会很麻烦。因为设计数据模型的时候考虑到了查询。所以当有新应用，新查询接入的时候，就会难于使用原有的模型。</p>
+<p>坏处：</p>
+<ol>
+<li><span style="line-height: 22px;">新应用接入难。当新的应用试图使用同一个数据库的时候，接入比较困难。因为查询时不同的，需要调整数据模型才能适应。但是调整模型又会影响原有应用。</span></li>
+<li><span style="line-height: 22px;">集成难。不同的关系型数据库可以集成在一起，共同使用。但是对于文档数据库，虽然功能上可以互补，但是由于内联数据结构的差异，也比较难于集成。</span></li>
+<li><span style="line-height: 22px;">ETL难。现在大部分的数据分析系统使用的是关系模型，就连Hadoop虽然不用关系模型，但是其上的Hive的常用工具也是按关系模型设计的。<br>
+</span></li>
+</ol>
+<p>解决方案：</p>
+<p>使用范式设计数据库，即用引用代替内联。或者在使用内联的时候，给每个内联对象一个全局唯一的Key，保证其和关系模型直接可以存在映射关系，这样可以提高数据模型的灵活性。如Blog表：</p>
+<div>
+<table>
+<tbody>
+<tr>
+<td valign="top" width="160">Blog_id</td>
+<td valign="top" width="160">content</td>
+<td valign="top" width="160">Comment[]</td>
+<td valign="top" width="160">……</td>
+</tr>
+<tr>
+<td valign="top" width="160">0</td>
+<td valign="top" width="160">“…”</td>
+<td valign="top" width="160">[{&#8220;id&#8221;=1,&#8221;content&#8221;=“NoSQL反模式是好文章”}, {&#8220;id&#8221;=2,&#8221;content&#8221;=“是啊”}…]</td>
+<td valign="top" width="160">……</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div></div>
+<div>这样的设计既可以利用到内联的好处，又能将其和关系模型映射起来。确定是需要手动维护comment_id，保证其全局唯一性。</div>
+<h3>反模式四：在线计算</h3>
+<p>症状：有一些运行时间很长的Query,由于有聚合计算，索引也不能解决。随着数据量的增长，逐渐成为性能瓶颈。</p>
+<p>坏处：</p>
+<ol>
+<li><span style="line-height: 22px;">影响用户体验。在线业务中，如果一个查询大于4s，用户体验会急剧下降。按主键和按索引的查询都能满足要求。但是聚合操作往往需要扫描全表或者大量的数据，随着数据量的增加，查询时间会变长，用户不可容忍。</span></li>
+<li><span style="line-height: 22px;">影响数据库性能。长查询的坏处数不清。在线上应用中，如果出现长查询，可能会霸占数据的大部分资源，包括IO，连接，CPU等等。导致其他很好的查询，轻则性能也下降，重者无法使用数据库。长查询可以称之为DB杀手。</span></li>
+</ol>
+<p>解决方案：<br>
+首先要权衡，这个聚合操作是不是必要的，必须实时完成。如果没有必要实时完成的话，可以采取离线操作的方案。在夜深人静的时候，跑一个长查询，将结果缓存起来，给第二天使用。如果必须实时完成，则可以新建一个字段，用“incr”这样的操作，在运行的时候，实时聚合结果。而不是查询的时候执行一次长查询。如果逻辑比较复杂，或者觉得大量“incr”操作给数据库系统带来了压力，可以使用Storm之类的实时数据处理框架。总之，要慎用长查询。</p>
+<h3>反模式五：把内联Map对象的Key当作ID用</h3>
+<p>症状：文档数据库支持内联Map类型。将其中Map的Key当作数据库的主键来用。</p>
+<table>
+<tbody>
+<tr>
+<td valign="top" width="160">Blog_id</td>
+<td valign="top" width="160">content</td>
+<td valign="top" width="160">Comment{}</td>
+<td valign="top" width="160">……</td>
+</tr>
+<tr>
+<td valign="top" width="160">0</td>
+<td valign="top" width="160">“…”</td>
+<td valign="top" width="160">{&#8220;1&#8243;=“NoSQL反模式是好文章”, &#8220;2&#8221;=“是啊”}</td>
+<td valign="top" width="160">……</td>
+</tr>
+</tbody>
+</table>
+<p>这个反模式很容易犯，因为在编程语言中Map数据结构就是这么用的。但是对于数据库模型来说，这是不折不扣的反模式。</p>
+<p>坏处：</p>
+<ol>
+<li><span style="line-height: 22px;">无法通过数据库做各种(&gt;&lt;=)查询。对于关系型数据库来说，虽然数据结构可以很灵活，但查询的时候都是按层次的。比如comment.id，comment.content。也就是说其Map类型中的Key可以理解为属性名的，而不是用作ID。因此一旦这样使用，就脱离的数据库管制，无法使用各种查询功能。</span></li>
+<li><span style="line-height: 22px;">无法通过索引查询。文档数据可建立索引是需要列名的。比如comment.id。而这样的数据结构没有固定的列名，因此无法建立索引。</span></li>
+</ol>
+<p>解决方案：<br>
+使用数组+Map来解决。如：</p>
+<div>
+<table>
+<tbody>
+<tr>
+<td valign="top" width="160">Blog_id</td>
+<td valign="top" width="160">content</td>
+<td valign="top" width="160">Comment[]</td>
+<td valign="top" width="160">……</td>
+</tr>
+<tr>
+<td valign="top" width="160">0</td>
+<td valign="top" width="160">“…”</td>
+<td valign="top" width="160">[{&#8220;id&#8221;=1,&#8221;content&#8221;=“NoSQL反模式是好文章”}, {&#8220;id&#8221;=2,&#8221;content&#8221;=“是啊”}…]</td>
+<td valign="top" width="160">……</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div></div>
+<div>这样，就可以使用comment.id作为索引，也可以使用数据库的查询功能。简单有效。Map类型中的Key是属性名，Value是属性值。这样的用法是文档数据库数据模型的本意，因此其提供的各种功能才能利用上。否则就无法使用。</div>
+<h3>反模式六：不合理的ID</h3>
+<p>症状：使用String甚至更复杂数据结构作为的ID，或者全部使用数据库提供的自生成ID。如：</p>
+<div>
+<table>
+<tbody>
+<tr>
+<td valign="top" width="160">id(该ID系系统自生成）</td>
+<td valign="top" width="160">Blog_id</td>
+<td valign="top" width="160">content</td>
+<td valign="top" width="160">……</td>
+</tr>
+<tr>
+<td valign="top" width="160">0</td>
+<td valign="top" width="160">0</td>
+<td valign="top" width="160">&#8230;</td>
+<td valign="top" width="160">……</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>坏处:</p>
+<ol>
+<li><span style="line-height: 22px;">ID混乱。如果使用数据库提供的自生成ID，同时表中还有一个类似有主键含义的Blog_id，这样很不好，容易造成逻辑混乱。由于文档数据库不支持ID的重命名，习惯关系数据库做法的人可能会再建立一个自己的逻辑ID字段。这是没有必要的。</span></li>
+<li><span style="line-height: 22px;">索引庞大，性能低下。ID是数据库的非常重要的部分。ID的长度将决定索引(包括主键的索引)的大小，直接影响到数据库性能。如果索引比内存小，性能会很好。但一旦索引大小超过内存，出现数据交换，性能会急剧下降。一个Long占8字节，一个20个字符的UTF8 String占用约60个字节。相差10倍之巨，不能不考虑。</span></li>
+</ol>
+<p>解决方案：<br>
+尽量使用有一定意义的字段做ID，并且不在其他字段中重复出现。不使用复杂的数据类型做ID，只使用int,long或者系统提供的主键类型做ID。</p>
+<h3>文档数据库的反模式总结</h3>
+<p>阐述了这么多的反模式，下面有个一览表，涵盖了上面所有的反模式。这个一览表，是按照文档数据库模型建立的。是个文档数据库模型的例子。</p>
+<table>
+<tbody>
+<tr>
+<td>ID</td>
+<td>反模式名</td>
+<td>问题</td>
+</tr>
+<tr>
+<td valign="top" width="55">0</td>
+<td valign="top" width="108">存在描述多对多的关系表</td>
+<td valign="top" width="601">[{ID：00<br>
+症状：文档数据库中存储在有纯粹的关系表<br>
+坏处：[破坏数据完备性，索引过多]<br>
+解决方案：加入一个List字段<br>
+},{<br>
+ID：01<br>
+症状：关系模型不区分“一对多”和“多对一”<br>
+坏处：额外索引<br>
+解决方案：合理的安排字段的位置<br>
+}]</td>
+</tr>
+<tr>
+<td valign="top" width="55">1</td>
+<td valign="top" width="108">处处引用客户端Join</td>
+<td valign="top" width="601">[{<br>
+ID：10<br>
+症状：查询的时候需要大量的手动Join操作<br>
+坏处：[手动Join，多次查询, 事务处理繁琐]<br>
+解决方案：适当使用内联数据结构。<br>
+}]</td>
+</tr>
+<tr>
+<td valign="top" width="55">2</td>
+<td valign="top" width="108">滥用内联后患无穷</td>
+<td valign="top" width="601">[{<br>
+ID：20<br>
+症状：频繁查询一些内联字段，丢弃其他字段<br>
+坏处：[无ID约束，索引泛滥, 性能浪费]<br>
+解决方案：使用引用代替内联了,允许重复数据<br>
+},{<br>
+ID：21<br>
+症状：List,Map类型的内联字段不断膨胀，而且没有限制<br>
+坏处：[插入失败, 性能拖油瓶]<br>
+解决方案：设定最大数目或者使用引用。<br>
+},{<br>
+ID：22<br>
+症状：DBA想单独维护内联字段，但无法做到<br>
+坏处：[权限管理难, 切表难, 备份难]<br>
+解决方案：设计数据库模型的时候需要考量之后的维护操作<br>
+},{<br>
+ID：23<br>
+症状：应用可以非常好的运行在数据库上。但是当新的应用接入的时候会很麻烦。内联盯死了应用<br>
+坏处：[新应用接入难, 集成难, ETL难]<br>
+解决方案：使用范式设计数据库，即用引用代替内联。保证其和关系模型直接可以存在映射关系<br>
+}]</td>
+</tr>
+<tr>
+<td valign="top" width="55">3</td>
+<td valign="top" width="108">在线计算</td>
+<td valign="top" width="601">[{<br>
+ID：30<br>
+症状：有一些运行时间很长的Query, 逐渐成为性能瓶颈。<br>
+坏处：[影响用户体验，影响数据库性能]<br>
+解决方案：取消不必要的聚合操作. 运行的时候，实时聚合结果.使用第三方实时或非实时工具。如Hadoop，Storm.<br>
+}]</td>
+</tr>
+<tr>
+<td valign="top" width="55">4</td>
+<td valign="top" width="108">把内联Map对象的Key当作ID用</td>
+<td valign="top" width="601">[{<br>
+ID：40<br>
+症状：文档数据库支持内联Map类型。将其中Map的Key当作数据库的主键来用。<br>
+坏处：[无法通过数据库做各种(&gt;&lt;&#8220;&#8221;&#8221; =)查询，无法通过索引查询]<br>
+解决方案：使用数组+Map来解决。<br>
+}]</td>
+</tr>
+<tr>
+<td valign="top" width="55">5</td>
+<td valign="top" width="108">不合理的ID</td>
+<td valign="top" width="601">[{<br>
+ID：50<br>
+症状：用String甚至更复杂数据结构作为的ID，或者全部使用数据库提供的自生成ID。<br>
+坏处：[ID混乱，索引庞大]<br>
+解决方案：尽量使用有一定意义的字段做ID。不使用复杂的数据类型做ID。<br>
+}]</td>
+</tr>
+</tbody>
+</table>
+<p>本文试图总结了笔者知道的重要的文档数据库的反模式。现在关于NoSQL数据模型设计模式的讨论才刚刚起步，将来也许会逐渐自成体系。对于列数据库和Key-Value的反模式，笔者等到有了足够积累的时候，再和大家分享。</p>
+<div></div>
+					</div>
+<!-- .entry-content -->
+
+	
+	<footer class="entry-meta">
+		
+							<span class="cat-links">
+				文章分类 <a href="./../category/%e6%8a%80%e6%9c%af/%e6%af%8f%e6%97%a5%e5%bf%83%e5%be%97/index.html" rel="category tag">每日心得</a>			</span>
+				<span class="sep"> | </span>
+			
+							<span class="taglinks">
+				标签： <a href="./../tag/nosql/index.html" rel="tag">NoSQL</a>, <a href="./../tag/%e5%8f%8d%e6%a8%a1%e5%bc%8f/index.html" rel="tag">反模式</a>, <a href="./../tag/%e6%96%87%e6%a1%a3%e6%95%b0%e6%8d%ae%e5%ba%93/index.html" rel="tag">文档数据库</a>			</span>
+				<span class="sep"> | </span>
+			
+		
+						<span class="comments-link"><a href="./index.html#comments">5 评论</a></span>
+				<span class="sep">  </span>
+			
+		
+	</footer>
+	<!-- #entry-meta -->
+
+</article><!-- #post-26652 -->
+
+							<div class="more-content">
+								<div class="row-fluid">
+									<div class="span6 previous-post">
+										&laquo; <a href="./../2012%e5%b9%b4%e5%ad%a6%e4%b9%a0%e5%b0%8f%e7%bb%93/index.html" rel="prev">2012年学习小结</a>									</div>
+									<div class="span6 next-post">
+										<a href="./../scala-tour-choiceness/index.html" rel="next">Scala Tour &#8211; 精选</a> &raquo;									</div>
+								</div>
+							</div>
+
+							
+
+<div id="comments" class="comments-area">
+
+	
+			<h2 class="comments-title">
+			5 thoughts on <span>&ldquo;NoSQL反模式 &#8211; 文档数据库篇&rdquo;</span>		</h2>
+
+		
+		<ol class="commentlist">
+							<li class="post pingback">
+				<p>通告: <a href="http://www.iamle.com/archives/1535.html" class="url" rel="ugc external nofollow">NoSQL反模式 &#8211; 文档数据库篇 | {流水理鱼|wwek}</a></p>
+				</li>
+<!-- #comment-## -->
+					<li class="comment even thread-even depth-1" id="li-comment-93">
+					<article id="comment-93" class="comment hreview">
+						<footer>
+							<div class="comment-author reviewer vcard">
+								<img alt="" src="http://1.gravatar.com/avatar/73cea4c6fd8591b6ffefdeb13575a516?s=40&#038;d=wavatar&#038;r=g" srcset="http://1.gravatar.com/avatar/73cea4c6fd8591b6ffefdeb13575a516?s=80&#038;d=wavatar&#038;r=g 2x" class="avatar avatar-40 photo" height="40" width="40" decoding="async">								<cite class="fn">Qing Yi</cite> <span class="says">说:</span>							</div>
+							<!-- .comment-author .vcard -->
+							
+							<div class="comment-meta commentmetadata">
+								<a href="./index.html#comment-93" class="dtreviewed">
+									<time pubdate datetime="2014-04-20T02:19:00+08:00">
+										2014年4月20日于上午2:19									</time>
+								</a>
+															</div>
+							<!-- .comment-meta .commentmetadata -->
+						</footer>
+
+						<div class="comment-content">
+<p>个人觉得 应延时更新 最好配合队列或者异步机制 用户信息更新后触发某自定义业务事件 事件的处理可以交给异步线程或者存入队列   </p>
+<p>这个也可以只用关联user_id 也可以 ：先遍历输出博客 然后顺便收集userIds 得到一个用户ids数组 接着利用缓存的multiGet 获取所有用户信息 进行二次渲染 二次渲染可以使用字符串替换（前提是博客输出时缓存被捕获了 用户图像输出的地方用了某种占位如简单的##userProfile_{{userId}}## ） 或者使用bigpipe技术 首页出现的东西基本都可以使用缓存哦 所以多点计算 没啥大碍 计算一次缓存几分钟，小时 就ok了</p>
+</div>
+
+						<div class="reply">
+							<a rel="nofollow" class="comment-reply-link" href="#comment-93" data-commentid="93" data-postid="26652" data-belowelement="comment-93" data-respondelement="respond" data-replyto="回复给Qing Yi" aria-label="回复给Qing Yi">回复</a>						</div>
+						<!-- .reply -->
+					</article><!-- #comment-## -->
+
+				</li>
+<!-- #comment-## -->
+				<li class="post pingback">
+				<p>通告: <a href="http://www.iteaer.com/?p=634" class="url" rel="ugc external nofollow">NoSQL反模式 – 文档数据库篇 | IT茶人---茗香燕归来</a></p>
+				</li>
+<!-- #comment-## -->
+				<li class="post pingback">
+				<p>通告: <a href="http://www.iteaer.com/?p=634" class="url" rel="ugc external nofollow">NoSQL反模式 – 文档数据库篇 | IT茶人---茗香燕归来</a></p>
+				</li>
+<!-- #comment-## -->
+					<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-96">
+					<article id="comment-96" class="comment hreview">
+						<footer>
+							<div class="comment-author reviewer vcard">
+								<img alt="" src="http://2.gravatar.com/avatar/b51b790da899487e0924d2f6401817c5?s=40&#038;d=wavatar&#038;r=g" srcset="http://2.gravatar.com/avatar/b51b790da899487e0924d2f6401817c5?s=80&#038;d=wavatar&#038;r=g 2x" class="avatar avatar-40 photo" height="40" width="40" decoding="async">								<cite class="fn"><a href="http://pyhome.org/" class="url" rel="ugc external nofollow">pyhome</a></cite> <span class="says">说:</span>							</div>
+							<!-- .comment-author .vcard -->
+							
+							<div class="comment-meta commentmetadata">
+								<a href="./index.html#comment-96" class="dtreviewed">
+									<time pubdate datetime="2016-01-23T21:04:00+08:00">
+										2016年1月23日于下午9:04									</time>
+								</a>
+															</div>
+							<!-- .comment-meta .commentmetadata -->
+						</footer>
+
+						<div class="comment-content">
+<p>博主，可以转载吗，保留来源链接</p>
+</div>
+
+						<div class="reply">
+							<a rel="nofollow" class="comment-reply-link" href="#comment-96" data-commentid="96" data-postid="26652" data-belowelement="comment-96" data-respondelement="respond" data-replyto="回复给pyhome" aria-label="回复给pyhome">回复</a>						</div>
+						<!-- .reply -->
+					</article><!-- #comment-## -->
+
+				</li>
+<!-- #comment-## -->
+		</ol>
+
+		
+	
+	
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">发表评论 <small><a rel="nofollow" id="cancel-comment-reply-link" href="./index.html#respond" style="display:none;">取消回复</a></small>
+</h3>
+<form action="http://yankay.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+<p class="comment-notes"><span id="email-notes">您的电子邮箱地址不会被公开。</span> <span class="required-field-message">必填项已用<span class="required">*</span>标注</span></p>
+<p class="comment-form-comment"><label for="comment">评论 <span class="required">*</span></label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p>
+<p class="comment-form-author"><label for="author">显示名称 <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" autocomplete="name" required="required"></p>
+<p class="comment-form-email"><label for="email">电子邮箱地址 <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" maxlength="100" aria-describedby="email-notes" autocomplete="email" required="required"></p>
+<p class="comment-form-url"><label for="url">网站地址</label> <input id="url" name="url" type="text" value="" size="30" maxlength="200" autocomplete="url"></p>
+<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"> <label for="wp-comment-cookies-consent">在此浏览器中保存我的显示名称、邮箱地址和网站地址，以便下次评论时使用。</label></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="发表评论"> <input type="hidden" name="comment_post_ID" value="26652" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p>
+<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="0d541b4c29"></p>
+<input type="hidden" id="ak_js" name="ak_js" value="233"><textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100" style="display: none !important;"></textarea>
+</form>	</div>
+<!-- #respond -->
+	
+</div>
+<!-- #comments .comments-area -->
+						
+						
+					</div>
+					<!-- #content -->
+
+					
+<div id="secondary" class="widget-area span3">
+
+	
+	<div id="sidebar">
+		<aside id="search-2" class="widget-container widget_search"><form method="get" id="searchform" class="navbar-search pull-right" action="http://yankay.com/" role="search">
+	<input type="text" class="search-query input-medium" name="s" placeholder="Search &hellip;">
+</form>
+<div class="clear"></div>
+</aside>
+		<aside id="recent-posts-2" class="widget-container widget_recent_entries">
+		<h3 class="widget-title">近期文章</h3>
+		<ul>
+											<li>
+					<a href="./../containerd-will-replace-docker/index.html">听说 Docker 被 kubenetes 抛弃了，怎么办？containerd</a>
+									</li>
+											<li>
+					<a href="./../%e5%85%ac%e5%91%8a-%e5%8d%9a%e5%ae%a2%e9%87%8d%e5%bc%80%e4%ba%86/index.html">公告 &#8211; 博客重开了</a>
+									</li>
+											<li>
+					<a href="./../cloudfoundry-v2-with-microcf/index.html">CloudFoundry v2面面谈，内赠MicroCFv2福利</a>
+									</li>
+											<li>
+					<a href="./../docker-paas-for-any-application/index.html">Docker能够运行任何应用的“PaaS”云</a>
+									</li>
+											<li>
+					<a href="./../scala-tour-choiceness/index.html">Scala Tour &#8211; 精选</a>
+									</li>
+					</ul>
+
+		</aside><aside id="recent-comments-2" class="widget-container widget_recent_comments"><h3 class="widget-title">近期评论</h3>
+<ul id="recentcomments">
+<li class="recentcomments">
+<span class="comment-author-link"><a href="https://www.ccppcoding.com/archives/63098.html" class="url" rel="ugc external nofollow">[整理]完美哈希函数(Perfect Hash Function) - 高性能架构探索</a></span>发表在《<a href="./../introduction-to-opmphf/index.html#comment-3101">最小完美哈希函数简介</a>》</li>
+<li class="recentcomments">
+<span class="comment-author-link"><a href="https://www.javatt.com/p/284115" class="url" rel="ugc external nofollow">Scala Tour – 精选 - Java天堂</a></span>发表在《<a href="./../scala-tour-choiceness/index.html#comment-2781">Scala Tour &#8211; 精选</a>》</li>
+<li class="recentcomments">
+<span class="comment-author-link"><a href="https://www.zhankr.net/46292.html" class="url" rel="ugc external nofollow">Golang适合高并发场景的原因分析 - 站壳网</a></span>发表在《<a href="./../go-clear-concurreny/index.html#comment-2701">Go-简洁的并发</a>》</li>
+<li class="recentcomments">
+<span class="comment-author-link"><a href="https://code84.com/710435.html" class="url" rel="ugc external nofollow">HBase 官方文档 &#8211; 源码巴士</a></span>发表在《<a href="./../windows%e4%b8%8beclipse%e7%9a%84-c%e7%8e%af%e5%a2%83%e9%85%8d%e7%bd%ae/index.html#comment-2679">Windows下eclipse的 C++环境配置</a>》</li>
+<li class="recentcomments">
+<span class="comment-author-link"><a href="https://www.ideaopen.cn/98230.html" class="url" rel="ugc external nofollow">Go-简洁的并发-点开</a></span>发表在《<a href="./../go-clear-concurreny/index.html#comment-1255">Go-简洁的并发</a>》</li>
+</ul></aside><aside id="archives-2" class="widget-container widget_archive"><h3 class="widget-title">归档</h3>
+			<ul>
+					<li><a href="./../2021/06/index.html">2021年6月</a></li>
+	<li><a href="./../2021/03/index.html">2021年3月</a></li>
+	<li><a href="./../2014/02/index.html">2014年2月</a></li>
+	<li><a href="./../2013/09/index.html">2013年9月</a></li>
+	<li><a href="./../2013/05/index.html">2013年5月</a></li>
+	<li><a href="./../2013/01/index.html">2013年1月</a></li>
+	<li><a href="./../2012/11/index.html">2012年11月</a></li>
+	<li><a href="./../2012/09/index.html">2012年9月</a></li>
+	<li><a href="./../2012/08/index.html">2012年8月</a></li>
+	<li><a href="./../2012/03/index.html">2012年3月</a></li>
+	<li><a href="./../2012/02/index.html">2012年2月</a></li>
+	<li><a href="./../2012/01/index.html">2012年1月</a></li>
+	<li><a href="./../2011/11/index.html">2011年11月</a></li>
+	<li><a href="./../2011/10/index.html">2011年10月</a></li>
+	<li><a href="./../2011/09/index.html">2011年9月</a></li>
+	<li><a href="./../2010/10/index.html">2010年10月</a></li>
+	<li><a href="./../2010/08/index.html">2010年8月</a></li>
+	<li><a href="./../2010/07/index.html">2010年7月</a></li>
+	<li><a href="./../2010/06/index.html">2010年6月</a></li>
+	<li><a href="./../2010/05/index.html">2010年5月</a></li>
+	<li><a href="./../2010/04/index.html">2010年4月</a></li>
+	<li><a href="./../2010/03/index.html">2010年3月</a></li>
+	<li><a href="./../2010/02/index.html">2010年2月</a></li>
+	<li><a href="./../2010/01/index.html">2010年1月</a></li>
+	<li><a href="./../2009/10/index.html">2009年10月</a></li>
+	<li><a href="./../2009/09/index.html">2009年9月</a></li>
+	<li><a href="./../2009/08/index.html">2009年8月</a></li>
+	<li><a href="./../2009/07/index.html">2009年7月</a></li>
+	<li><a href="./../2009/06/index.html">2009年6月</a></li>
+	<li><a href="./../2008/10/index.html">2008年10月</a></li>
+	<li><a href="./../2008/08/index.html">2008年8月</a></li>
+	<li><a href="./../2008/07/index.html">2008年7月</a></li>
+	<li><a href="./../2008/06/index.html">2008年6月</a></li>
+			</ul>
+
+			</aside><aside id="categories-2" class="widget-container widget_categories"><h3 class="widget-title">分类目录</h3>
+			<ul>
+					<li class="cat-item cat-item-3">
+<a href="./../category/%e5%ae%b6%e5%ba%ad%e7%94%9f%e6%b4%bb/index.html">家庭生活</a>
+</li>
+	<li class="cat-item cat-item-1">
+<a href="./../category/uncategorized/index.html">未分类</a>
+</li>
+	<li class="cat-item cat-item-7">
+<a href="./../category/%e6%8a%80%e6%9c%af/%e6%af%8f%e6%97%a5%e5%bf%83%e5%be%97/index.html">每日心得</a>
+</li>
+	<li class="cat-item cat-item-5">
+<a href="./../category/%e6%8a%80%e6%9c%af/index.html">软件技术</a>
+</li>
+			</ul>
+
+			</aside><aside id="nav_menu-3" class="widget-container widget_nav_menu"><h3 class="widget-title">友情链接</h3>
+<div class="menu-%e5%8f%8b%e6%83%85%e9%93%be%e6%8e%a5-container"><ul id="menu-%e5%8f%8b%e6%83%85%e9%93%be%e6%8e%a5" class="menu">
+<li id="menu-item-27287" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-27287"><a href="https://www.daocloud.io/dce">DaoCloud Enterprise</a></li>
+<li id="menu-item-27288" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-27288"><a href="https://www.daocloud.io/dch">DaoCloud 云原生一体机</a></li>
+</ul></div></aside>	</div>
+	<!-- #sidebar -->
+
+	
+</div>
+<!-- #secondary .widget-area .span3 -->
+				</div>
+				<!-- #container .row-fluid-->
+
+				
+			</div>
+			<!--container fluid -->
+
+		</div>
+		<!-- container -->
+
+	</div>
+<!-- container full width -->
+
+
+
+	<div class="container-full-width" id="after_footer">
+		<div class="container">
+			<div class="container-fluid">
+				<footer class="site-footer row-fluid">
+					<div class="span6">
+						<div id="credit">
+															<a href="http://cyberchimps.com/" target="_blank" title="CyberChimps Themes">
+																			<h4 class="cc-credit-text">CyberChimps WordPress Themes</h4></a>
+																	
+													
+						</div>
+					</div>
+					<!-- Adds the afterfooter copyright area -->
+					<div class="span6">
+												<div id="copyright">
+							沪ICP备2021008917号-1 © 颜开						</div>
+					</div>
+				</footer>
+				<!-- row-fluid -->
+			</div>
+			<!-- .container-fluid-->
+		</div>
+		<!-- .container -->
+	</div>    <!-- #after_footer -->
+
+
+</div>
+<!-- End Sub Body -->
+
+
+		<script type="text/javascript">jQuery(document).ready(function($){
+			$(window).scroll(function()  {
+			if ($(this).scrollTop() > 0) {
+			$('#header_section').addClass("sticky-header");
+                       
+			}
+			else{
+			$('#header_section').removeClass("sticky-header");
+                       
+			}
+			});
+		});</script>
+	<script type="text/javascript" src="./../wp-content/themes/neuro/inc/js/jquery.flexslider.js?ver=1.0" id="jquery-flexslider-js"></script>
+<script type="text/javascript" src="./../wp-content/themes/neuro/cyberchimps/lib/bootstrap/js/bootstrap.min.js?ver=2.0.4" id="bootstrap-js-js"></script>
+<script type="text/javascript" src="./../wp-content/themes/neuro/cyberchimps/lib/js/retina-1.1.0.min.js?ver=1.1.0" id="retina-js-js"></script>
+<script type="text/javascript" src="./../wp-includes/js/comment-reply.min.js?ver=6.4.2" id="comment-reply-js" async="async" data-wp-strategy="async"></script>
+<script async="async" type="text/javascript" src="./../wp-content/plugins/akismet/_inc/form.js?ver=4.1.9" id="akismet-form-js"></script>
+
+</body>
+</html>

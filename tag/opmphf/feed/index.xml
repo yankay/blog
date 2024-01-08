@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>opmphf &#8211; 我自然</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../index.html</link>
+	<description>颜开的博客</description>
+	<lastBuildDate>Sun, 16 Oct 2011 09:32:17 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.2</generator>
+
+<image>
+	<url>./../../../wp-content/uploads/2021/03/cropped-favicon-32x32.png</url>
+	<title>opmphf &#8211; 我自然</title>
+	<link>./../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>最小完美哈希函数简介</title>
+		<link>./../../../introduction-to-opmphf/index.html</link>
+					<comments>./../../../introduction-to-opmphf/index.html#comments</comments>
+		
+		<dc:creator><![CDATA[yankay]]></dc:creator>
+		<pubDate>Sun, 16 Oct 2011 09:32:17 +0000</pubDate>
+				<category><![CDATA[软件技术]]></category>
+		<category><![CDATA[opmphf]]></category>
+		<category><![CDATA[哈希]]></category>
+		<category><![CDATA[最小完美哈希函数]]></category>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26158</guid>
+
+					<description><![CDATA[<p>我曾经花了很多脑筋来找一个很好很完美的哈希算法，但都没有想到，最近看到了，掩不住一阵激动分享下。最小完美哈希函数是什么，要从定义说起，这个名字很长，一步步解释。</p>
+<p><a rel="nofollow" href="./../../../introduction-to-opmphf/index.html">最小完美哈希函数简介</a>最先出现在<a rel="nofollow" href="./../../../index.html">我自然</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[<h4>什么是保序最小完美哈希函数</h4>
+<p>我曾经花了很多脑筋来找一个很好很完美的哈希算法，但都没有想到，最近看到了，掩不住一阵激动分享下。最小完美哈希函数是什么，要从定义说起，这个名字很长，一步步解释。</p>
+<ol>
+<li><strong>哈希函数 </strong>任意函数h(x)都可以说哈希函数，一般来说，一个良好的哈希函数可以尽量避免重复。x的集合是参数域，h(x)的集合是值域。</li>
+<li><strong>完美哈希函数  </strong>完美哈希函数，就是完全不会冲突的哈希函数，这要求函数的值域至少比参数域要大</li>
+<li><strong>最小完美哈希函数 </strong>最小完美哈希函数，就是指函数的值域和参数域的大小完全相等，一个也不多</li>
+<li><strong>保序最小完美哈希函数 </strong>保序的意思就是指这个哈希之后顺序是不变的，同时还能满足其他两个条件。</li>
+</ol>
+<div>这个函数的优点就是形式上很完美，就像给一个排好序的文档编上的序号一般紧凑可靠。但是这个函数有两个缺点，一是必须事前必须知道原数据集，二是需要花一定的CPU来生成这个函数。我认为，对于数据仓库类的线下搜索应用，这个算法是有用武之地的。但对于强调实时的数据业务，这个算法是不适合的。</div>
+<div>
+<h4>算法实现</h4>
+<p>该算法的实现方法是这样的。先构造两个普通的哈希函数h1(x)和h2(x),还有一个用数组实现的函数g(x)。使得$$h(x)=g(h1(x))+g(h2(x)) mod n$$,其中n是参数的总个数，H(x)就是最终的有序最小完美哈希函数了。</p>
+<p>以上是定义，说不清楚，举个例子就明白了。取一个n为12的数据集。</p>
+<p>首先构造这三个函数：<br />
+函数h1和h2:</p>
+<table width="100%">
+<tbody>
+<tr>
+<td>x</td>
+<td>h1函数</td>
+<td>h2函数</td>
+</tr>
+<tr>
+<td>jezebel</td>
+<td>5</td>
+<td>9</td>
+</tr>
+<tr>
+<td>jezer</td>
+<td>5</td>
+<td>7</td>
+</tr>
+<tr>
+<td>&#8230;</td>
+<td>&#8230;</td>
+<td>&#8230;</td>
+</tr>
+</tbody>
+</table>
+<p>函数g:</p>
+<table width="100%">
+<tbody>
+<tr>
+<td>x</td>
+<td>g函数</td>
+</tr>
+<tr>
+<td>5</td>
+<td>0</td>
+</tr>
+<tr>
+<td>7</td>
+<td>1</td>
+</tr>
+<tr>
+<td>9</td>
+<td>0</td>
+</tr>
+<tr>
+<td>&#8230;</td>
+<td>&#8230;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>根据上文的公式$$h(x)=g(h1(x))+g(h2(x)) mod n$$，可以得出：</div>
+<div>
+<table width="100%">
+<tbody>
+<tr>
+<td>x</td>
+<td>h计算步骤</td>
+<td>h值</td>
+</tr>
+<tr>
+<td>jezebel</td>
+<td>g(5)+g(9)</td>
+<td>0</td>
+</tr>
+<tr>
+<td>jezer</td>
+<td>g(5)+g(7)</td>
+<td>1</td>
+</tr>
+<tr>
+<td>&#8230;</td>
+<td>&#8230;</td>
+<td>&#8230;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>这里的h就可以最小完美哈希函数算出的值了，很神奇，不是吗？</p>
+<p>大致的流程走了一遍，现在最最关键的是h1(x),h2(x)和g(x)是怎么得来的。</p>
+<p>h1(x)和h2(x)比较简单，可以使用一个很简便的方法获得：先定义一个权重数组w[i],这个数据是一系列随机的数。$$h1=(t[1]*w[1]+t[2]*w[2]+&#8230;+t[i]*w[i]) mod m$$。其中t[i]指得的字符串x的第i个字符,m值得的函数的值域。只要更换一个权重数组，就可以重新构造一个新函数。有很多方法可以构造这两个函数。</p>
+<p>g(x)的获得就比较复杂。可以是凑出来的。就如同上面的例子，因为$$g(5)+g(9) mod 12=0$$,$$g(5)+g(7) mod 12=1$$。所以我们可以凑出$$g(5)=0,g(7)=1,g(9)=0$$这样就可以满足上面的两个条件了。需要一个数组来存储函数g的结果，当然凑也不能瞎凑，是有方法的，下面专门讲凑的步骤。</p>
+<div>
+<h4>算法函数生成</h4>
+<p>首先随意设定一个数，比如是7，设为$$g(7)=1$$,因为我们已知$$g(5)+g(7) mod 12=1$$，所以可以推论出$$g(5)=0$$。因为$$g(5)+g(9) mod 12=0$$，所以可以推出$$g(9)=0$$，以此类推就可以了。但要注意的是千万不能重复设定一个数两次，这样就会形成一个环，永远也推不完。所以遇到已经推算过的数的时候，要检测环的存在。这样下去，就可以猜出全部的值了。</p>
+<p>现在需要的就是分析这个凑的过程的运行效率问题。这个就要涉及到h1,h2这两个函数的值域大小，如果越大，越容易凑出一个g函数，但是g函数的参数域就会比较大，存储这个g函数的数据就需要占用更多的空间。相反如果值域越小，在凑的时候就非常容易出现环，需要更长的时间才能凑出这个g函数。</p>
+<p>怎么办呢？</p>
+<p>我们可以使用3个的h函数来降低形成环的可能，就是这样$$h(x)=g(h1(x))+g(h2(x))+g(h3(x)) mod n$$，这样虽然推理g函数的过程会复杂一些，但是很有效，有实验分析表明，当h函数的值域大约参数域的1.23倍的时候，这个g函数的创建尝试次数是常数。</p>
+<p>至此，这个算法介绍完了。这个方法是从《Managing Gigabytes》这本书看到的，这里的讲述更浅显一些。</p>
+</div>
+<div>
+<h4>结语</h4>
+<p>这个哈希函数是一个静态Hash函数，可以非常有效的缩减索引所需要的空间。《Managing Gigabytes》一书中有一个对比，如果直接使用字符串数组，100万个术语需要28MB的空间，而是要这样的哈希函数，可以缩减到12MB。要知道索引小一点，磁盘就能读得快一点，查询就能快一点。所以这个哈希函数对于提高性能是非常给力的。</p>
+<p>但是他是静态的，就意味着事前必须知道需要哈希哪些数据。同时生成的算法比较复杂，需要很长的时间来建立索引。没有办法实时添加更新。给他的应用范围提了个极大的限制。窃以为输入法的词库，数据仓库的查询索引，还有一些不需要更新且对性能有要求的场景，这个算法是适用的。</p>
+</div>
+<p><a rel="nofollow" href="./../../../introduction-to-opmphf/index.html">最小完美哈希函数简介</a>最先出现在<a rel="nofollow" href="./../../../index.html">我自然</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../introduction-to-opmphf/feed/index.html</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

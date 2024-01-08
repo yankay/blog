@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>
+	《内存究竟有多快？》的评论	</title>
+	<atom:link href="./../../%E5%86%85%E5%AD%98%E7%A9%B6%E7%AB%9F%E6%9C%89%E5%A4%9A%E5%BF%AB%EF%BC%9F/feed/index.html" rel="self" type="application/rss+xml" />
+	<link>./../index.html</link>
+	<description>颜开的博客</description>
+	<lastBuildDate>Thu, 02 Jun 2016 06:37:00 +0000</lastBuildDate>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.2</generator>
+	<item>
+		<title>
+		评论者：paladintyrion		</title>
+		<link>./../index.html#comment-20</link>
+
+		<dc:creator><![CDATA[paladintyrion]]></dc:creator>
+		<pubDate>Thu, 02 Jun 2016 06:37:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26346#comment-20</guid>
+
+					<description><![CDATA[不错诶~~]]></description>
+			<content:encoded><![CDATA[<p>不错诶~~</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：Alex Stocks		</title>
+		<link>./../index.html#comment-19</link>
+
+		<dc:creator><![CDATA[Alex Stocks]]></dc:creator>
+		<pubDate>Thu, 10 Mar 2016 22:40:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26346#comment-19</guid>
+
+					<description><![CDATA[哥们，计算方法很好啊，受益良多]]></description>
+			<content:encoded><![CDATA[<p>哥们，计算方法很好啊，受益良多</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：Melon-li		</title>
+		<link>./../index.html#comment-18</link>
+
+		<dc:creator><![CDATA[Melon-li]]></dc:creator>
+		<pubDate>Sun, 29 Jun 2014 14:04:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26346#comment-18</guid>
+
+					<description><![CDATA[同意Newyear的观点，博主的测量方法的科学性有待考究！]]></description>
+			<content:encoded><![CDATA[<p>同意Newyear的观点，博主的测量方法的科学性有待考究！</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：2012年学习小结 &#8211; 马开东博客		</title>
+		<link>./../index.html#comment-17</link>
+
+		<dc:creator><![CDATA[2012年学习小结 &#8211; 马开东博客]]></dc:creator>
+		<pubDate>Thu, 19 Jun 2014 03:53:40 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26346#comment-17</guid>
+
+					<description><![CDATA[[&#8230;] 笔者以前学过一些系统编程，但希望了解得更深入一些。所以先读了的《深入理解计算机系统》，这本书里“存储器山”的概念让我茅舍顿开。教授先生别出心裁的将存储器的吞吐量，画成了一座山。并自己做了些测试，写了《内存究竟有多快？》一文。如果细细在山上品，可以考虑如何最好的使用存储器。然后看了些UNIX编程的内容，包括系统提供API和他们的脾气。还研究了下如何在Unix里面用GDB之类的工具Debug，查看程序状态。 [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] 笔者以前学过一些系统编程，但希望了解得更深入一些。所以先读了的《深入理解计算机系统》，这本书里“存储器山”的概念让我茅舍顿开。教授先生别出心裁的将存储器的吞吐量，画成了一座山。并自己做了些测试，写了《内存究竟有多快？》一文。如果细细在山上品，可以考虑如何最好的使用存储器。然后看了些UNIX编程的内容，包括系统提供API和他们的脾气。还研究了下如何在Unix里面用GDB之类的工具Debug，查看程序状态。 [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：knitweb		</title>
+		<link>./../index.html#comment-16</link>
+
+		<dc:creator><![CDATA[knitweb]]></dc:creator>
+		<pubDate>Thu, 15 May 2014 02:53:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26346#comment-16</guid>
+
+					<description><![CDATA[文章很好，3Q。数据数据总量越小：句子不通？；山是不是平滑的：是想表达山不是平滑的？]]></description>
+			<content:encoded><![CDATA[<p>文章很好，3Q。数据数据总量越小：句子不通？；山是不是平滑的：是想表达山不是平滑的？</p>
+]]></content:encoded>
+		
+			</item>
+	</channel>
+</rss>

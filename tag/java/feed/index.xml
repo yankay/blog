@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Java &#8211; 我自然</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../index.html</link>
+	<description>颜开的博客</description>
+	<lastBuildDate>Fri, 16 Mar 2012 10:30:54 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.2</generator>
+
+<image>
+	<url>./../../../wp-content/uploads/2021/03/cropped-favicon-32x32.png</url>
+	<title>Java &#8211; 我自然</title>
+	<link>./../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Java使用&#8221;指针&#8221;快速比较字节</title>
+		<link>./../../../java-fast-byte-comparison/index.html</link>
+					<comments>./../../../java-fast-byte-comparison/index.html#respond</comments>
+		
+		<dc:creator><![CDATA[yankay]]></dc:creator>
+		<pubDate>Fri, 16 Mar 2012 10:30:54 +0000</pubDate>
+				<category><![CDATA[软件技术]]></category>
+		<category><![CDATA[Java]]></category>
+		<category><![CDATA[Java字节数组比较]]></category>
+		<category><![CDATA[Java字节比较]]></category>
+		<category><![CDATA[字节]]></category>
+		<category><![CDATA[比较]]></category>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26437</guid>
+
+					<description><![CDATA[<p>如何才能快速比较两个字节数组呢?</p>
+<p><a rel="nofollow" href="./../../../java-fast-byte-comparison/index.html">Java使用&#8221;指针&#8221;快速比较字节</a>最先出现在<a rel="nofollow" href="./../../../index.html">我自然</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[<p>如何才能快速比较两个字节数组呢?我将问题描述成下面的接口：</p>
+<pre lang="java"> 
+public int compareTo(byte[] b1, int s1, int l1, byte[] b2, int s2,int l2);
+</pre>
+<p>最直观的做法是同时遍历两个数组，两两比较。</p>
+<pre lang="java"> 
+public int compareTo(byte[] buffer1, int offset1, int length1,
+		byte[] buffer2, int offset2, int length2) {
+	// Short circuit equal case
+	if (buffer1 == buffer2 && offset1 == offset2
+		&& length1 == length2) {
+		return 0;
+	}
+	// Bring WritableComparator code local
+	int end1 = offset1 + length1;
+	int end2 = offset2 + length2;
+	for (int i = offset1, j = offset2; i < end1 &#038;&#038; j < end2; i++, j++) {
+		int a = (buffer1[i] &#038; 0xff);
+		int b = (buffer2[j] &#038; 0xff);
+		if (a != b) {
+return a - b;
+		}
+	}
+	return length1 - length2;
+}
+</pre>
+<p>如果事情这么简单就结束了，就没有意思了。</p>
+<p>如果要提升性能，可以做循环展开等等优化，但这些优化应该依赖JVM来做，新的JVM可以做的很好。那还有什么办法可以提高性能呢？<br />
+可以将<strong>字节数组合并</strong>!!上面的例子中，每个byte被迫转型成了int，再比较。其实我们可以将8个byte转换成一个long，在比较long，这样效果会不会好些？用什么方法转换才是最优的？</p>
+<pre lang="java"> 
+long sun.misc.Unsafe.getLong(Object o,int offset)
+</pre>
+<p>Java提供了一个本地方法，可以最快最好转换byte与long。该函数是直接访问一个对象的内存，内存地址是对象指针加偏移量，返回该地址指向的值。有人说Java很安全，不可以操作指针，所以有的时候性能也不高。其实不对，有了这个Unsafe类，Java一样也不安全。所以Unsafe类中的方法都不是public的，不过没关系，我们有反射。言归正传，下面是使用这种技术手段的实现代码。</p>
+<pre lang="java"> 
+public int compareTo(byte[] buffer1, int offset1, int length1,
+		byte[] buffer2, int offset2, int length2) {
+	// Short circuit equal case
+	if (buffer1 == buffer2 && offset1 == offset2
+			&& length1 == length2) {
+		return 0;
+	}
+	int minLength = Math.min(length1, length2);
+	int minWords = minLength / Longs.BYTES;
+	int offset1Adj = offset1 + BYTE_ARRAY_BASE_OFFSET;
+	int offset2Adj = offset2 + BYTE_ARRAY_BASE_OFFSET;
+
+	/*
+	 * Compare 8 bytes at a time. Benchmarking shows comparing 8
+	 * bytes at a time is no slower than comparing 4 bytes at a time
+	 * even on 32-bit. On the other hand, it is substantially faster
+	 * on 64-bit.
+	 */
+	for (int i = 0; i < minWords * Longs.BYTES; i += Longs.BYTES) {
+		long lw = theUnsafe.getLong(buffer1, offset1Adj + (long) i);
+		long rw = theUnsafe.getLong(buffer2, offset2Adj + (long) i);
+		long diff = lw ^ rw;
+
+		if (diff != 0) {
+			if (!littleEndian) {
+				return (lw + Long.MIN_VALUE) < (rw + Long.MIN_VALUE) ? -1
+						: 1;
+			}
+
+			// Use binary search,一下省略若干代码
+			.....
+			return (int) (((lw >>> n) & 0xFFL) - ((rw >>> n) & 0xFFL));
+		}
+	}
+
+	// The epilogue to cover the last (minLength % 8) elements.
+	for (int i = minWords * Longs.BYTES; i < minLength; i++) {
+		int result = UnsignedBytes.compare(buffer1[offset1 + i],
+				buffer2[offset2 + i]);
+		if (result != 0) {
+			return result;
+		}
+	}
+	return length1 - length2;
+}
+</pre>
+<p>实现比原来复杂了一些。但这次一次可以比较8个字节了。这种getLong函数和系统的字节序是紧紧相关的，如果是小端序操作起来有点麻烦，代码先省略掉。这样操作实际效果如何？我们需要对比测试下。对比两个1M的字节数组，如果使用第一个版本，每次比较平均需要2.5499ms,如果使用第二个版本，需要0.8359ms,提升了3倍。对应这种CPU密集型的操作，这样的提升可是很可观的。</p>
+<p>如果要提升性能，使用Unsafe直接访问内存也是不错的选择。</p>
+<p><a rel="nofollow" href="./../../../java-fast-byte-comparison/index.html">Java使用&#8221;指针&#8221;快速比较字节</a>最先出现在<a rel="nofollow" href="./../../../index.html">我自然</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../java-fast-byte-comparison/feed/index.html</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>多核平台下的JAVA优化</title>
+		<link>./../../../%e5%a4%9a%e6%a0%b8%e5%b9%b3%e5%8f%b0%e4%b8%8b%e7%9a%84java%e4%bc%98%e5%8c%96/index.html</link>
+					<comments>./../../../%e5%a4%9a%e6%a0%b8%e5%b9%b3%e5%8f%b0%e4%b8%8b%e7%9a%84java%e4%bc%98%e5%8c%96/index.html#comments</comments>
+		
+		<dc:creator><![CDATA[yankay]]></dc:creator>
+		<pubDate>Sat, 05 Nov 2011 12:41:47 +0000</pubDate>
+				<category><![CDATA[软件技术]]></category>
+		<category><![CDATA[Java]]></category>
+		<category><![CDATA[优化]]></category>
+		<category><![CDATA[多核]]></category>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26220</guid>
+
+					<description><![CDATA[<p>现在多核CPU是主流。利用多核技术，可以有效发挥硬件的能力，提升吞吐量，对于Java程序，可以实现并发垃圾收集。但是Java利用多核技术也带来了一些问题，主要是多线程共享内存引起了。目前内存和CPU之间的带宽是一个主要瓶颈，每个核可以独享一部分高速缓存，可以提高性能。JVM是利用操作系统的"轻量级进程"实现线程，所以线程每操作一次共享内存，都无法在高速缓存中命中，是一次开销较大的系统调用。所以区别于普通的优化，针对多核平台，需要进行一些特殊的优化。</p>
+<p><a rel="nofollow" href="./../../../%e5%a4%9a%e6%a0%b8%e5%b9%b3%e5%8f%b0%e4%b8%8b%e7%9a%84java%e4%bc%98%e5%8c%96/index.html">多核平台下的JAVA优化</a>最先出现在<a rel="nofollow" href="./../../../index.html">我自然</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[<p>现在多核CPU是主流。利用多核技术，可以有效发挥硬件的能力，提升吞吐量，对于Java程序，可以实现并发垃圾收集。但是Java利用多核技术也带来了一些问题，主要是多线程共享内存引起了。目前内存和CPU之间的带宽是一个主要瓶颈，每个核可以独享一部分高速缓存，可以提高性能。JVM是利用操作系统的&#8221;轻量级进程&#8221;实现线程，所以线程每操作一次共享内存，都无法在高速缓存中命中，是一次开销较大的系统调用。所以区别于普通的优化，针对多核平台，需要进行一些特殊的优化。</p>
+<h3>代码优化</h3>
+<p><strong>线程数要大于等于核数</strong></p>
+<p>如果使用多线程，只有运行的线程数比核数大，才有可能榨干CPU资源，否则会有若干核闲置。要注意的是，如果线程数目太多，就会占用过多内存，导致性能不升反降。JVM的垃圾回收也是需要线程的，所以这里的线程数包含JVM自己的线程</p>
+<p><strong>尽量减少共享数据写操作</strong></p>
+<p>每个线程有自己的工作内存，在这个区域内，系统可以毫无顾忌的优化，如果去读共享内存区域，性能也不会下降。但是一旦线程想写共享内存(使用volatile关键字)，就会插入很多内存屏障操作(Memory Barrier或者Memory Fence)指令，保证处理器不乱序执行。相比写本地线程自有的变量，性能下降很多。处理方法是尽量减少共享数据，这样也符合&#8221;数据耦合&#8221;的设计原则。</p>
+<p><strong>使用synchronize关键字</strong></p>
+<p>在Java1.5中，synchronize是性能低效的。因为这是一个重量级操作，需要调用操作接口，导致有可能加锁消耗的系统时间比加锁以外的操作还多。相比之下使用Java提供的Lock对象，性能更高一些。但是到了Java1.6，发生了变化。synchronize在语义上很清晰，可以进行很多优化，有适应自旋，锁消除，锁粗化，轻量级锁，偏向锁等等。导致在Java1.6上synchronize的性能并不比Lock差。官方也表示，他们也更支持synchronize，在未来的版本中还有优化余地。</p>
+<p><strong>使用乐观策略</strong></p>
+<p>传统的同步并发策略是悲观的。表现语义为：多线程操作一个对象的时候，总觉得会有两个线程在同时操作，所以需要锁起来。乐观策略是，假设平时就一个线程访问，当出现了冲突的时候，再重试。这样更高效一些。Java的AtomicInteger就是使用了这个策略。</p>
+<p><strong>使用线程本地变量(ThreadLocal)</strong></p>
+<p>使用ThreadLocal可以生成线程本地对象的副本，不会和其他线程共享。当该线程终止的时候，其本地变量可以全部回收。</p>
+<p><strong>类中Field的排序</strong></p>
+<p>可以将一个类会频繁访问到的几个field放在一起，这样他们就有更多的可能性被一起加入高速缓存。同时最好把他们放在头部。基本变量和引用变量不要交错排放。</p>
+<p><strong>批量处理数组</strong></p>
+<p>现在处理器可以用一条指令来处理一个数组中的多条记录，例如可以同时向一个byte数组中读或者写store记录。所以要尽量使用System.arraycopy()这样的批量接口，而不是自己操作数组。</p>
+<h3>JVM优化</h3>
+<p><strong>启用大内存页</strong></p>
+<p>现在一个操作系统默认页是4K。如果你的heap是4GB，就意味着要执行1024*1024次分配操作。所以最好能把页调大。这个配额设计操作系统，单改Jvm是不行的。Linux上的配置有点复杂，不详述。</p>
+<p>在Java1.6中UseLargePages是默认开启的，LasrgePageSzieInBytes被设置成了4M。笔者看到一些情况下配置成了128MB，在官方的性能测试中更是配置到256MB。</p>
+<p><strong>启用压缩指针</strong></p>
+<p>Java的64的性能比32慢，原因是因为其指针由32位扩展到64位，虽然寻址空间从4GB扩大到256 TB，但导致性能的下降，并占用了更多的内存。所以对指针进行压缩。压缩后的指针最多支持32GB内存，并且可以获得32位JVM的性能。</p>
+<p>在JDK6 update 23默认开启了，之前的版本可以使用-XX:+UseCompressedOops来启动配置。</p>
+<p>性能可以看这个<a href="http://blog.juma.me.uk/tag/compressed-oops/">评测</a>，性能的提升是很可观。<br />
+<a rel="shadowbox" href="http://farm7.static.flickr.com/6039/6314042797_3e4992989f_b.jpg"><br />
+<img fetchpriority="high" decoding="async" src="http://farm7.static.flickr.com/6039/6314042797_3e4992989f.jpg" alt="benchmarka" width="500" height="205" /><br />
+</a><br />
+<strong>启用NUMA</strong></p>
+<p>numa是一个CPU的特性。SMP架构下，CPU的核是对称，但是他们共享一条系统总线。所以CPU多了，总线就会成为瓶颈。在NUMA架构下，若干CPU组成一个组，组之间有点对点的通讯，相互独立。启动它可以提高性能。</p>
+<p>NUMA需要硬件，操作系统，JVM同时启用，才能启用。Linux可以用<a href="http://linux.die.net/man/8/numactl">numactl</a>来配置numa,JVM通过-XX:+UseNUMA来启用。</p>
+<p><strong>激进优化特性</strong></p>
+<p>在Java1.6中，激进优化(AggressiveOpts)是默认开启的。激进优化是一般有一些下一个版本才会发布的优化选项。但是有可能造成不稳定。前段时间以讹传讹的<a title="Java 7 Hotspot循环Bug详解" href="http://www.infoq.com/cn/news/2011/08/java7-hotspot">JDK7的Bug</a>，就是开启这个选项后测到的。</p>
+<p><strong>逃逸分析</strong></p>
+<p>让一个对象在一个方法内创建后，如果他传递出去，就可以称为方法逃逸；如果传递到别的线程，成为线程逃逸。如果能知道一个对象没有逃逸，就可以把它分配在栈而不是堆上，节约GC的时间。同时可以将这个对象拆散，直接使用其成员变量，有利于利用高速缓存。如果一个对象没有线程逃逸，就可以取消其中一切同步操作，很大的提高性能。</p>
+<p>但是逃逸分析是很有难度的，因为花了cpu去对一个对象去分析，要是他不逃逸，就无法优化，之前的分析血本无归。所以不能使用复杂的算法，同时现在的JVM也没有实现栈上分配。所以开启之后，性能也可能下降。</p>
+<p>可以使用-XX:+DoEscapeAnalysis来开启逃逸分析。</p>
+<p><strong>高吞吐量GC配置</strong></p>
+<p><strong></strong>对于高吞吐量，在年轻态可以使用Parallel Scavenge,年老态可以使用Parallel Old垃圾收集器。<br />
+使用-XX:+UseParallelOldGC开启</p>
+<p>可以将-XX:ParallelGCThreads根据CPU的个数进行调整。可以是CPU数的1/2或者5/8</p>
+<p><strong>低延迟GC配置</strong></p>
+<p><strong></strong>对于低延迟的应用，在年轻态可以使用ParNew,年老态可以使用CMS垃圾收集器。</p>
+<p>可以使用-XX:+UseConcMarkSweepGC和-XX:+UseParNewGC打开。</p>
+<p>可以将-XX:ParallelGCThreads根据CPU的个数进行调整。可以是CPU数的1/2或者5/8</p>
+<p>可以调整-XX:MaxTenuringThreshold(晋升年老代年龄)调高，默认是15.这样可以减少年老代GC的压力</p>
+<p>可以-XX:TargetSurvivorRatio，调整Survivor的占用比率。默认50%.调高可以提供Survivor区的利用率</p>
+<p>可以调整-XX:SurvivorRatio,调整Eden和Survivor的比重。默认是8。这个比重越小，Survivor越大，对象可以在年轻态呆更多时间。</p>
+<p>等等</p>
+<p>&nbsp;</p>
+<p>参见：《<a href="http://java.sun.com/performance/reference/whitepapers/tuning.html">Java优化白皮书</a>》，《<a href="http://book.douban.com/subject/6522893/">深入理解Java虚拟机</a>》</p>
+<p><a rel="nofollow" href="./../../../%e5%a4%9a%e6%a0%b8%e5%b9%b3%e5%8f%b0%e4%b8%8b%e7%9a%84java%e4%bc%98%e5%8c%96/index.html">多核平台下的JAVA优化</a>最先出现在<a rel="nofollow" href="./../../../index.html">我自然</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../%e5%a4%9a%e6%a0%b8%e5%b9%b3%e5%8f%b0%e4%b8%8b%e7%9a%84java%e4%bc%98%e5%8c%96/feed/index.html</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Java调用外部程序技巧</title>
+		<link>./../../../java%e8%b0%83%e7%94%a8%e5%a4%96%e9%83%a8%e7%a8%8b%e5%ba%8f%e6%8a%80%e5%b7%a7/index.html</link>
+					<comments>./../../../java%e8%b0%83%e7%94%a8%e5%a4%96%e9%83%a8%e7%a8%8b%e5%ba%8f%e6%8a%80%e5%b7%a7/index.html#respond</comments>
+		
+		<dc:creator><![CDATA[yankay]]></dc:creator>
+		<pubDate>Mon, 19 Sep 2011 10:42:21 +0000</pubDate>
+				<category><![CDATA[软件技术]]></category>
+		<category><![CDATA[Java]]></category>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26120</guid>
+
+					<description><![CDATA[<p>前些天使用Java调用外部程序的时候，发现线程会堵塞在waitfor()方法。</p>
+<p><a rel="nofollow" href="./../../../java%e8%b0%83%e7%94%a8%e5%a4%96%e9%83%a8%e7%a8%8b%e5%ba%8f%e6%8a%80%e5%b7%a7/index.html">Java调用外部程序技巧</a>最先出现在<a rel="nofollow" href="./../../../index.html">我自然</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[<p>前些天使用Java调用外部程序的时候，发现线程会堵塞在waitfor()方法。<br />
+调用方法如下：</p>
+<pre lang="java">
+Process process = Runtime.getRuntime().exec(cmd);
+process.waitfor();
+</pre>
+<p>如果直接在Shell中调用这个程序，程序会很快结束，不会僵死。</p>
+<p>为什么会堵塞呢，原因是当调用exec(cmd)后，JVM会启动一个子进程，该进程会与JVM进程建立3个管道连接，标准输入，标准输出和标准错误流。假设该程序不断在向标准输出流和标准错误流写数据，而JVM不读取，数据会暂时缓冲在Linux的缓冲区，缓冲区满后该程序将无法继续写数据，会僵死，所以Java程序就会僵死在waitfor()，永远无法结束。</p>
+<p>解决办法就是增加两个线程，一个线程负责读标准输出流，另一个负责读标准错误流，这样子数据就不会积压在缓冲区，程序就能够顺利运行。</p>
+<p>查看源代码后，还发现一个潜在的问题。但程序执行到exec的时候，JVM会使用管道，占有3个文件句柄，但程序运行结束后，这三个句柄并不会自动关闭，这样最终会导致java.io.IOException: Too many open files。所以就算外部程序的没有输出，也必须关闭句柄：</p>
+<pre lang="java">
+Process process=null;
+try{
+  process = Runtime.getRuntime().exec(cmd);
+  process.waitfor();
+}cache{
+  process.getOutputStream().close();
+  process.getInputStream().close();
+  process.getErrorStream().close();
+}
+</pre>
+<p>我们发觉当调用close()方法后,JVM并不会立即回收句柄，具体的回收时间不确定。另外如果不调用close(),句柄也会被回收，也可能发生“Too many open files”的错误。根据<a href="http://mark.koli.ch/2011/01/leaky-pipes-remember-to-close-your-streams-when-using-javas-runtimegetruntimeexec.html">这篇文章</a>，不同的垃圾收集器会选择不同的回收策略。所以最好还是要关闭。</p>
+<p><strong>总结</strong><br />
+1.如果外部程序有大量输出,需要启动额外的线程来读取标准输出和标准错误流<br />
+2.必须关闭三个句柄</p>
+<p>另外编写了一个工具类来方便使用，本来两行代码确要写成这么长，有点小折腾了。感兴趣的可以在<a href="http://www.yankay.com/wp-content/uploads/2011/09/ProcessUtil.txt">这里</a>下载：</p>
+<p><a rel="nofollow" href="./../../../java%e8%b0%83%e7%94%a8%e5%a4%96%e9%83%a8%e7%a8%8b%e5%ba%8f%e6%8a%80%e5%b7%a7/index.html">Java调用外部程序技巧</a>最先出现在<a rel="nofollow" href="./../../../index.html">我自然</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../java%e8%b0%83%e7%94%a8%e5%a4%96%e9%83%a8%e7%a8%8b%e5%ba%8f%e6%8a%80%e5%b7%a7/feed/index.html</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

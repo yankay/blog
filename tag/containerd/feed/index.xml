@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>containerd &#8211; 我自然</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../index.html</link>
+	<description>颜开的博客</description>
+	<lastBuildDate>Wed, 30 Jun 2021 14:16:34 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.2</generator>
+
+<image>
+	<url>./../../../wp-content/uploads/2021/03/cropped-favicon-32x32.png</url>
+	<title>containerd &#8211; 我自然</title>
+	<link>./../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>听说 Docker 被 kubenetes 抛弃了，怎么办？containerd</title>
+		<link>./../../../containerd-will-replace-docker/index.html</link>
+					<comments>./../../../containerd-will-replace-docker/index.html#respond</comments>
+		
+		<dc:creator><![CDATA[yankay]]></dc:creator>
+		<pubDate>Sat, 12 Jun 2021 11:29:52 +0000</pubDate>
+				<category><![CDATA[软件技术]]></category>
+		<category><![CDATA[containerd]]></category>
+		<guid isPermaLink="false">./../../../index.html?p=27289</guid>
+
+					<description><![CDATA[<p>原文地址：原文链接，作者： 张世明 Containerd 是 Kubernetes 默认的标准 CRI 运行时 [&#8230;]</p>
+<p><a rel="nofollow" href="./../../../containerd-will-replace-docker/index.html">听说 Docker 被 kubenetes 抛弃了，怎么办？containerd</a>最先出现在<a rel="nofollow" href="./../../../index.html">我自然</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>原文地址：<a rel="noreferrer noopener" href="http://blog.daocloud.io/containerd-1-5-%e9%9c%87%e6%92%bc%e5%8f%91%e5%b8%83-%e6%94%af%e6%8c%81%e9%95%9c%e5%83%8f%e5%8a%a0%e5%af%86%e7%9a%84%e5%ae%b9%e5%99%a8%e5%bc%95%e6%93%8e/" target="_blank">原文链接</a>，作者： <a href="https://github.com/wzshiming">张世明</a></p>
+
+
+
+<p>Containerd 是 Kubernetes 默认的标准 CRI 运行时环境，被 Kubernetes, Docker 等各种项目使用。也是 CNCF 唯一的容器运行时。Docker 在最近这些年 ，没有太多新特性引入，而更轻量的 containerd 正在蓬勃发展。 <a href="https://www.infoq.cn/article/x14tvb7izidjpjheoeuj">Docker公司 正在衰落</a>，<strong>Containerd 将继承衣钵，成为未来容器引擎的实施标准。</strong></p>
+
+
+
+<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="1024" height="621" src="./../../../wp-content/uploads/2021/06/containerd-architecture-1024x621.png" alt="" class="wp-image-27292" srcset="./../../../wp-content/uploads/2021/06/containerd-architecture-1024x621.png 1024w, ./../../../wp-content/uploads/2021/06/containerd-architecture-300x182.png 300w, ./../../../wp-content/uploads/2021/06/containerd-architecture-768x465.png 768w, ./../../../wp-content/uploads/2021/06/containerd-architecture-1536x931.png 1536w, ./../../../wp-content/uploads/2021/06/containerd-architecture.png 1782w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<h2 class="wp-block-heading">Containerd 的使用情况</h2>
+
+
+
+<p>Containerd 并非一个 全新技术，它是由 Docker 公司开源，作为 docker 的核心组件存在。根据社区中的几个托管服务和开源项目使用的统计，到 2020 年止 Containerd 的使用 (包含在 Docker 中使用) 占容器使用的 83%。</p>
+
+
+
+<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="413" src="./../../../wp-content/uploads/2021/06/企业微信截图_16234983158073-1024x413.png" alt="" class="wp-image-27302" srcset="./../../../wp-content/uploads/2021/06/企业微信截图_16234983158073-1024x413.png 1024w, ./../../../wp-content/uploads/2021/06/企业微信截图_16234983158073-300x121.png 300w, ./../../../wp-content/uploads/2021/06/企业微信截图_16234983158073-768x310.png 768w, ./../../../wp-content/uploads/2021/06/企业微信截图_16234983158073-1536x619.png 1536w, ./../../../wp-content/uploads/2021/06/企业微信截图_16234983158073.png 1954w" sizes="(max-width: 1024px) 100vw, 1024px" /><figcaption>continerd 可以作为 kubelet 和 docker 的 容器引擎使用，也可以单独使用</figcaption></figure>
+
+
+
+<p> 根据 Sysdig 的统计数据，从 2019 年 到 2020 年，conatinerd 的独立使用率，上升了 2倍。上升趋势明显。</p>
+
+
+
+<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="370" src="./../../../wp-content/uploads/2021/06/企业微信截图_16234985914716-1024x370.png" alt="" class="wp-image-27303" srcset="./../../../wp-content/uploads/2021/06/企业微信截图_16234985914716-1024x370.png 1024w, ./../../../wp-content/uploads/2021/06/企业微信截图_16234985914716-300x108.png 300w, ./../../../wp-content/uploads/2021/06/企业微信截图_16234985914716-768x278.png 768w, ./../../../wp-content/uploads/2021/06/企业微信截图_16234985914716-1536x555.png 1536w, ./../../../wp-content/uploads/2021/06/企业微信截图_16234985914716.png 1914w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<h2 class="wp-block-heading">Containerd 1.5 的一些新特性</h2>
+
+
+
+<p>最近的<a rel="noreferrer noopener" href="https://github.com/containerd/containerd/releases" target="_blank">Containerd 1.5</a>&nbsp;以于2021年5月4日发布。这是 Containerd的第6个主要版本包括许多稳定性改进, 以及代码组织结构的变化使后续开发更方便。该版本默认启用支持&nbsp;OCI crypt&nbsp;解密，并引入了对zstd、NRI 和 FreeBSD 的实验性支持，还包括CRI插件纳入主容器库和切换到Go&nbsp;modules。</p>
+
+
+
+<h3 class="wp-block-heading" id="id-震惊-Containerd1.5发布-支持镜像加密的容器引擎-更好的压缩算法支持">更好的压缩算法支持</h3>
+
+
+
+<p>现在除了 gzip 之外，还支持 zstd 作为镜像压缩算法。zstd 是 Facebook 在2016年开源的新无损压缩算法，优点是压缩率和压缩/解压缩性能都很突出。</p>
+
+
+
+<p>zstd 的设计目的是达到与&nbsp;deflate&nbsp;算法(开发于1991年，用于gzip) 相当的压缩比， 并且更快，尤其是解压的时候。</p>
+
+
+
+<p>zstd 在其最大压缩级别的压缩比接近 lzma、lzham 和 ppmx，并且比 lza 和 bzip2 性能更好。它的解压速度比任何当前可用的算法都快，并且压缩比更好。</p>
+
+
+
+<p><code><a rel="noreferrer noopener" href="https://github.com/klauspost/compress/tree/master/zstd" target="_blank">zstd</a>&nbsp;的</code><a rel="noreferrer noopener" href="https://github.com/klauspost/compress/blob/master/zstd/README.md" target="_blank">基准测试结果</a>&nbsp;在速度方面，在最快模式下，它的速度通常是 stdlib deflate/gzip 2倍。</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="736" height="241" src="./../../../wp-content/uploads/2021/06/GJQ_1wCBa0G6DvoDACqDn0MAAAAAbj0JAAAB.jpg" alt="" class="wp-image-27295" srcset="./../../../wp-content/uploads/2021/06/GJQ_1wCBa0G6DvoDACqDn0MAAAAAbj0JAAAB.jpg 736w, ./../../../wp-content/uploads/2021/06/GJQ_1wCBa0G6DvoDACqDn0MAAAAAbj0JAAAB-300x98.jpg 300w" sizes="(max-width: 736px) 100vw, 736px" /></figure>
+
+
+
+<h3 class="wp-block-heading">支持加密镜像</h3>
+
+
+
+<p>可以把镜像加密后上传到镜像仓库, Containerd 只需要配置解码的 key 就可以运行这加密的镜像, 对于一些对于安全性有需求的镜像可以使用这种方式。</p>
+
+
+
+<p>自从 Containerd 1.3 加入该功能后，已支持容器使用&nbsp;<a href="https://github.com/containers/ocicrypt">加密镜像 (OCI crypt)</a>&nbsp;但是一直并没有启用该功能。</p>
+
+
+
+<p>该特性将在 1.5 中已经默认启用，使用方法请参见<a href="https://github.com/containerd/containerd/blob/v1.5.0/docs/cri/decryption.md">文档</a>&nbsp;（依赖的二进制文件包含在&nbsp;<a href="https://github.com/containerd/containerd/releases">cri-containerd-cni-1.5.0-linux-amd64.tar.gz</a>&nbsp;）</p>
+
+
+
+<p>注意：当前 Docker 是不支持 OCI crypt 的，因为 Docker 目前还没有使用 Containerd 管理镜像。</p>
+
+
+
+<h3 class="wp-block-heading">节点资源接口</h3>
+
+
+
+<p>节点资源接口(<a href="https://github.com/containerd/nri">NRI</a>) 用于 CPU 调度约束和内存配额的标准接口。</p>
+
+
+
+<p>其类似容器网络接口(<a href="https://www.cni.dev/">CNI</a>)的基本接口、概念和插件设计是一种处理容器网络堆栈的多种实现的优雅方式。此概念可用于其他接口，以定制容器的运行时环境。节点资源接口(<a href="https://github.com/containerd/nri">NRI</a>)是一个新的接口，其实带有结构化API和容器插件设计，用对节点上的资源进行管理。与 CNI 相同 NRI 插件将在容器创建完毕, 但是还没有真正启动之前的初始化时被调用。</p>
+
+
+
+<p>可以看<a href="https://github.com/containerd/nri#sample-plugin">示例代码</a>了解 NRI 的使用。</p>
+
+
+
+<h3 class="wp-block-heading">支持 FreeBSD</h3>
+
+
+
+<p>现在支持在 FreeBSD 运行 Containerd，容器运行时 OCI 是使用&nbsp;<a href="https://en.wikipedia.org/wiki/FreeBSD_jail">FreeBSD jails</a>&nbsp;(Samuel Karp 的&nbsp;<code><a href="https://github.com/samuelkarp/runj">runj</a></code>)。文件系统目前仅支持 ZFS, 后续计划支持&nbsp;<code><a href="https://www.freebsd.org/cgi/man.cgi?query=unionfs&amp;sektion=8&amp;manpath=freebsd-release-ports">unionfs</a></code>。</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="977" height="416" src="./../../../wp-content/uploads/2021/06/1_Wu1CiRsPaGoiqNaeLJrWVg.png" alt="" class="wp-image-27296" srcset="./../../../wp-content/uploads/2021/06/1_Wu1CiRsPaGoiqNaeLJrWVg.png 977w, ./../../../wp-content/uploads/2021/06/1_Wu1CiRsPaGoiqNaeLJrWVg-300x128.png 300w, ./../../../wp-content/uploads/2021/06/1_Wu1CiRsPaGoiqNaeLJrWVg-768x327.png 768w" sizes="(max-width: 977px) 100vw, 977px" /></figure>
+
+
+
+<h2 class="wp-block-heading">结尾</h2>
+
+
+
+<p>原文作者“张世明”是 任职 DaoCloud 研发团队的 天才青年，在过去的 半年，在 containerd 社区 <strong>排名第八</strong>的贡献者。</p>
+
+
+
+<p>感谢“<a href="https://www.yuque.com/alipayko5m44vl0y">胖橘</a>“对本文的润色加工。</p>
+
+
+
+<p><strong>各位观众老爷，您是否看好 containerd 呢？</strong></p>
+<p><a rel="nofollow" href="./../../../containerd-will-replace-docker/index.html">听说 Docker 被 kubenetes 抛弃了，怎么办？containerd</a>最先出现在<a rel="nofollow" href="./../../../index.html">我自然</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../containerd-will-replace-docker/feed/index.html</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

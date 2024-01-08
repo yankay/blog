@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Scala &#8211; 我自然</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../index.html</link>
+	<description>颜开的博客</description>
+	<lastBuildDate>Sun, 28 Mar 2021 12:06:20 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.2</generator>
+
+<image>
+	<url>./../../../wp-content/uploads/2021/03/cropped-favicon-32x32.png</url>
+	<title>Scala &#8211; 我自然</title>
+	<link>./../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Scala Tour &#8211; 精选</title>
+		<link>./../../../scala-tour-choiceness/index.html</link>
+					<comments>./../../../scala-tour-choiceness/index.html#comments</comments>
+		
+		<dc:creator><![CDATA[yankay]]></dc:creator>
+		<pubDate>Wed, 01 May 2013 18:55:26 +0000</pubDate>
+				<category><![CDATA[每日心得]]></category>
+		<category><![CDATA[软件技术]]></category>
+		<category><![CDATA[Scala]]></category>
+		<guid isPermaLink="false">http://www.yankay.com/?p=27005</guid>
+
+					<description><![CDATA[<p>5月1日是劳动的日子，笔者做了一个学习Scala精彩特性的网站<a title="scala-tour" href="http://zh.scala-tour.com/" target="_blank" rel="noopener">Scala-Tour</a>。</p>
+<p><a rel="nofollow" href="./../../../scala-tour-choiceness/index.html">Scala Tour &#8211; 精选</a>最先出现在<a rel="nofollow" href="./../../../index.html">我自然</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[<p>5月1日是劳动的日子，笔者做了一个学习Scala精彩特性的网站<a title="scala-tour" href="http://zh.scala-tour.com/" target="_blank" rel="noopener">Scala-Tour</a>。在学习Scala是时候，遇到很多令人激动的特性，主要函数式编程和并发。相比下Java已经老态龙钟，步履躇跚。或许Scala不会成为替代Java语言，但的确给后来者设立了标杆。所以做了这个网站，顺着一个一个例子，由浅入深，由表及里。逐渐学会Scala,尽管不会因此成为一个熟练Scala的开发者，但是对函数式编程的也会相当了然。这篇文章精选了Scala-Tour上了一些章节，想快速了解的朋友可以看看这篇文章，当然想详细看就上上<a title="scala-tour" href="http://zh.scala-tour.com/" target="_blank" rel="noopener">Scala-Tour</a>吧。<br />
+<img decoding="async" class="alignnone size-medium wp-image-27241" src="http://47.100.65.109/wp-content/uploads/2013/05/scala-300x137.png" alt="" width="300" height="137" srcset="./../../../wp-content/uploads/2013/05/scala-300x137.png 300w, ./../../../wp-content/uploads/2013/05/scala.png 332w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<h3>不再需要Close</h3>
+<p>在Java里面，使用完资源(文件句柄，数据库连接)等之后，必须手动Close。否则发生泄漏后，程序只有被迫重启。Scala可以通过函数式实现自动close。</p>
+<pre lang="scala">import scala.reflect.io.File
+import java.util.Scanner
+
+def withScanner(f: File, op: Scanner =&gt; Unit) = {
+    val scanner = new Scanner(f.bufferedReader)
+    try {
+        op(scanner)
+    } finally {
+        scanner.close()
+    }
+}
+
+withScanner(File("/proc/self/stat"),
+    scanner =&gt; println("pid is " + scanner.next()))</pre>
+<p>这个例子是从/proc/self/stat文件中读取当前进程的pid。withScanner封装了try-finally块，所以调用者不用再close。</p>
+<h3>按名称传递参数</h3>
+<p>我们熟悉的参数传递方式是按值传递。按名称传递的方式，可以理解为直接传递参数名字，等到实际调用的时候，再去取值。在Java代码中，往往充斥着if(log.isDebug()){log.debug(&#8230;)}这样语句。之前的if调用是很有必要的，因为在之后的debug语句中往往有字符串拼接的操作。在不需要打Log的时候，字符串拼接也有可能发生异常抛出。而Scala可以通过按名称传递解决这个问题，这样就不再需要if(log.isDebug())这样的语句了。</p>
+<pre lang="scala">val logEnable = false
+
+def log(msg: =&gt; String) =
+    if (logEnable) println(msg)
+
+val MSG = "programing is running"
+
+log(MSG + 1 / 0)</pre>
+<h3>鸭子类型</h3>
+<p>“走起来像鸭子，叫起来像鸭子，就是鸭子。”这个例子中使用{ def close(): Unit }作为参数类型。因此任何含有close()的函数的类都可以作为参数。这样的做法比使用接口要好很多，因为可以不引入任何依赖。这个withClose方法单独编译，随处使用。</p>
+<pre lang="scala">def withClose(closeAble: { def close(): Unit }, op: { def close(): Unit } =&gt; Unit) {
+    try {
+        op(closeAble)
+    } finally {
+        closeAble.close()
+    }
+}
+
+class Connection {
+    def close() = println("close Connection")
+}
+
+val conn: Connection = new Connection()
+withClose(conn, conn =&gt;
+    println("do something with Connection"))</pre>
+<h3>Trait</h3>
+<p>Traits就像是有函数体的Interface，使用with关键字来混入。单个Traits就像是一块乐高积木，一个插件。就像下面的JsonAble，当使用一个对象的时候，可以随时随地把它插在他上面。这个对接就具备了toJson的能力。不用创建一个类，或者写组合的代码，非常干脆。这样也可以使代码有很高的正交性。不再会为了一个很小的需求，去修改一个被广泛使用的类。</p>
+<pre lang="scala">trait ForEachAble[A] {
+  def iterator: java.util.Iterator[A]
+  def foreach(f: A =&gt; Unit) = {
+    val iter = iterator
+    while (iter.hasNext)
+      f(iter.next)
+  }
+}
+
+trait JsonAble {
+  def toJson() =
+    scala.util.parsing.json.JSONFormat.defaultFormatter(this)
+}
+
+val list = new java.util.ArrayList[Int]() with ForEachAble[Int] 
+list.add(1); list.add(2)
+
+println("For each: "); list.foreach(x =&gt; println(x))
+//println("Json: " + list.toJson())</pre>
+<h3>函数式真正的威力</h3>
+<p>通过将函数作为参数，可以使程序极为简洁。 函数式除了能简化代码外，更重要的是他关注的是Input和Output，函数本身没有副作用。 就是Unix pipeline一样，简单的命令可以组合在一起。 List的filter方法接受一个过滤函数，返回一个新的List 如果你喜欢Unix pipeline的方式，你一定也会喜欢函数式编程。 这个例子是用函数式的代码模拟“cat file | grep &#8216;warn&#8217; | grep &#8216;2013&#8217; | wc”的行为。相比于Ruby等动态语言,这威力来自于科学而不是魔法</p>
+<pre lang="scala">val file = List("warn 2013 msg", "warn 2012 msg", "error 2013 msg", "warn 2013 msg")
+
+println("cat file | grep 'warn' | grep '2013' | wc : " 
+    + file.filter(_.contains("warn")).filter(_.contains("2013")).size)</pre>
+<h3>再见 NullException</h3>
+<p>每个Java程序员都被NullException折磨过。因为Java中每个对象都可能为Null,所以要么到处检查null的问题，要么到处try/cache。<br />
+Scala提供了Option机制来解决，代码中不断检查null的问题。这个例子包装了getProperty方法，使其返回一个Option。 这样就可以不再漫无目的地null检查。只要Option类型的值即可。使用pattern match来检查是常见做法。也可以使用getOrElse来提供当为None时的默认值。给力的是Option还可以看作是最大长度为1的List，List的强大功能都可以使用。<br />
+不是每个对象都可以为Null了，只有Option可以为None。这样的做法显示区分了可能为Null的情况，可以和NullException说再见了。</p>
+<pre lang="scala">def getProperty(name: String): Option[String] = {
+  val value = System.getProperty(name)
+  if (value != null) Some(value) else None
+}
+
+val osName = getProperty("os.name")
+
+osName match {
+  case Some(value) =&gt; println(value)
+  case _ =&gt; println("none")
+}
+
+println(osName.getOrElse("none"))
+
+osName.foreach(print _)</pre>
+<h3>并行集合</h3>
+<p>这个例子是访问若干URL。但确可以并行访问，比非并行的做法可以快一倍。要想让访问并行，只要调用List.par就可以了。</p>
+<pre lang="scala">val urls = List("http://scala-lang.org/",
+  "https://github.com/yankay/scala-tour")
+
+def fromURL(url: String) = scala.io.Source.fromURL(url)
+  .getLines().mkString("\n")
+
+val t = System.currentTimeMillis()
+urls.par.map(fromURL(_))
+println("time: " + (System.currentTimeMillis - t) + "ms")</pre>
+<p>是不是非常的简单？并行集合支持大部分集合的功能。不增加程序复杂性，却能大幅提高并发的能力。</p>
+<h3>远程Actor</h3>
+<p>Actor是并发模型，也使用于分布式。这个例子创建一个时间服务器，通过alive来监听TCP端口，register来注册自己。调用时通过select创建client。其余使用方式和普通Actor一样。<br />
+将单机并发和分布式抽象成一种模型。简化了程序复杂性。虽然多核编程并不广泛，但调用外部接口的情况越来越多。Actor模型非常适用于这样的异步环境。</p>
+<pre lang="scala">import scala.actors.remote.RemoteActor._
+import scala.actors.Actor._
+import scala.actors.remote.Node
+
+val port = 31241
+
+val echoServer = actor {
+  alive(port)
+  register('echoServer, self)
+  loop {
+    react {
+      case msg =&gt; {
+        reply("replay " + msg)
+      }
+    }
+  }
+}
+
+val timeServerClient = select(Node("127.0.0.1", port), 'echoServer)
+
+timeServerClient !? "hi" match {
+  case replay: String =&gt; println(replay)
+}</pre>
+<h3>抽取器</h3>
+<p>抽取器可以进行解构。这个例子是构建一个Email抽取器，只要实现unapply函数就可以了。<br />
+Scala的正则表达式会自带抽取器，可以抽取出一个List。List里的元素是匹配()里的表达式。<br />
+抽取器很有用，短短的例子里就有两处使用抽取器：</p>
+<ul>
+<li>通过 case user :: do main :: Nil 来解构List</li>
+<li>通过 case Email(user, domain) 来解构Email。</li>
+</ul>
+<pre lang="scala">import scala.util.matching.Regex
+
+object Email {
+  def unapply(str: String) = new Regex("""(.*)@(.*)""")
+    .unapplySeq(str).get match {
+    case user :: domain :: Nil =&gt; Some(user, domain)
+    case _ =&gt; None
+  }
+}
+
+"user@domain.com" match {
+  case Email(user, domain) =&gt; println(user + "@" + domain)
+}</pre>
+<h3>DSL</h3>
+<p>DSL是Scala最强大武器，可以使一些描述性代码变得极为简单。这个例子是使用DSL生成JSON。Scala很多看似是语言级的特性也是用DSL做到的。<br />
+自己编写DSL有点复杂，但使用起来非常方便。这样可以使Scala可以嵌入XML，嵌入Json，嵌入SQL。而其他语言中这些都只是字符串而已。</p>
+<pre lang="scala">import org.json4s._
+import org.json4s.JsonDSL._
+import org.json4s.jackson.JsonMethods._
+import java.util.Date
+
+case class Twitter(id: Long, text: String, publishedAt: Option[java.util.Date])
+
+var twitters = Twitter(1, "hello scala", Some(new Date())) ::
+  Twitter(2, "I like scala tour", None) :: Nil
+
+var json = ("twitters"
+  -&gt; twitters.map(
+    t =&gt; ("id" -&gt; t.id)
+      ~ ("text" -&gt; t.text)
+      ~ ("published_at" -&gt; t.publishedAt.toString())))
+
+println(pretty(render(json)))</pre>
+<h3>Simple Build Tool</h3>
+<p>SBT是Scala的最佳编译工具，在他的帮助下，你甚至不需要安装除JRE外的任何东西，来开发Scala。<br />
+例如你想在自己的机器上执行<a title="scala-tour" href="http://zh.scala-tour.com/" target="_blank" rel="noopener">Scala-Tour</a>,可以执行下面的命令</p>
+<pre lang="bash">#Linux/Mac(compile &amp; run):
+git clone https://github.com/yankay/scala-tour-zh.git
+cd scala-tour-zh
+./sbt/sbt stage
+./target/start
+
+#Windows(can only compile):
+git clone https://github.com/yankay/scala-tour-zh.git
+cd scala-tour-zh
+sbt\sbt stage</pre>
+<h3>结语</h3>
+<p>这几个例子精选自<a title="scala-tour" href="http://zh.scala-tour.com/" target="_blank" rel="noopener">Scala-Tour</a>，这个网站中还有介绍了很多其他好的特性，比如模式匹配和隐式转换，就不逐一介绍了。这个项目Host在<a title="GitHub" href="https://github.com/yankay/scala-tour/">GitHub</a>上，如果你也有精彩的用法的话，大家交流交流吧。</p>
+<p><a rel="nofollow" href="./../../../scala-tour-choiceness/index.html">Scala Tour &#8211; 精选</a>最先出现在<a rel="nofollow" href="./../../../index.html">我自然</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../scala-tour-choiceness/feed/index.html</wfw:commentRss>
+			<slash:comments>5</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Linux &#8211; 我自然</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../index.html</link>
+	<description>颜开的博客</description>
+	<lastBuildDate>Tue, 07 Feb 2012 06:35:49 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.2</generator>
+
+<image>
+	<url>./../../../wp-content/uploads/2021/03/cropped-favicon-32x32.png</url>
+	<title>Linux &#8211; 我自然</title>
+	<link>./../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Linux大文件传输</title>
+		<link>./../../../linux%e5%a4%a7%e6%96%87%e4%bb%b6%e4%bc%a0%e8%be%93/index.html</link>
+					<comments>./../../../linux%e5%a4%a7%e6%96%87%e4%bb%b6%e4%bc%a0%e8%be%93/index.html#comments</comments>
+		
+		<dc:creator><![CDATA[yankay]]></dc:creator>
+		<pubDate>Tue, 07 Feb 2012 06:35:49 +0000</pubDate>
+				<category><![CDATA[软件技术]]></category>
+		<category><![CDATA[Linux]]></category>
+		<category><![CDATA[传输]]></category>
+		<category><![CDATA[大文件]]></category>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26367</guid>
+
+					<description><![CDATA[<div>我们经常需要在机器之间传输文件。比如备份，复制数据等等。这个是很常见，也是很简单的。用scp或者rsync就能很好的完成任务。但是如果文件很大，需要占用一些传输时间的时候，怎样又快又好地完成任务就很重要了。在我的测试用例中，一个最佳的方案比最差的方案，性能提高了10倍。</div>
+<p><a rel="nofollow" href="./../../../linux%e5%a4%a7%e6%96%87%e4%bb%b6%e4%bc%a0%e8%be%93/index.html">Linux大文件传输</a>最先出现在<a rel="nofollow" href="./../../../index.html">我自然</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[<div>我们经常需要在机器之间传输文件。比如备份，复制数据等等。这个是很常见，也是很简单的。用scp或者rsync就能很好的完成任务。但是如果文件很大，需要占用一些传输时间的时候，怎样又快又好地完成任务就很重要了。在我的测试用例中，一个最佳的方案比最差的方案，性能提高了10倍。</div>
+<h3><strong>复制文件</strong></h3>
+<div>如果我们是复制一个<strong>未压缩</strong>的文件。这里走如下步骤：</div>
+<div>
+<ol>
+<li><span style="line-height: 19px;">压缩数据</span></li>
+<li><span style="line-height: 19px;">发送到另外一台机器上</span></li>
+<li><span style="line-height: 19px;">数据解压缩</span></li>
+<li><span style="line-height: 19px;">校验正确性</span></li>
+</ol>
+<div>这样做会很有效率，数据压缩后可以更有效的利用带宽</div>
+</div>
+<h3><strong>使用ZIP+SCP</strong></h3>
+<div>我们可以通过ZIP+SCP的组合实现这个功能。</div>
+<div>
+<pre>gzip -c /home/yankay/data | ssh yankay01 "gunzip -c - &gt; /home/yankay/data"</pre>
+<p>这条命令是将/home/yankay/data经过GZIP压缩，通过ssh传输到yankay01的机器上。</p>
+</div>
+<div>data文件的大小是1.1GB,经过Zip压缩后是183MB，执行上面的命令需要45.6s。平均吞吐量为24.7MB/s</div>
+<div>我们会发现Scp也有压缩功能，所以上面的语句可以写成</div>
+<div>
+<pre>scp -C -c blowfish /home/yankay/data yankay01:/home/yankay/data</pre>
+<p>这样运行效果是相同的，不通之处在于我使用了blowfish算法作为Scp的密匙算法，使用这个算法可以比默认的情况快很多。单单对与scp,使用了blowfish 吞吐量是62MB/s,不使用只有46MB/s。</p>
+</div>
+<div>可是我执行上面一条命令的时候，发现还是需要45s。平均吞吐量还为24MB/s。没有丝毫的提升，可见瓶颈不在网络上。</div>
+<div>那瓶颈在哪里呢？</div>
+<h3><strong>性能分析</strong></h3>
+<p>我们先定义几个变量</p>
+<ul>
+<li>压缩工具的压缩比是 CompressRadio</li>
+<li>压缩工具的压缩吞吐是CompressSpeed MB/s</li>
+<li>网络传输的吞吐是 NetSpeed MB/s</li>
+</ul>
+<p>由于使用了管道，管道的性能取决于管道中最慢的部分的性能，所以整体的性能是：</p>
+<p>$$speed=min(NetSpeed/CompressRadio,CompressSpeed)$$</p>
+<p>当压缩吞吐较网络传输慢的时候，压缩是瓶颈；但网络较慢的时候，网络传输/吞吐 是瓶颈。</p>
+<p>根据现有的测试数据(纯文本)，可以得到表格：</p>
+<table width="615" border="0" cellspacing="0" cellpadding="0">
+<colgroup>
+<col span="2" width="72" />
+<col width="64" />
+<col width="146" />
+<col width="129" />
+<col width="132" /> </colgroup>
+<tbody>
+<tr>
+<td width="72" height="18"></td>
+<td width="72">压缩比</td>
+<td width="64">吞吐量</td>
+<td width="146">千兆网卡(100MB/s)吞吐量</td>
+<td width="129">千兆网卡吞吐量,基于ssh(62MB/s)</td>
+<td width="132">百兆网卡(10MB/s)吞吐量</td>
+</tr>
+<tr>
+<td height="18">ZLIB</td>
+<td align="right">35.80%</td>
+<td align="right">9.6</td>
+<td align="right">9.6</td>
+<td align="right">9.6</td>
+<td align="right">9.6</td>
+</tr>
+<tr>
+<td height="18">LZO</td>
+<td align="right">54.40%</td>
+<td align="right">101.7</td>
+<td align="right">101.7</td>
+<td align="right">101.7</td>
+<td align="right">18.38235294</td>
+</tr>
+<tr>
+<td height="18">LIBLZF</td>
+<td align="right">54.60%</td>
+<td align="right">134.3</td>
+<td align="right">134.3</td>
+<td align="right">113.5531136</td>
+<td align="right">18.31501832</td>
+</tr>
+<tr>
+<td height="18">QUICKLZ</td>
+<td align="right">54.90%</td>
+<td align="right">183.4</td>
+<td align="right">182.1493625</td>
+<td align="right">112.9326047</td>
+<td align="right">18.21493625</td>
+</tr>
+<tr>
+<td height="18">FASTLZ</td>
+<td align="right">56.20%</td>
+<td align="right">134.4</td>
+<td align="right">134.4</td>
+<td align="right">110.3202847</td>
+<td align="right">17.79359431</td>
+</tr>
+<tr>
+<td height="18">SNAPPY</td>
+<td align="right">59.80%</td>
+<td align="right">189</td>
+<td align="right">167.2240803</td>
+<td align="right">103.6789298</td>
+<td align="right">16.72240803</td>
+</tr>
+<tr>
+<td height="18">NONE</td>
+<td align="right">100%</td>
+<td align="right">300</td>
+<td align="right">100</td>
+<td align="right">62</td>
+<td align="right">10</td>
+</tr>
+</tbody>
+</table>
+<p>可以看出来。在千兆网卡下，使用QuickLZ作为压缩算法，可以达到最高的性能。如果使用SSH作为数据传输通道，则远远没有达到网卡可以达到的最佳性能。在百兆网卡的情况下，各个算法相近。对比下来QuickLZ是有优势的。</p>
+<p>对于不同的数据和不同的机器，可以得出不同的最佳压缩算法。但有一点是肯定的，尽量把瓶颈压在网络上。对于较慢的网络环境，高压缩比的算法会比较有优势；相反对于较快的网络环境，低压缩比的算法会更好。</p>
+<h3><strong>结论</strong></h3>
+<p>根据上面的分析结果，我们不能是用SSH作为网络传输通道，可以使用NC这个基本网络工具，提高性能。同时使用qpress作为压缩算法。</p>
+<pre>scp /usr/bin/qpress yankay01:/usr/bin/qpress
+ssh yankay01 "nc -l 12345 |  qpress -dio &gt; /home/yankay/data" &amp;
+qpress -o /home/yankay/data |nc yankay01 12345</pre>
+<p>第一行是将gpress安装到远程机器上，第二行在远程机器上使用nc监听一个端口，第三行压缩并传送数据。</p>
+<p>执行上面的命令需要2.8s。平均吞吐量为402MB/s,比使用Gzip+Scp快了16倍！！</p>
+<p>根据上文的公式，和自己的数据，可以绘出上面的表格，就可以选择出最适合的压缩算法和传输方式。达到满意的效果。如果是一个长期运行的脚本的话，这么做是值得的。</p>
+<p><a rel="nofollow" href="./../../../linux%e5%a4%a7%e6%96%87%e4%bb%b6%e4%bc%a0%e8%be%93/index.html">Linux大文件传输</a>最先出现在<a rel="nofollow" href="./../../../index.html">我自然</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../linux%e5%a4%a7%e6%96%87%e4%bb%b6%e4%bc%a0%e8%be%93/feed/index.html</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

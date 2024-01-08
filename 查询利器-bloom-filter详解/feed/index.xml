@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>
+	《查询利器-bloom-filter详解》的评论	</title>
+	<atom:link href="./../../%E6%9F%A5%E8%AF%A2%E5%88%A9%E5%99%A8-bloom-filter%E8%AF%A6%E8%A7%A3/feed/index.html" rel="self" type="application/rss+xml" />
+	<link>./../index.html</link>
+	<description>颜开的博客</description>
+	<lastBuildDate>Sat, 22 Feb 2014 03:11:00 +0000</lastBuildDate>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.2</generator>
+	<item>
+		<title>
+		评论者：David		</title>
+		<link>./../index.html#comment-15</link>
+
+		<dc:creator><![CDATA[David]]></dc:creator>
+		<pubDate>Sat, 22 Feb 2014 03:11:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26267#comment-15</guid>
+
+					<description><![CDATA[&quot;但因为查询一个Bloom Filter数组的速度很快，查询一组Bloom Filter数组也不会太影响性能。&quot;是谁告诉你查询一个bloom filter很快的？这是错误的，想法查询一个bloom filter因为需要多次放存，速度不会太快。]]></description>
+			<content:encoded><![CDATA[<p>&#8220;但因为查询一个Bloom Filter数组的速度很快，查询一组Bloom Filter数组也不会太影响性能。&#8221;是谁告诉你查询一个bloom filter很快的？这是错误的，想法查询一个bloom filter因为需要多次放存，速度不会太快。</p>
+]]></content:encoded>
+		
+			</item>
+	</channel>
+</rss>

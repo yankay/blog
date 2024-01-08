@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>官方文档 &#8211; 我自然</title>
+	<atom:link href="./../../%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/feed/index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../index.html</link>
+	<description>颜开的博客</description>
+	<lastBuildDate>Tue, 01 Nov 2011 03:02:55 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.2</generator>
+
+<image>
+	<url>./../../../wp-content/uploads/2021/03/cropped-favicon-32x32.png</url>
+	<title>官方文档 &#8211; 我自然</title>
+	<link>./../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>HBase中文官方文档</title>
+		<link>./../../../hbase%e4%b8%ad%e6%96%87%e5%ae%98%e6%96%b9%e6%96%87%e6%a1%a3/index.html</link>
+					<comments>./../../../hbase%e4%b8%ad%e6%96%87%e5%ae%98%e6%96%b9%e6%96%87%e6%a1%a3/index.html#respond</comments>
+		
+		<dc:creator><![CDATA[yankay]]></dc:creator>
+		<pubDate>Tue, 01 Nov 2011 03:02:55 +0000</pubDate>
+				<category><![CDATA[软件技术]]></category>
+		<category><![CDATA[Hbase]]></category>
+		<category><![CDATA[中文]]></category>
+		<category><![CDATA[官方文档]]></category>
+		<category><![CDATA[文档]]></category>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26193</guid>
+
+					<description><![CDATA[<p><a href="http://hbase.apache.org/">HBase </a>– Hadoop Database，是一个构建在Apache Hadoop上的列数据。Hbase有很好的扩展性，被认为是BigTable的一个克隆，可以存储数以亿计的行。</p>
+<p><a rel="nofollow" href="./../../../hbase%e4%b8%ad%e6%96%87%e5%ae%98%e6%96%b9%e6%96%87%e6%a1%a3/index.html">HBase中文官方文档</a>最先出现在<a rel="nofollow" href="./../../../index.html">我自然</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[<p>&nbsp;</p>
+<p><a href="http://hbase.apache.org/"><img decoding="async" class="alignright" style="border-style: initial; border-color: initial;" title="hbase" src="http://hbase.apache.org/images/hbase_logo.png" alt="hbase" width="200" height="50" /></a></p>
+<p><a href="http://hbase.apache.org/">HBase </a>– Hadoop Database，是一个构建在Apache Hadoop上的列数据。Hbase有很好的扩展性，被认为是BigTable的一个克隆，可以存储数以亿计的行。</p>
+<p>在Hbase的官网，我们看到一篇很好的<a href="http://hbase.apache.org/book.html">官方文档</a>。我花了很长的时间，把他汉化了。请点击这里:《<a href="http://www.yankay.com/wp-content/hbase/book.html">HBase中文官方文档</a>》</p>
+<p>这篇文档非常的详尽，从Hbase的安装，配置，使用，原理，优化，维护都做了非常全面的介绍。还提供了很多扩展阅读，方便我们知道更多Hbase的工作机制。通过翻译这篇文档，我细细读了这篇文档，受益良多。</p>
+<p>翻译是一个吃进去再吐出来的过程，我的Hbase的理解也可能会发生一些偏差，所以如果有地方发生错误，请告诉我，大家一起进步。</p>
+<p>&nbsp;</p>
+<p><a rel="nofollow" href="./../../../hbase%e4%b8%ad%e6%96%87%e5%ae%98%e6%96%b9%e6%96%87%e6%a1%a3/index.html">HBase中文官方文档</a>最先出现在<a rel="nofollow" href="./../../../index.html">我自然</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../hbase%e4%b8%ad%e6%96%87%e5%ae%98%e6%96%b9%e6%96%87%e6%a1%a3/feed/index.html</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

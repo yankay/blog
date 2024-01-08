@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>家庭生活 &#8211; 我自然</title>
+	<atom:link href="./../../%E5%AE%B6%E5%BA%AD%E7%94%9F%E6%B4%BB/feed/index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../index.html</link>
+	<description>颜开的博客</description>
+	<lastBuildDate>Mon, 29 Mar 2021 13:02:45 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.2</generator>
+
+<image>
+	<url>./../../../wp-content/uploads/2021/03/cropped-favicon-32x32.png</url>
+	<title>家庭生活 &#8211; 我自然</title>
+	<link>./../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>公告 &#8211; 博客重开了</title>
+		<link>./../../../%e5%85%ac%e5%91%8a-%e5%8d%9a%e5%ae%a2%e9%87%8d%e5%bc%80%e4%ba%86/index.html</link>
+					<comments>./../../../%e5%85%ac%e5%91%8a-%e5%8d%9a%e5%ae%a2%e9%87%8d%e5%bc%80%e4%ba%86/index.html#comments</comments>
+		
+		<dc:creator><![CDATA[yankay]]></dc:creator>
+		<pubDate>Sun, 28 Mar 2021 14:15:29 +0000</pubDate>
+				<category><![CDATA[家庭生活]]></category>
+		<guid isPermaLink="false">http://47.100.65.109/?p=27267</guid>
+
+					<description><![CDATA[<p>尊敬的读者，博客重开了。 “我自然“这个博客，从2008年开始写，到现在已经13年了。期间记录了不少点点滴滴。 [&#8230;]</p>
+<p><a rel="nofollow" href="./../../../%e5%85%ac%e5%91%8a-%e5%8d%9a%e5%ae%a2%e9%87%8d%e5%bc%80%e4%ba%86/index.html">公告 &#8211; 博客重开了</a>最先出现在<a rel="nofollow" href="./../../../index.html">我自然</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>尊敬的读者，博客重开了。</p>
+
+
+
+<p>“我自然“这个博客，从2008年开始写，到现在已经13年了。期间记录了不少点点滴滴。中间不但断更，而且博客图床数据也被删除了。不过好在终于成功恢复。未来会有更多的精彩内容。</p>
+
+
+
+<p>最近这 6年间，笔者是去创业(<a href="http://www.daocloud.io/" data-type="URL" data-id="www.daocloud.io">DaoCloud</a>)去了，之所以断更 主要是因为 “特别忙“ &#8211; 真的特别忙，博客坏了3年，却没有3个小时去修理，更别提更新什么文章了。 不过对于工作来说，这样的忙法是病态的，而且也不知道还要忙到什么时候。既然如此，那还是把博客捡起来吧。</p>
+
+
+
+<p>接下来这个博客，我还是会多谢写一些技术干货，穿插一点点生活故事。有人会问 “我自然” 这个博客标题是什么意思。“我自然“，是一种自然而然， 怡然快乐的感觉。在现代社会每个人都被资本或政治异化，变成了“人力资源”，“资本家” 这些非自然的形象。 通过读一读这个博客，也希望能够给读者回到更自然快乐的感觉。</p>
+
+
+
+<div class="wp-block-image"><figure class="alignleft size-large"><img fetchpriority="high" decoding="async" width="640" height="426" src="http://47.100.65.109/wp-content/uploads/2021/03/hailan.jpeg" alt="" class="wp-image-27271" srcset="./../../../wp-content/uploads/2021/03/hailan.jpeg 640w, ./../../../wp-content/uploads/2021/03/hailan-300x200.jpeg 300w" sizes="(max-width: 640px) 100vw, 640px" /></figure></div>
+<p><a rel="nofollow" href="./../../../%e5%85%ac%e5%91%8a-%e5%8d%9a%e5%ae%a2%e9%87%8d%e5%bc%80%e4%ba%86/index.html">公告 &#8211; 博客重开了</a>最先出现在<a rel="nofollow" href="./../../../index.html">我自然</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../%e5%85%ac%e5%91%8a-%e5%8d%9a%e5%ae%a2%e9%87%8d%e5%bc%80%e4%ba%86/feed/index.html</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

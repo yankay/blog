@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>EBS架构 &#8211; 我自然</title>
+	<atom:link href="./../../ebs%E6%9E%B6%E6%9E%84/feed/index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../index.html</link>
+	<description>颜开的博客</description>
+	<lastBuildDate>Thu, 08 Mar 2012 10:19:19 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.2</generator>
+
+<image>
+	<url>./../../../wp-content/uploads/2021/03/cropped-favicon-32x32.png</url>
+	<title>EBS架构 &#8211; 我自然</title>
+	<link>./../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Amazon EBS架构猜想</title>
+		<link>./../../../amazon-ebs%e6%9e%b6%e6%9e%84%e7%8c%9c%e6%83%b3/index.html</link>
+					<comments>./../../../amazon-ebs%e6%9e%b6%e6%9e%84%e7%8c%9c%e6%83%b3/index.html#respond</comments>
+		
+		<dc:creator><![CDATA[yankay]]></dc:creator>
+		<pubDate>Thu, 08 Mar 2012 10:19:19 +0000</pubDate>
+				<category><![CDATA[软件技术]]></category>
+		<category><![CDATA[Amazon EBS]]></category>
+		<category><![CDATA[EBS]]></category>
+		<category><![CDATA[EBS架构]]></category>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26394</guid>
+
+					<description><![CDATA[<p>Amazon EBS是专门为Amazon EC2 虚拟机设计的弹性块存储服务。Amazon EBS可以为Amazon EC2的虚拟机创建卷volumes，Amazon EBS卷类似没有格式化的外部卷设备。</p>
+<p><a rel="nofollow" href="./../../../amazon-ebs%e6%9e%b6%e6%9e%84%e7%8c%9c%e6%83%b3/index.html">Amazon EBS架构猜想</a>最先出现在<a rel="nofollow" href="./../../../index.html">我自然</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Amazon EBS是专门为Amazon EC2 虚拟机设计的弹性块存储服务。Amazon EBS可以为Amazon EC2的虚拟机创建卷volumes，Amazon EBS卷类似没有格式化的外部卷设备。卷有设备名称，同时也提供了块设备接口。你可以在Amazon EBS 卷上驻留自己的文件系统，或者直接作为卷设备使用。也就是说EBS就是一个基于集群的完美的“大磁盘”，可以随机读写，较高性能，完美的一致性和高可靠。本来以为这只是幻象，十分不好做。杨公一席话让我茅塞顿开。所以猜测EBS的架构如下，内部人士不要笑话我。</p>
+<h3>架构</h3>
+<p style="text-align: center;"><a href="http://yankaycom-wordpress.stor.sinaapp.com/uploads/2012/03/EBS-arch.png"><img fetchpriority="high" decoding="async" class="size-full wp-image-26398 aligncenter" title="EBS-arch" src="http://yankaycom-wordpress.stor.sinaapp.com/uploads/2012/03/EBS-arch.png" alt="" width="336" height="273" /></a></p>
+<ul>
+<li><strong>EBS虚拟磁盘驱动器</strong>：EBS客户端构件，和EC2部署在一起，同生共死。作为操作系统的磁盘驱动器存在。作用是管理该磁盘的块,接受磁盘请求。</li>
+<li><strong>缓冲存储</strong>：我猜测，如果要想保证高性能，同时保证数据不丢失，需要使用一个本地的持久化存储作为缓冲和缓存。直接对集群进行大量的细碎的操作，延迟是不可接受的。如果使用长连接，多网卡，可以让延迟变得可以接受，那么这个组件就不是必须的。</li>
+<li><strong>类S3</strong>:类似S3的Key-Value存储。有高可靠，高延时，高吞吐的特点。肯定不是S3，也许也不是Key-value，但是大致是类似的。不可修改和按块存储的特性是相似的。</li>
+<li><strong>类Mysql</strong>:类似Mysql的DB,用来存储块的信息，必须高可靠，容量不比太大，压力也不大。</li>
+<li><strong>Slave</strong>:可选组件，Slave会记录磁盘驱动器的每个操作，同步其日志。如果EC2那台机器的缓冲存储损坏，可以使用Slave上面的来恢复最近这段时间没有同步到S3的数据。</li>
+</ul>
+<h3><span style="line-height: 18px;">存储方式</span></h3>
+<p>存储的基本单位是块。每个块由Key和Value组成。块的Key分三部分:diskNo-blockNo-version,Value就是Block的内容。块存储在&#8221;S3&#8243;中，每个块都是不可以修改的，逻辑上的修改通过增加版本来实现。同时不是每一次修改都必须增加版本的。具体方式下面说。块的大小估计在4M左右，要综合&#8221;S3&#8243;的性能来决定。</p>
+<p>一个“盘”由若干个“块”构成，需要记录每一个&#8221;块版本号&#8221;，blockNo和块的个数在盘创建的时候就已经决定了。“块版本号”信息持久化存储在Mysql中。</p>
+<p>这个架构分两层，S3是底层，负责不断存储“盘”的快照。本地缓冲提供低延迟读写。</p>
+<h3>实现</h3>
+<p>下面分几种情况，分别来讨论如何实现。</p>
+<h4><strong>创建，挂载盘</strong></h4>
+<p>当创建一个盘的时候，只要在Mysql生成一个新的DiskNo。根据盘的大小和Block的大小，计算出Block数量，在Mysql中初始化元信息，将每个Block的版本标记为0(Block在物理上还不存在)。</p>
+<p>然后“磁盘驱动器”挂载他，将Mysql中的源信息，加载到内存中。如果上次非正常关闭，可以通过缓冲存储中的数据，执行恢复操作。因为这个盘不是共享的只有该EC2可以使用。所以挂载后不需要再读Mysql.所以对元数据的操作都发生在内存中，每隔一段时间(比如10分钟)，将元数据增量添加到Mysql。</p>
+<p>有一点需要注意的是，如果一个块在元数据中有，这个块的数据可能在本地缓冲也可能在S3上。但是如果在Mysql的元数据中有，S3上必须存在有该块。</p>
+<h4><strong>读块</strong></h4>
+<p>根据blockId，可以得之其最近版本，并且是在本地缓冲存储还是在&#8221;S3&#8243;，直接访问即可。读过的块可以放入缓冲。</p>
+<h4><strong>写块</strong></h4>
+<p>写块比较复杂。当发起一个写操作的时候，如果本地不存在或者正在同步，本地会先写入一个临时块，写入成功就返回成功。然后会找到&#8221;S3&#8243;上的块，下载合并修改。如果本地存在，并且该块不在同步中，就直接修改。</p>
+<p>每隔一段时间，系统会建立一个check point，将修改的块增加一个版本号，同步到“S3”中去。这里的同步是异步的。全部完成算完成，不存在中间状态。如果操作系统对一个块修改10次，但这些修改操作在两次同步之间，只增加一个版本，避免重复。</p>
+<p><strong>缓冲存储损坏</strong></p>
+<p>如果缓冲存储损坏，如果没有Slave。由于S3和Mysql中有上一次的快照信息，所以可以恢复到最近的快照状态。不会出现一致性问题。但Check Point之间的时间间隔可能比较长，如果无法忍受的话，可以建立一个Slave用来记录所有的写操作，但缓冲存储损坏的时候，可以通过Slave上的数据恢复到最近的点。</p>
+<h3>总结</h3>
+<p>分布式的虚拟磁盘，可以通过两层存储架构，同时满足严格的一致性和分区要求，也有好的随机读写性能。之所以可以采取两层存储，是因为一块“盘”只能一台机器独享，不要求共享，相当于在可分区的特性上打了个折扣，所以这样应该是没问题的。</p>
+<p>亚马逊的测试报告也是写的性能远远大于读性能，和这个架构的特点也是相似的。暂时没有发现什么冲突的地方。当然这个架构只是我的猜想，做不得数的。</p>
+<p>好像除了亚马逊，没有其他公司对这种磁盘系统感兴趣，也许是没有必要吧。这样虚拟出来的磁盘性能有限，而且系统层次越多越不稳定。但“云计算”招摇撞骗，大行其道，探索一下也好。</p>
+<p><a rel="nofollow" href="./../../../amazon-ebs%e6%9e%b6%e6%9e%84%e7%8c%9c%e6%83%b3/index.html">Amazon EBS架构猜想</a>最先出现在<a rel="nofollow" href="./../../../index.html">我自然</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../amazon-ebs%e6%9e%b6%e6%9e%84%e7%8c%9c%e6%83%b3/feed/index.html</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

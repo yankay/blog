@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>
+	《NoSQL数据库笔谈v0.2》的评论	</title>
+	<atom:link href="./../../nosql%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%B0%88v0-2/feed/index.html" rel="self" type="application/rss+xml" />
+	<link>./../index.html</link>
+	<description>颜开的博客</description>
+	<lastBuildDate>Sun, 28 Mar 2021 13:02:04 +0000</lastBuildDate>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.2</generator>
+	<item>
+		<title>
+		评论者：何建兵		</title>
+		<link>./../index.html#comment-10</link>
+
+		<dc:creator><![CDATA[何建兵]]></dc:creator>
+		<pubDate>Wed, 29 Aug 2018 09:54:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=25685#comment-10</guid>
+
+					<description><![CDATA[大佬 文档下载不了 能不能单独给发一个 特别希望能看 bayhe2@163.com]]></description>
+			<content:encoded><![CDATA[<p>大佬 文档下载不了 能不能单独给发一个 特别希望能看 <a href="mailto:bayhe2@163.com">bayhe2@163.com</a></p>
+]]></content:encoded>
+		
+			</item>
+	</channel>
+</rss>

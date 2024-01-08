@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>内存 &#8211; 我自然</title>
+	<atom:link href="./../../%E5%86%85%E5%AD%98/feed/index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../index.html</link>
+	<description>颜开的博客</description>
+	<lastBuildDate>Mon, 06 Feb 2012 14:58:10 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.2</generator>
+
+<image>
+	<url>./../../../wp-content/uploads/2021/03/cropped-favicon-32x32.png</url>
+	<title>内存 &#8211; 我自然</title>
+	<link>./../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>内存究竟有多快？</title>
+		<link>./../../../%e5%86%85%e5%ad%98%e7%a9%b6%e7%ab%9f%e6%9c%89%e5%a4%9a%e5%bf%ab%ef%bc%9f/index.html</link>
+					<comments>./../../../%e5%86%85%e5%ad%98%e7%a9%b6%e7%ab%9f%e6%9c%89%e5%a4%9a%e5%bf%ab%ef%bc%9f/index.html#comments</comments>
+		
+		<dc:creator><![CDATA[yankay]]></dc:creator>
+		<pubDate>Mon, 06 Feb 2012 14:58:10 +0000</pubDate>
+				<category><![CDATA[软件技术]]></category>
+		<category><![CDATA[内存]]></category>
+		<category><![CDATA[性能]]></category>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26346</guid>
+
+					<description><![CDATA[<p>一般来说。CPU需要0个周期来访问其寄存器，1-30个周期来访问高速缓存，50-200个周期来访问主存。</p>
+<p><a rel="nofollow" href="./../../../%e5%86%85%e5%ad%98%e7%a9%b6%e7%ab%9f%e6%9c%89%e5%a4%9a%e5%bf%ab%ef%bc%9f/index.html">内存究竟有多快？</a>最先出现在<a rel="nofollow" href="./../../../index.html">我自然</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[<p>一般来说。CPU需要0个周期来访问其寄存器，1-30个周期来访问高速缓存，50-200个周期来访问主存。</p>
+<p>对于Intel Core i7来说。这个值可以很具体。Intel Core i7的主频约在2-3GHz。可以计算出。</p>
+<table border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td valign="top" width="94"></td>
+<td valign="top" width="96">L1—指令缓存</td>
+<td valign="top" width="95">L1-数据缓存</td>
+<td valign="top" width="95">L2-缓存</td>
+<td valign="top" width="98">L3-缓存</td>
+<td valign="top" width="91">内存</td>
+</tr>
+<tr>
+<td valign="top" width="94">访问周期</td>
+<td valign="top" width="96">4</td>
+<td valign="top" width="95">4</td>
+<td valign="top" width="95">11</td>
+<td valign="top" width="98">30-40</td>
+<td valign="top" width="91">50-200</td>
+</tr>
+<tr>
+<td valign="top" width="94">缓存大小</td>
+<td valign="top" width="96">32KB</td>
+<td valign="top" width="95">32KB</td>
+<td valign="top" width="95">256KB</td>
+<td valign="top" width="98">8MB</td>
+<td valign="top" width="91">若干GB</td>
+</tr>
+<tr>
+<td valign="top" width="94">访问时间</td>
+<td valign="top" width="96">2ns</td>
+<td valign="top" width="95">2ns</td>
+<td valign="top" width="95">5ns</td>
+<td valign="top" width="98">14-18ns</td>
+<td valign="top" width="91">24-93ns</td>
+</tr>
+</tbody>
+</table>
+<p>也就是说，访问内存的时间是ns级别的。</p>
+<p><strong>再来看看磁盘。</strong></p>
+<p>磁盘的访问时间=寻道时间+旋转延迟+数据传输时间。对于普通的7200转SATA磁盘。这个值是:9ms+4ms+0.02ms=13.02ms。</p>
+<p>也就是说，如果从磁盘随机访问一个字节，需要13.02ms，比从内存获取的时间24-93ns，至少要多14万倍。相差5个数据级，何其巨大的差距。</p>
+<p>顺序读写磁盘会快一些。 假设一个盘片有1000个扇区，每个扇区512字节，7200转。顺序读可以忽略掉寻道的时间。所以吞吐量是 扇区数×扇区大小×转速=1000*512/(60/7200)=58MB/s。这个数据似乎不咋样。如果使用多盘系统。SATA II的接口，吞吐量可以达到300MB/s。追求极限性能可以mount裸盘直接操作多盘。</p>
+<p><strong>存储器山</strong></p>
+<p>《深入理解计算机系统》一书中提到了一个<a href="http://zh.wikipedia.org/wiki/%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%B1">存储器山</a>的概念。教授先生别出心裁的将存储器的吞吐量，画成了一座山。</p>
+<p><a href="http://yankaycom-wordpress.stor.sinaapp.com/uploads/2012/02/MemoryMountain17.png"><img fetchpriority="high" decoding="async" class="alignnone size-full wp-image-26348" title="MemoryMountain" alt="" src="http://yankaycom-wordpress.stor.sinaapp.com/uploads/2012/02/MemoryMountain17.png" width="560" height="420" /></a></p>
+<p>&nbsp;</p>
+<p>存储器山的测试程序是这样的：</p>
+<pre><strong>Kernel_loop(elems, stride):</strong>
+for (i = 0; i &lt; elems; i += stride)
+    result = data[i];</pre>
+<p>X轴表示的是读取步长，Y轴是吞吐量，Z轴是数据总量的大小。</p>
+<p>可以看出来步长越小，数据数据总量越小。性能越好。</p>
+<p>很明显，山是不是平滑的，是成阶梯状。红色部分为L1缓存，绿色为L2缓存，浅蓝是L3缓存，深蓝是内存。我们可以得一些数据。</p>
+<table border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td valign="top" width="77"></td>
+<td valign="top" width="91">L1-数据缓存</td>
+<td valign="top" width="74">L2-缓存</td>
+<td valign="top" width="89">L3-缓存</td>
+<td valign="top" width="83">内存</td>
+<td valign="top" width="71">磁盘</td>
+<td valign="top" width="71">SSD</td>
+</tr>
+<tr>
+<td valign="top" width="77">缓存大小</td>
+<td valign="top" width="91">32KB</td>
+<td valign="top" width="74">256KB</td>
+<td valign="top" width="89">8MB</td>
+<td valign="top" width="83">十几GB</td>
+<td valign="top" width="71">几TB</td>
+<td valign="top" width="71">几百GB</td>
+</tr>
+<tr>
+<td valign="top" width="77">访问时间</td>
+<td valign="top" width="91">2ns</td>
+<td valign="top" width="74">5ns</td>
+<td valign="top" width="89">14-18ns</td>
+<td valign="top" width="83">24-93ns</td>
+<td valign="top" width="71">13.0ms</td>
+<td valign="top" width="71">30-300us</td>
+</tr>
+<tr>
+<td valign="top" width="77">吞吐量</td>
+<td valign="top" width="91">6500MB/s</td>
+<td valign="top" width="74">3300MB/s</td>
+<td valign="top" width="89">2200MB/s</td>
+<td valign="top" width="83">800MB/s</td>
+<td valign="top" width="71">60MB/s</td>
+<td valign="top" width="71">250MB/s</td>
+</tr>
+</tbody>
+</table>
+<p>也就是说，去除高速缓存的内存，吞吐量性能只有800MB/s而已。比起磁盘的300MB/s,网络的100MB/s。也只是快了几倍。平时说内存比磁盘快许多，其实没有那么多，如果不好好操作内存，内存的频繁读写，也可以成为系统瓶颈。</p>
+<p><strong>总结</strong></p>
+<p>现在处理器的主频已经停止了增长。但是高速缓存仍然以摩尔定律的速度增长的。长久的看，高速缓存频率逐渐会追上处理器的性能，容量也会越来越大。但是内存则不容乐观，虽然容量增加了许多，但是性能确没有大的提升,磁盘的状况也是类似;SSD刚刚开始普及,趋势不明显。</p>
+<p>但可以看到，SSD的吞吐量和内存的吞吐量相去并不大。也就是说在未来，当SSD完全替代了磁盘。我们要像现在操作磁盘一样小心翼翼地操作内存，才有可能写出符合那个时代计算机性能的程序。相比之下，SSD的使用比磁盘要轻松一些，毕竟随机读写的速度在一两个数量级上。</p>
+<p><a rel="nofollow" href="./../../../%e5%86%85%e5%ad%98%e7%a9%b6%e7%ab%9f%e6%9c%89%e5%a4%9a%e5%bf%ab%ef%bc%9f/index.html">内存究竟有多快？</a>最先出现在<a rel="nofollow" href="./../../../index.html">我自然</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../%e5%86%85%e5%ad%98%e7%a9%b6%e7%ab%9f%e6%9c%89%e5%a4%9a%e5%bf%ab%ef%bc%9f/feed/index.html</wfw:commentRss>
+			<slash:comments>5</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

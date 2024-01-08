@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>多核编程 &#8211; 我自然</title>
+	<atom:link href="./../../%E5%A4%9A%E6%A0%B8%E7%BC%96%E7%A8%8B/feed/index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../index.html</link>
+	<description>颜开的博客</description>
+	<lastBuildDate>Sun, 08 Jan 2012 15:22:02 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.2</generator>
+
+<image>
+	<url>./../../../wp-content/uploads/2021/03/cropped-favicon-32x32.png</url>
+	<title>多核编程 &#8211; 我自然</title>
+	<link>./../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>并发编程之巧用锁</title>
+		<link>./../../../%e5%b9%b6%e5%8f%91%e7%bc%96%e7%a8%8b%e4%b9%8b%e5%b7%a7%e7%94%a8%e9%94%81/index.html</link>
+					<comments>./../../../%e5%b9%b6%e5%8f%91%e7%bc%96%e7%a8%8b%e4%b9%8b%e5%b7%a7%e7%94%a8%e9%94%81/index.html#respond</comments>
+		
+		<dc:creator><![CDATA[yankay]]></dc:creator>
+		<pubDate>Sun, 08 Jan 2012 15:22:02 +0000</pubDate>
+				<category><![CDATA[软件技术]]></category>
+		<category><![CDATA[多核编程]]></category>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26320</guid>
+
+					<description><![CDATA[<div>可以看出来，CPU访问内存的代价是很高的。如果一个处理器改变的一个volatile变量，为了保持一致性，需要将这个消息广播到其他的处理器，其他处理器废弃其一级缓存，重新加载。整个操作需要至少数十个时钟周期。而如果CPU仅仅访问其一级缓存的数据，性能就很高。所以多核编程和网络编程一样，性能的瓶颈就在于互连线的使用。</div>
+<p><a rel="nofollow" href="./../../../%e5%b9%b6%e5%8f%91%e7%bc%96%e7%a8%8b%e4%b9%8b%e5%b7%a7%e7%94%a8%e9%94%81/index.html">并发编程之巧用锁</a>最先出现在<a rel="nofollow" href="./../../../index.html">我自然</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[<p><strong>背景</strong></p>
+<p>程序都是跑在机器上的，并行CPU包含几个部分。</p>
+<ul>
+<li><strong>处理器核心</strong>。执行线程的设备。一个核心可以执行一个或多个线程(超线程)</li>
+<li><strong>互连线</strong>。处理器和处理器，处理器和储存器之间的通信通道。一般CPU分两种架构，SMP对称多处理器和NUMA架构。SMP的通信是总线式的，核心增加后性能会下降。NUMA的结果相当于以太网，性能相对较好。理论上NUMA是没有cache的,不过商业产品都有。互连线的资源是<strong>有限的</strong>。</li>
+<li><strong>存储器</strong>。这里存储器值得是一级缓存，二级缓存和内存。一级缓存一般和处理器在一起，访问它需要1-2个时钟周期，访问二级缓存则需要数十个时钟周期。而访问内存，需要数百个时钟周期。</li>
+</ul>
+<div><span style="line-height: 18px;"><a href="http://yankaycom-wordpress.stor.sinaapp.com/uploads/2012/01/image002.gif"><img decoding="async" class="alignnone  wp-image-26322" title="smp-numa" alt="" src="http://yankaycom-wordpress.stor.sinaapp.com/uploads/2012/01/image002.gif" /></a></span></div>
+<div>可以看出来，CPU访问内存的代价是很高的。如果一个处理器改变的一个volatile变量，为了保持一致性，需要将这个消息广播到其他的处理器，其他处理器废弃其一级缓存，重新加载。整个操作需要至少数十个时钟周期。而如果CPU仅仅访问其一级缓存的数据，性能就很高。所以多核编程和网络编程一样，性能的瓶颈就在于互连线的使用。</div>
+<div><strong>自转锁</strong></div>
+<div>自转锁是一种锁的实现方式。就是在while语句中不断监视一个变量，通过观察到变化，保证只有一个线程持有锁。</div>
+<div>
+<pre lang="java">    public void lock(){
+        while(state.getAndSet(true)){}
+    }</pre>
+</div>
+<div>
+<div>
+<p>这里的GetAndSet方法是一个CPU的CAS硬件指令。我们可以看到，每次调用这个质量，CPU要保证缓存一致，丢弃该CPU持有该变量的缓存，重新加载。会消耗至少数十个时钟周期的时间。所以可以进行如下改进。</p>
+<pre lang="java">    public void lock(){
+        while(true){
+            while(state.get()){};
+            if(!state.getAndSet(true))
+                return;
+    }</pre>
+</div>
+<p>这个锁和上面的锁逻辑上是一样的。区别是处理器在自旋的时候，不再执行CAS，而是执行一个get操作，直接从一级缓存中取数据，不主动同步。让发现状态有所变化后，再通过CAS操作确认并加锁。这样可以大大减少CAS指令的数量，节约了处理器之间的信息流量。</p>
+<p>当然这个锁还有很多可以改进的地方，不详述了。不过其中“乐观”的思想是值得借鉴的。下面总结了一个用锁时候的方法，可以提高性能。</p>
+<p><strong>细粒度同步</strong></p>
+<p>细粒度同步避免对整个数据结构上锁。比如Java语言中的ConcurrentHashMap相对普通的HashMap性能要高很多。下图是ConcurrentHashMap的结构。</p>
+<p><img fetchpriority="high" decoding="async" class="alignnone" alt="" src="http://pic.yupoo.com/goldendoc/Ba4GCFe1/nuEZ0.png" width="995" height="530" /></p>
+<p><a title="Java并发编程之ConcurrentHashMap" href="http://www.goldendoc.org/2011/06/">《Java并发编程之ConcurrentHashMap》</a>很好的解释了ConcurrentHashMap的实现。</p>
+<p><strong>读写锁</strong></p>
+<p>许多共享对象都是这样的，读可以并发进行，不会去修改对象。而写操作需要线性进行。如果读操作远远大于写操作，区分读写行为，可以提高程序的并发性。</p>
+<p><strong>乐观同步</strong></p>
+<p>上面的自旋锁，就是一个乐观的例子。乐观就是先取出变量，乐观的认为没有冲突，在最后再确认下没有冲突，如果有冲突，重新再执行一边。这样就把麻烦的事情放到了最后，可以减少整段程序中加锁的部分，提高并行性。</p>
+<p><strong>惰性同步</strong></p>
+<p>惰性同步和乐观思路是一样的。在修改变量的时候，分两个阶段，先修改好，再在最后确认没有冲突，完成修改。</p>
+<p><strong>非阻塞操作</strong></p>
+<p>非阻塞操作就是CAS操作。使用这些操作可以避免使用加锁的传统方法，但实现一个非阻塞的共享数据结构非常的复杂，很容易出问题。性能的提升不是没有成本的。关于CAS操作，有一个缺陷，即ABA问题。CAS（compare and swap）操作的语义是(先比较原来的值和新的值是否一致，如果一致则更新并返回True,不一致则返回False)。这个操作<strong>不是原子</strong>的，中途如果有其他的线程先将这个地址修改为另一个值在改回来，一样会返回True。所以要注意这个特性，否则就可能造成一些Bug.</p>
+<p>性能的提升很不容易，多点复杂性，就多点Bug的可能。并发编程的Bug还不怎么好找出来。所以我觉得，善用现有的久经考验的数据结构，少自己操作底层的原语，等到发现性能问题的时候，再在性能瓶颈的部分履薄冰地编程，尽可能少的引入复杂度。话说Java的LinkedTransferQueue使用了更精致的并发编程可以极大的提高队列的性能，可到Java7才成为JDK的一部分。可见实现一个并发的队列有多难了。</p>
+</div>
+<p><a rel="nofollow" href="./../../../%e5%b9%b6%e5%8f%91%e7%bc%96%e7%a8%8b%e4%b9%8b%e5%b7%a7%e7%94%a8%e9%94%81/index.html">并发编程之巧用锁</a>最先出现在<a rel="nofollow" href="./../../../index.html">我自然</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../%e5%b9%b6%e5%8f%91%e7%bc%96%e7%a8%8b%e4%b9%8b%e5%b7%a7%e7%94%a8%e9%94%81/feed/index.html</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

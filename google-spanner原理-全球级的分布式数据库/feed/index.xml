@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>
+	《Google Spanner原理- 全球级的分布式数据库》的评论	</title>
+	<atom:link href="./../../google-spanner%E5%8E%9F%E7%90%86-%E5%85%A8%E7%90%83%E7%BA%A7%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93/feed/index.html" rel="self" type="application/rss+xml" />
+	<link>./../index.html</link>
+	<description>颜开的博客</description>
+	<lastBuildDate>Wed, 01 Jun 2016 07:43:00 +0000</lastBuildDate>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.2</generator>
+	<item>
+		<title>
+		评论者：Paladin Tyrion		</title>
+		<link>./../index.html#comment-56</link>
+
+		<dc:creator><![CDATA[Paladin Tyrion]]></dc:creator>
+		<pubDate>Wed, 01 Jun 2016 07:43:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26514#comment-56</guid>
+
+					<description><![CDATA[直接去读spanner论文最好~~]]></description>
+			<content:encoded><![CDATA[<p>直接去读spanner论文最好~~</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：Google NewSQL之Spanner &#124; yhddba.com		</title>
+		<link>./../index.html#comment-55</link>
+
+		<dc:creator><![CDATA[Google NewSQL之Spanner &#124; yhddba.com]]></dc:creator>
+		<pubDate>Sat, 19 Apr 2014 03:52:45 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26514#comment-55</guid>
+
+					<description><![CDATA[[&#8230;] Spanner: Google’s Globally-Distributed Database Google Spanner原理- 全球级的分布式数据库 从Google Spanner漫谈分布式存储与数据库技术 MIT DB [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] Spanner: Google’s Globally-Distributed Database Google Spanner原理- 全球级的分布式数据库 从Google Spanner漫谈分布式存储与数据库技术 MIT DB [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：Google Spanner原理- 全球级的分布式数据库 &#124; {流水理鱼&#124;wwek}		</title>
+		<link>./../index.html#comment-53</link>
+
+		<dc:creator><![CDATA[Google Spanner原理- 全球级的分布式数据库 &#124; {流水理鱼&#124;wwek}]]></dc:creator>
+		<pubDate>Sun, 16 Mar 2014 06:29:16 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26514#comment-53</guid>
+
+					<description><![CDATA[[&#8230;] 文章来源：http://www.yankay.com/google-spanner%E5%8E%9F%E7%90%86-%E5%85%A8%E7%90%83%E7%BA%A7%E7%9A%84%E5%88%86&#8230; [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] 文章来源：http://www.yankay.com/google-spanner%E5%8E%9F%E7%90%86-%E5%85%A8%E7%90%83%E7%BA%A7%E7%9A%84%E5%88%86&#8230; [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：Google Spanner原理- 全球级的分布式数据库 &#124; seeksky		</title>
+		<link>./../index.html#comment-49</link>
+
+		<dc:creator><![CDATA[Google Spanner原理- 全球级的分布式数据库 &#124; seeksky]]></dc:creator>
+		<pubDate>Sun, 16 Feb 2014 11:52:08 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26514#comment-49</guid>
+
+					<description><![CDATA[[&#8230;] EMC中国研究院的研究员颜开又在自己博客上分析了Google的全球级分布式数据库Spanner，他重点分析了Spanner的背景、设计和并发控制。 [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] EMC中国研究院的研究员颜开又在自己博客上分析了Google的全球级分布式数据库Spanner，他重点分析了Spanner的背景、设计和并发控制。 [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+	</channel>
+</rss>

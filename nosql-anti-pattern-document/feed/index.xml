@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>
+	《NoSQL反模式 &#8211; 文档数据库篇》的评论	</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../index.html</link>
+	<description>颜开的博客</description>
+	<lastBuildDate>Sun, 28 Mar 2021 12:06:56 +0000</lastBuildDate>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.2</generator>
+	<item>
+		<title>
+		评论者：pyhome		</title>
+		<link>./../index.html#comment-96</link>
+
+		<dc:creator><![CDATA[pyhome]]></dc:creator>
+		<pubDate>Sat, 23 Jan 2016 13:04:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26652#comment-96</guid>
+
+					<description><![CDATA[博主，可以转载吗，保留来源链接]]></description>
+			<content:encoded><![CDATA[<p>博主，可以转载吗，保留来源链接</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：NoSQL反模式 – 文档数据库篇 &#124; IT茶人---茗香燕归来		</title>
+		<link>./../index.html#comment-94</link>
+
+		<dc:creator><![CDATA[NoSQL反模式 – 文档数据库篇 &#124; IT茶人---茗香燕归来]]></dc:creator>
+		<pubDate>Mon, 25 May 2015 06:49:30 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26652#comment-94</guid>
+
+					<description><![CDATA[[&#8230;] 原文链接：http://www.yankay.com/nosql-anti-pattern-document/ [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] 原文链接：http://www.yankay.com/nosql-anti-pattern-document/ [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：NoSQL反模式 – 文档数据库篇 &#124; IT茶人---茗香燕归来		</title>
+		<link>./../index.html#comment-95</link>
+
+		<dc:creator><![CDATA[NoSQL反模式 – 文档数据库篇 &#124; IT茶人---茗香燕归来]]></dc:creator>
+		<pubDate>Mon, 25 May 2015 06:49:30 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26652#comment-95</guid>
+
+					<description><![CDATA[[&#8230;] 原文链接：http://www.yankay.com/nosql-anti-pattern-document/ [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] 原文链接：http://www.yankay.com/nosql-anti-pattern-document/ [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：Qing Yi		</title>
+		<link>./../index.html#comment-93</link>
+
+		<dc:creator><![CDATA[Qing Yi]]></dc:creator>
+		<pubDate>Sat, 19 Apr 2014 18:19:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26652#comment-93</guid>
+
+					<description><![CDATA[个人觉得 应延时更新 最好配合队列或者异步机制 用户信息更新后触发某自定义业务事件 事件的处理可以交给异步线程或者存入队列   
+
+这个也可以只用关联user_id 也可以 ：先遍历输出博客 然后顺便收集userIds 得到一个用户ids数组 接着利用缓存的multiGet 获取所有用户信息 进行二次渲染 二次渲染可以使用字符串替换（前提是博客输出时缓存被捕获了 用户图像输出的地方用了某种占位如简单的##userProfile_{{userId}}## ） 或者使用bigpipe技术 首页出现的东西基本都可以使用缓存哦 所以多点计算 没啥大碍 计算一次缓存几分钟，小时 就ok了]]></description>
+			<content:encoded><![CDATA[<p>个人觉得 应延时更新 最好配合队列或者异步机制 用户信息更新后触发某自定义业务事件 事件的处理可以交给异步线程或者存入队列   </p>
+<p>这个也可以只用关联user_id 也可以 ：先遍历输出博客 然后顺便收集userIds 得到一个用户ids数组 接着利用缓存的multiGet 获取所有用户信息 进行二次渲染 二次渲染可以使用字符串替换（前提是博客输出时缓存被捕获了 用户图像输出的地方用了某种占位如简单的##userProfile_{{userId}}## ） 或者使用bigpipe技术 首页出现的东西基本都可以使用缓存哦 所以多点计算 没啥大碍 计算一次缓存几分钟，小时 就ok了</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：NoSQL反模式 &#8211; 文档数据库篇 &#124; {流水理鱼&#124;wwek}		</title>
+		<link>./../index.html#comment-92</link>
+
+		<dc:creator><![CDATA[NoSQL反模式 &#8211; 文档数据库篇 &#124; {流水理鱼&#124;wwek}]]></dc:creator>
+		<pubDate>Sun, 16 Mar 2014 06:20:50 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26652#comment-92</guid>
+
+					<description><![CDATA[[&#8230;] 文章来源： http://www.yankay.com/nosql-anti-pattern-document/ [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] 文章来源： http://www.yankay.com/nosql-anti-pattern-document/ [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+	</channel>
+</rss>

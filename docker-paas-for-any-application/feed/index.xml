@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>
+	《Docker能够运行任何应用的“PaaS”云》的评论	</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../index.html</link>
+	<description>颜开的博客</description>
+	<lastBuildDate>Sun, 28 Mar 2021 12:04:42 +0000</lastBuildDate>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.2</generator>
+	<item>
+		<title>
+		评论者：Pony		</title>
+		<link>./../index.html#comment-114</link>
+
+		<dc:creator><![CDATA[Pony]]></dc:creator>
+		<pubDate>Wed, 23 Aug 2017 15:13:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26819#comment-114</guid>
+
+					<description><![CDATA[回复给&lt;a href=&quot;./../index.html#comment-113&quot;&gt;Pony&lt;/a&gt;。
+
+disques有bug.不能判断哪里是链接的结束。哈哈。我再重新复制一下吧。
+
+不好意思打扰一下。能问你一个关于docker的技术问题吗？看过你的一篇回答，你觉得不应该把数据库放在docker上面。https://www.zhihu.com/question/31682393  。
+我顺着这个思路来，把postgres放在本地机器上跑。那就出现一个问题在于，我放在docker上的应用不能直接通过localhost:5432直接访问数据库。因为在docker里面locahost指向是不一样的。
+
+我大概查了一下，解决方法，比如这个：https://stackoverflow.com/questions/24319662/from-inside-of-a-docker-container-how-do-i-connect-to-the-localhost-of-the-mach 。 
+一般而言他们都推荐把本地机器的ip写成一个常数，比如叫dockerhost..那么docker上面的程序用dockerhost来与数据库交流。这个方法可以解决，但是不太优美。
+
+说了这么多，其实我冒昧的想问一下，你和DaoCloud是怎么解决这个问题的？有没有什么特别方便的解决方法？
+在此谢谢啦。:)]]></description>
+			<content:encoded><![CDATA[<p>回复给<a href="./../index.html#comment-113">Pony</a>。</p>
+<p>disques有bug.不能判断哪里是链接的结束。哈哈。我再重新复制一下吧。</p>
+<p>不好意思打扰一下。能问你一个关于docker的技术问题吗？看过你的一篇回答，你觉得不应该把数据库放在docker上面。https://www.zhihu.com/question/31682393  。<br />
+我顺着这个思路来，把postgres放在本地机器上跑。那就出现一个问题在于，我放在docker上的应用不能直接通过localhost:5432直接访问数据库。因为在docker里面locahost指向是不一样的。</p>
+<p>我大概查了一下，解决方法，比如这个：https://stackoverflow.com/questions/24319662/from-inside-of-a-docker-container-how-do-i-connect-to-the-localhost-of-the-mach 。<br />
+一般而言他们都推荐把本地机器的ip写成一个常数，比如叫dockerhost..那么docker上面的程序用dockerhost来与数据库交流。这个方法可以解决，但是不太优美。</p>
+<p>说了这么多，其实我冒昧的想问一下，你和DaoCloud是怎么解决这个问题的？有没有什么特别方便的解决方法？<br />
+在此谢谢啦。:)</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：Pony		</title>
+		<link>./../index.html#comment-113</link>
+
+		<dc:creator><![CDATA[Pony]]></dc:creator>
+		<pubDate>Wed, 23 Aug 2017 15:09:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26819#comment-113</guid>
+
+					<description><![CDATA[不好意思打扰一下。能问你一个关于docker的技术问题吗？看过你的一篇回答，你觉得不应该把数据库放在docker上面。https://www.zhihu.com/question/31682393。我顺着这个思路来，把postgres放在本地机器上跑。那就出现一个问题在于，我放在docker上的应用不能直接通过localhost:5432直接访问数据库。因为在docker里面locahost指向是不一样的。
+
+我大概查了一下，解决方法，比如这个：https://stackoverflow.com/questions/24319662/from-inside-of-a-docker-container-how-do-i-connect-to-the-localhost-of-the-mach。一般而言他们都推荐把本地机器的ip写成一个常数，比如叫dockerhost..那么docker上面的程序用dockerhost来与数据库交流。这个方法可以解决，但是不太优美。
+
+说了这么多，其实我冒昧的想问一下，你和DaoCloud是怎么解决这个问题的？有没有什么特别方便的解决方法？
+在此谢谢啦。:)]]></description>
+			<content:encoded><![CDATA[<p>不好意思打扰一下。能问你一个关于docker的技术问题吗？看过你的一篇回答，你觉得不应该把数据库放在docker上面。https://www.zhihu.com/question/31682393。我顺着这个思路来，把postgres放在本地机器上跑。那就出现一个问题在于，我放在docker上的应用不能直接通过localhost:5432直接访问数据库。因为在docker里面locahost指向是不一样的。</p>
+<p>我大概查了一下，解决方法，比如这个：https://stackoverflow.com/questions/24319662/from-inside-of-a-docker-container-how-do-i-connect-to-the-localhost-of-the-mach。一般而言他们都推荐把本地机器的ip写成一个常数，比如叫dockerhost..那么docker上面的程序用dockerhost来与数据库交流。这个方法可以解决，但是不太优美。</p>
+<p>说了这么多，其实我冒昧的想问一下，你和DaoCloud是怎么解决这个问题的？有没有什么特别方便的解决方法？<br />
+在此谢谢啦。:)</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：fate		</title>
+		<link>./../index.html#comment-109</link>
+
+		<dc:creator><![CDATA[fate]]></dc:creator>
+		<pubDate>Fri, 03 Oct 2014 17:41:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26819#comment-109</guid>
+
+					<description><![CDATA[docker的资源隔离性能怎样？docker创建的集群的实际运行效率是否比基于kvm的集群的运行效率高，有实例证明吗？从当前的理解上只是看到docker较充分利用了资源。]]></description>
+			<content:encoded><![CDATA[<p>docker的资源隔离性能怎样？docker创建的集群的实际运行效率是否比基于kvm的集群的运行效率高，有实例证明吗？从当前的理解上只是看到docker较充分利用了资源。</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：tufeiping		</title>
+		<link>./../index.html#comment-107</link>
+
+		<dc:creator><![CDATA[tufeiping]]></dc:creator>
+		<pubDate>Mon, 24 Feb 2014 18:01:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26819#comment-107</guid>
+
+					<description><![CDATA[Docker其实就是汇集了多种Linux虚拟化技术的集合，相比较LXC，是一种更简洁，有效的方案!]]></description>
+			<content:encoded><![CDATA[<p>Docker其实就是汇集了多种Linux虚拟化技术的集合，相比较LXC，是一种更简洁，有效的方案!</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：zacker		</title>
+		<link>./../index.html#comment-106</link>
+
+		<dc:creator><![CDATA[zacker]]></dc:creator>
+		<pubDate>Mon, 24 Feb 2014 01:54:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26819#comment-106</guid>
+
+					<description><![CDATA[Dock可以用来：
+
+
+
+错别字。应该是Docker哦。]]></description>
+			<content:encoded><![CDATA[<p>Dock可以用来：</p>
+<p>错别字。应该是Docker哦。</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：Docker能够运行任何应用的“PaaS”云 &#124; 电商技术与互联网营销博客		</title>
+		<link>./../index.html#comment-105</link>
+
+		<dc:creator><![CDATA[Docker能够运行任何应用的“PaaS”云 &#124; 电商技术与互联网营销博客]]></dc:creator>
+		<pubDate>Fri, 24 Jan 2014 08:05:43 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26819#comment-105</guid>
+
+					<description><![CDATA[[&#8230;] 作者：http://www.yankay.com 文章来源：http://www.yankay.com/docker-paas-for-any-application/ [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] 作者：http://www.yankay.com 文章来源：http://www.yankay.com/docker-paas-for-any-application/ [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：demohi		</title>
+		<link>./../index.html#comment-104</link>
+
+		<dc:creator><![CDATA[demohi]]></dc:creator>
+		<pubDate>Tue, 21 Jan 2014 05:05:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26819#comment-104</guid>
+
+					<description><![CDATA[赞~]]></description>
+			<content:encoded><![CDATA[<p>赞~</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：Docker能够运行任何应用的“PaaS”云 &#171; OpenStack中国社区		</title>
+		<link>./../index.html#comment-103</link>
+
+		<dc:creator><![CDATA[Docker能够运行任何应用的“PaaS”云 &#171; OpenStack中国社区]]></dc:creator>
+		<pubDate>Tue, 21 Jan 2014 04:08:58 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26819#comment-103</guid>
+
+					<description><![CDATA[[&#8230;] 作者：http://www.yankay.com 文章来源：http://www.yankay.com/docker-paas-for-any-application/ [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] 作者：http://www.yankay.com 文章来源：http://www.yankay.com/docker-paas-for-any-application/ [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：Docker &#8211; Some materials &#124; John&#039;s code place		</title>
+		<link>./../index.html#comment-101</link>
+
+		<dc:creator><![CDATA[Docker &#8211; Some materials &#124; John&#039;s code place]]></dc:creator>
+		<pubDate>Tue, 14 Jan 2014 07:57:18 +0000</pubDate>
+		<guid isPermaLink="false">http://www.yankay.com/?p=26819#comment-101</guid>
+
+					<description><![CDATA[[&#8230;] http://www.yankay.com/docker-paas-for-any-application/ [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] <a href="http://www.yankay.com/docker-paas-for-any-application/" rel="nofollow ugc">http://www.yankay.com/docker-paas-for-any-application/</a> [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+	</channel>
+</rss>
